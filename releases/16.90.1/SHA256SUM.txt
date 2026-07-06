@@ -1,0 +1,2 @@
+Replace this placeholder after code-signing and hashing the MSI.
+Command: Get-FileHash .\ALZA-M365-Migration-Suite-16.90.1-x64.msi -Algorithm SHA256
