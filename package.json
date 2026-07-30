@@ -1,0 +1,19 @@
+{
+  "name": "alza-website",
+  "private": true,
+  "version": "17.0.0",
+  "type": "module",
+  "scripts": {
+    "build:site": "node tools/prepare-static-build.mjs",
+    "build": "npm run build:site && node tools/build-github-package.mjs",
+    "format": "prettier --write \"*.html\" \"docs/*.html\" \"resources/*.html\" \"assets/css/*.css\" \"assets/js/*.js\" \"tools/*.mjs\"",
+    "format:check": "prettier --check \"*.html\" \"docs/*.html\" \"resources/*.html\" \"assets/css/*.css\" \"assets/js/*.js\" \"tools/*.mjs\"",
+    "validate:structure": "node tools/validate-site.mjs",
+    "validate:html": "html-validate \"*.html\" \"docs/*.html\" \"resources/*.html\"",
+    "validate": "npm run validate:structure && npm run validate:html"
+  },
+  "devDependencies": {
+    "html-validate": "10.10.0",
+    "prettier": "3.6.2"
+  }
+}
