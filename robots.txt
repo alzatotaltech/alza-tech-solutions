@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://alzatech.dpdns.org/sitemap.xml
