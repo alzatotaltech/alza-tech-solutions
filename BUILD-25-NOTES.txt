@@ -1,1 +1,0 @@
-Build 25 correction: removed only the large standalone showcase image from Solutions. Restored image treatments on Products and every other applicable page. Restored the missing WhatsApp SVG logo asset while retaining the compact ALZA-blue icon-only button.
