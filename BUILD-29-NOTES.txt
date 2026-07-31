@@ -1,0 +1,1 @@
+Build 29 standardizes every raster site image as an animated WebP in assets/img and updates all HTML/CSS paths to the corresponding respective_name.webp file. Legacy PNG/JPG files and duplicate raster assets outside assets/img were removed. Future changes require replacing only the matching WebP file using the same filename.
