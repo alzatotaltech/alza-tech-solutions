@@ -1,0 +1,1 @@
+Build 26 displays the complete approved cloud migration artwork across the Home page hero and removes the duplicate large cloud image only from the Products page flagship product section.

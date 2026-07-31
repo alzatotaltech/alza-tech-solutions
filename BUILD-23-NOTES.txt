@@ -1,0 +1,1 @@
+Build 23 applies the approved dark enterprise design language across all pages, adds the refined FAQ treatment, updates the floating WhatsApp action to an icon-only ALZA-style button, uses the UAE solutions visual where relevant, and removes unused development files and images from the deployment package.

@@ -1,0 +1,61 @@
+{
+  "policy": "All raster website images are animated WebP files in assets/img. For future updates, replace the image using the same filename; no HTML or CSS changes are required.",
+  "assets": [
+    {
+      "filename": "alza-brand-mark.webp",
+      "stable_path": "assets/img/alza-brand-mark.webp",
+      "width": 313,
+      "height": 275,
+      "animated": true,
+      "frames": 6
+    },
+    {
+      "filename": "alza-monogram.webp",
+      "stable_path": "assets/img/alza-monogram.webp",
+      "width": 600,
+      "height": 459,
+      "animated": true,
+      "frames": 6
+    },
+    {
+      "filename": "customer-controlled-perimeter-diagram.webp",
+      "stable_path": "assets/img/customer-controlled-perimeter-diagram.webp",
+      "width": 1448,
+      "height": 1086,
+      "animated": true,
+      "frames": 6
+    },
+    {
+      "filename": "hero-cloud-migration-v21.webp",
+      "stable_path": "assets/img/hero-cloud-migration-v21.webp",
+      "width": 1586,
+      "height": 992,
+      "animated": true,
+      "frames": 6
+    },
+    {
+      "filename": "pricing-growth-rays.webp",
+      "stable_path": "assets/img/pricing-growth-rays.webp",
+      "width": 1672,
+      "height": 941,
+      "animated": true,
+      "frames": 5
+    },
+    {
+      "filename": "solutions-delivery-model.webp",
+      "stable_path": "assets/img/solutions-delivery-model.webp",
+      "width": 1916,
+      "height": 821,
+      "animated": true,
+      "frames": 6
+    },
+    {
+      "filename": "uae-tech-solutions.webp",
+      "stable_path": "assets/img/uae-tech-solutions.webp",
+      "width": 842,
+      "height": 900,
+      "animated": true,
+      "frames": 6
+    }
+  ]
+}
