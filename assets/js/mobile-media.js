@@ -1,7 +1,7 @@
 (() => {
   const mq = window.matchMedia('(max-width: 900px)');
-  const videos = Array.from(document.querySelectorAll('.mobile-autoplay-media'));
-  if (!videos.length) return;
+  const pairs = Array.from(document.querySelectorAll('.responsive-media-pair'));
+  const heroVideos = Array.from(document.querySelectorAll('.page-hero-mobile-video, .home-hero-video-mobile'));
 
   const prepare = (video) => {
     video.muted = true;
@@ -13,18 +13,35 @@
   };
 
   const attemptPlay = (video) => {
-    prepare(video);
-    if (!mq.matches || document.hidden || video.dataset.inView === 'false') {
-      video.pause();
+    if (!video || video.hidden || !mq.matches || document.hidden || video.dataset.inView === 'false') {
+      if (video && !video.paused) video.pause();
       return;
     }
-    const result = video.play();
-    if (result && typeof result.catch === 'function') {
-      result.catch(() => video.classList.add('mobile-media-failed'));
+    prepare(video);
+    const promise = video.play();
+    if (promise && typeof promise.catch === 'function') {
+      promise.catch(() => video.classList.add('mobile-media-failed'));
     }
   };
 
-  videos.forEach((video) => {
+  const syncPair = (pair) => {
+    const image = pair.querySelector(':scope > .media-webp-desktop');
+    const video = pair.querySelector(':scope > .media-h264-mobile');
+    const mobile = mq.matches;
+    if (image) {
+      image.hidden = mobile;
+      image.setAttribute('aria-hidden', mobile ? 'true' : 'false');
+    }
+    if (video) {
+      prepare(video);
+      video.hidden = !mobile;
+      video.setAttribute('aria-hidden', mobile ? 'false' : 'true');
+      if (mobile) attemptPlay(video); else video.pause();
+    }
+  };
+
+  const allVideos = [...pairs.map(p => p.querySelector(':scope > .media-h264-mobile')).filter(Boolean), ...heroVideos];
+  allVideos.forEach((video) => {
     prepare(video);
     video.addEventListener('loadedmetadata', () => attemptPlay(video), {passive:true});
     video.addEventListener('canplay', () => attemptPlay(video), {passive:true});
@@ -35,16 +52,22 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         entry.target.dataset.inView = entry.isIntersecting ? 'true' : 'false';
-        if (entry.isIntersecting) attemptPlay(entry.target);
-        else entry.target.pause();
+        if (entry.isIntersecting) attemptPlay(entry.target); else entry.target.pause();
       });
     }, {rootMargin:'100px 0px', threshold:0.01});
-    videos.forEach((video) => observer.observe(video));
+    allVideos.forEach(v => observer.observe(v));
   } else {
-    videos.forEach((video) => { video.dataset.inView='true'; });
+    allVideos.forEach(v => { v.dataset.inView = 'true'; });
   }
 
-  const sync = () => videos.forEach(attemptPlay);
+  const sync = () => {
+    pairs.forEach(syncPair);
+    heroVideos.forEach((video) => {
+      video.hidden = !mq.matches;
+      if (mq.matches) attemptPlay(video); else video.pause();
+    });
+  };
+
   sync();
   if (typeof mq.addEventListener === 'function') mq.addEventListener('change', sync);
   else if (typeof mq.addListener === 'function') mq.addListener(sync);
