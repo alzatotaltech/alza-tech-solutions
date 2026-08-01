@@ -50,7 +50,7 @@
     const nav = qs(".desktop-nav");
     if (!toggle || !nav) return;
 
-    const desktopQuery = window.matchMedia("(min-width: 72rem)");
+    const desktopQuery = window.matchMedia("(min-width: 1200px)");
     const navLinks = () => qsa("a, button:not([disabled])", nav);
 
     const setState = (open, { returnFocus = false } = {}) => {

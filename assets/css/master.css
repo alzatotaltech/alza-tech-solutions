@@ -1983,7 +1983,7 @@ body.enterprise-theme .text-link{color:#45cfff}
 
 /* Cloud artwork across all inner page heroes */
 .page-hero.cloud-page-hero{position:relative;isolation:isolate;min-height:330px;padding:90px 0 72px;overflow:hidden;background:linear-gradient(90deg,#031026 0%,#04152e 54%,rgba(4,21,46,.50) 100%)}
-.page-hero.cloud-page-hero::before{content:"";position:absolute;z-index:-2;inset:0 0 0 45%;background:url('../img/hero-cloud-migration-v21.webp?v=35') center/cover no-repeat;opacity:.48}
+.page-hero.cloud-page-hero::before{content:"";position:absolute;z-index:-2;inset:0 0 0 45%;background:url('../img/hero-cloud-migration-v21.webp?v=36') center/cover no-repeat;opacity:.48}
 .page-hero.cloud-page-hero::after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#031026 0%,#031026 35%,rgba(3,16,38,.76) 58%,rgba(3,16,38,.25) 100%),linear-gradient(0deg,#041329 0%,transparent 45%)}
 .page-hero.cloud-page-hero .container{position:relative;z-index:2}
 .page-hero.cloud-page-hero h1{max-width:760px;font-size:clamp(2.7rem,5.5vw,4.8rem)}
@@ -2158,7 +2158,7 @@ body.page-services .cloud-page-hero::before,
 body.page-about .cloud-page-hero::before,
 body.page-projects .cloud-page-hero::before,
 body.page-industries .cloud-page-hero::before,
-body.page-ai-solutions .cloud-page-hero::before{background:url('../img/uae-tech-solutions.webp?v=35') center right/contain no-repeat;opacity:.68}
+body.page-ai-solutions .cloud-page-hero::before{background:url('../img/uae-tech-solutions.webp?v=36') center right/contain no-repeat;opacity:.68}
 body.page-solutions .cloud-page-hero,
 body.page-services .cloud-page-hero,
 body.page-about .cloud-page-hero,
@@ -2171,7 +2171,7 @@ body.page-platform .cloud-page-hero::before,
 body.page-download .cloud-page-hero::before,
 body.page-resources .cloud-page-hero::before,
 body.page-docs .cloud-page-hero::before,
-body.page-contact .cloud-page-hero::before{background:url('../img/hero-cloud-migration-v21.webp?v=35') center right/cover no-repeat;opacity:.54}
+body.page-contact .cloud-page-hero::before{background:url('../img/hero-cloud-migration-v21.webp?v=36') center right/cover no-repeat;opacity:.54}
 
 /* rounded FAQ like design preview */
 .faq{margin-top:18px;padding:18px;border:1px solid rgba(77,162,242,.28);border-radius:28px;background:linear-gradient(180deg,rgba(4,22,46,.82),rgba(3,18,39,.74));box-shadow:0 18px 52px rgba(0,0,0,.18)}
@@ -2306,7 +2306,7 @@ body.page-solutions .cloud-page-hero{background:linear-gradient(135deg,#020b1c,#
   padding-bottom:42px;
   background:
     linear-gradient(90deg,#020a18 0%,rgba(2,10,24,.98) 26%,rgba(2,10,24,.76) 47%,rgba(2,10,24,.18) 69%,rgba(2,10,24,.04) 100%),
-    url('../img/hero-cloud-migration-v21.webp?v=35') center center / contain no-repeat,
+    url('../img/hero-cloud-migration-v21.webp?v=36') center center / contain no-repeat,
     #020a18;
 }
 .page-index .hero.hero-branded::before{
@@ -2346,7 +2346,7 @@ body.page-solutions .cloud-page-hero{background:linear-gradient(135deg,#020b1c,#
     min-height:auto;
     background:
       linear-gradient(180deg,#020a18 0%,rgba(2,10,24,.98) 54%,rgba(2,10,24,.62) 76%,rgba(2,10,24,.20) 100%),
-      url('../img/hero-cloud-migration-v21.webp?v=35') center bottom / 100% auto no-repeat,
+      url('../img/hero-cloud-migration-v21.webp?v=36') center bottom / 100% auto no-repeat,
       #020a18;
     padding-bottom:250px;
   }
@@ -2374,7 +2374,7 @@ body.page-solutions .cloud-page-hero::after{background:linear-gradient(90deg,#03
 
 /* Build 28: animated live rays for pricing hero */
 body.page-pricing .pricing-hero{position:relative;isolation:isolate;overflow:hidden;min-height:420px;background:linear-gradient(90deg,#020b1c 0%,#031026 46%,rgba(3,16,38,.34) 100%)!important}
-body.page-pricing .pricing-hero::before{content:"";position:absolute;inset:0 0 0 40%;z-index:-2;background:url('../img/pricing-growth-rays.webp?v=35') right center/contain no-repeat;opacity:.98;filter:saturate(1.05) contrast(1.05)}
+body.page-pricing .pricing-hero::before{content:"";position:absolute;inset:0 0 0 40%;z-index:-2;background:url('../img/pricing-growth-rays.webp?v=36') right center/contain no-repeat;opacity:.98;filter:saturate(1.05) contrast(1.05)}
 body.page-pricing .pricing-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#031026 0%,#031026 34%,rgba(3,16,38,.82) 52%,rgba(3,16,38,.18) 78%,transparent 100%),radial-gradient(circle at 76% 70%,rgba(22,131,255,.16),transparent 26%),linear-gradient(0deg,#041329 0%,transparent 44%)!important}
 body.page-pricing .pricing-hero .container{position:relative;z-index:3}
 body.page-pricing .pricing-hero h1{max-width:620px}
