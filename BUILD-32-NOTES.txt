@@ -1,1 +1,0 @@
-Build 32 adds stable root favicon.ico and favicon.svg URLs for Google/browser discovery, standardizes favicon metadata on every page, adds organization/site-name logo structured data, preloads above-the-fold animated WebP assets, and applies final responsive rules that display complete WebP frames without object-fit or background-size cropping.
