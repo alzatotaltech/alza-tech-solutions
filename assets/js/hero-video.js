@@ -1,30 +1,23 @@
 (() => {
   const query = window.matchMedia('(max-width: 900px)');
-  const videos = [...document.querySelectorAll('.home-hero-video')];
-  if (!videos.length) return;
+  const video = document.querySelector('.home-hero-video-mobile');
+  if (!video) return;
 
   const sync = () => {
-    const useMobile = query.matches;
-    videos.forEach((video) => {
-      const active = useMobile
-        ? video.classList.contains('home-hero-video-mobile')
-        : video.classList.contains('home-hero-video-desktop');
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
 
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-
-      if (active) {
-        const playPromise = video.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(() => {
-            // Safari Low Power Mode may block autoplay; the poster remains visible.
-          });
-        }
-      } else {
-        video.pause();
+    if (query.matches && !document.hidden) {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+          // Safari Low Power Mode can block autoplay; the poster remains visible.
+        });
       }
-    });
+    } else {
+      video.pause();
+    }
   };
 
   sync();
@@ -33,7 +26,6 @@
   } else if (typeof query.addListener === 'function') {
     query.addListener(sync);
   }
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) sync();
-  });
+  document.addEventListener('visibilitychange', sync);
+  window.addEventListener('pageshow', sync);
 })();
