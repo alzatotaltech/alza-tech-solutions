@@ -1,4 +1,4 @@
-# ALZA Total Tech Solutions — Production Website Build 33
+# ALZA Total Tech Solutions — Production Website Build 35
 
 Static GitHub Pages website for **ALZA Total Tech Solutions FZ-LLC**, a UAE-based IT consulting and complete technology solutions company.
 
@@ -39,3 +39,8 @@ alzatotaltech.com
 ```
 
 After deployment, submit the sitemap and request indexing of the homepage and priority pages in Google Search Console.
+
+
+## Build 35 motion update
+
+Optimized moving WebP artwork is restored across the hero, solutions, contact, pricing, UAE technology and architecture visuals. Cache-busted `?v=35` references prevent browsers and Cloudflare from serving the static Build 34 assets.

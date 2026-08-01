@@ -221,7 +221,7 @@ body.menu-open {
   padding-bottom: 180px;
   background:
     linear-gradient(180deg, #020a18 0%, rgba(2, 10, 24, 0.98) 55%, rgba(2, 10, 24, 0.72) 77%, rgba(2, 10, 24, 0.2) 100%),
-    url("../img/hero-cloud-migration-v21.webp") center bottom / 100% auto no-repeat,
+    url("../img/hero-cloud-migration-v21.webp?v=35") center bottom / 100% auto no-repeat,
     #020a18;
 }
 
@@ -866,7 +866,7 @@ textarea {
     padding-bottom: 42px;
     background:
       linear-gradient(90deg, #020a18 0%, rgba(2, 10, 24, 0.98) 26%, rgba(2, 10, 24, 0.76) 47%, rgba(2, 10, 24, 0.18) 69%, rgba(2, 10, 24, 0.04) 100%),
-      url("../img/hero-cloud-migration-v21.webp") center center / contain no-repeat,
+      url("../img/hero-cloud-migration-v21.webp?v=35") center center / contain no-repeat,
       #020a18;
   }
 
@@ -1058,7 +1058,7 @@ textarea {
 
 /* ===== BUILD 32: FULL WEBP VISIBILITY + STABLE BRAND ICON ===== */
 /* Content images always retain their complete intrinsic frame. */
-img[src$=".webp"] {
+img[src$=".webp?v=35"] {
   max-width: 100%;
   height: auto;
 }

@@ -27,6 +27,24 @@
   };
   window.alzaTrack = emit;
 
+  function initMotionBudget() {
+    const root = document.documentElement;
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches === true;
+    const saveData = navigator.connection?.saveData === true;
+    // Preserve motion on normal mobile and desktop hardware. Only an explicit
+    // reduced-motion preference or browser Save-Data mode disables it.
+    root.classList.toggle("low-motion", reduced || saveData);
+
+    const syncVisibility = () => {
+      root.classList.toggle("motion-paused", document.hidden);
+    };
+
+    document.addEventListener("visibilitychange", syncVisibility, { passive: true });
+    window.addEventListener("pagehide", () => root.classList.add("motion-paused"), { passive: true });
+    window.addEventListener("pageshow", syncVisibility, { passive: true });
+    syncVisibility();
+  }
+
   function initNavigation() {
     const toggle = qs(".nav-toggle");
     const nav = qs(".desktop-nav");
@@ -575,6 +593,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const source = attribution();
+    initMotionBudget();
     initNavigation();
     initReveal();
     initFaq();

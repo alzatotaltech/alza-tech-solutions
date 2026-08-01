@@ -1,10 +1,6 @@
 # ALZA animated WebP replacement guide
 
-All raster website artwork is standardized as animated `.webp` files in `assets/img/`.
-
-## Future image updates
-
-Replace the required file with a new animated WebP using the **same filename**. The website paths are already fixed, so no HTML or CSS changes are required.
+Build 35 restores moving WebP artwork while reducing decode load. The large animations use approximately half the original frames and display-appropriate dimensions.
 
 Stable paths:
 
@@ -15,13 +11,8 @@ Stable paths:
 - `assets/img/solutions-delivery-model.webp`
 - `assets/img/customer-controlled-perimeter-diagram.webp`
 - `assets/img/uae-tech-solutions.webp`
+- `assets/img/contact-us.webp`
 
-Recommended rules:
+For future moving artwork, retain the same filename and aspect ratio. Target 12–16 frames per second for ambient UI motion, size the file close to its maximum displayed width, loop continuously, and keep individual assets preferably below 2.5 MB. Avoid restoring 90–123 full-resolution frames unless the artwork genuinely requires that frame rate.
 
-- Keep the current dimensions where practical.
-- Use a continuously looping animated WebP.
-- Keep motion subtle so text and diagrams remain readable.
-- Preserve transparency for the ALZA logo.
-- Keep the exact filename.
-
-`favicon.svg` and `whatsapp-logo.svg` remain SVG because they are vector interface icons, not raster artwork.
+`favicon.svg` and `whatsapp-logo.svg` remain SVG vector interface icons.

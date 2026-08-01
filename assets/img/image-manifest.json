@@ -1,5 +1,13 @@
 {
-  "policy": "All raster website images are animated WebP files in assets/img. For future updates, replace the image using the same filename; no HTML or CSS changes are required.",
+  "policy": "Website motion is retained using optimized animated WebP artwork plus lightweight GPU-composited CSS effects.",
+  "performance_strategy": [
+    "Approximately half the original animation frames while preserving full loop duration",
+    "Reduced display-appropriate pixel dimensions",
+    "Lossy WebP compression tuned for neon interface artwork",
+    "Lazy loading for below-the-fold image elements",
+    "Only explicit reduced-motion or Save-Data preferences suppress decorative CSS motion",
+    "Cache-busted asset references using ?v=35"
+  ],
   "assets": [
     {
       "filename": "alza-brand-mark.webp",
@@ -7,7 +15,8 @@
       "width": 313,
       "height": 275,
       "animated": true,
-      "frames": 6
+      "frames": 6,
+      "bytes": 7030
     },
     {
       "filename": "alza-monogram.webp",
@@ -15,47 +24,62 @@
       "width": 600,
       "height": 459,
       "animated": true,
-      "frames": 6
-    },
-    {
-      "filename": "customer-controlled-perimeter-diagram.webp",
-      "stable_path": "assets/img/customer-controlled-perimeter-diagram.webp",
-      "width": 1448,
-      "height": 1086,
-      "animated": true,
-      "frames": 6
+      "frames": 6,
+      "bytes": 57448
     },
     {
       "filename": "hero-cloud-migration-v21.webp",
       "stable_path": "assets/img/hero-cloud-migration-v21.webp",
-      "width": 1586,
-      "height": 992,
+      "width": 1144,
+      "height": 600,
       "animated": true,
-      "frames": 6
-    },
-    {
-      "filename": "pricing-growth-rays.webp",
-      "stable_path": "assets/img/pricing-growth-rays.webp",
-      "width": 1672,
-      "height": 941,
-      "animated": true,
-      "frames": 5
-    },
-    {
-      "filename": "solutions-delivery-model.webp",
-      "stable_path": "assets/img/solutions-delivery-model.webp",
-      "width": 1916,
-      "height": 821,
-      "animated": true,
-      "frames": 6
+      "frames": 61,
+      "bytes": 1665516
     },
     {
       "filename": "uae-tech-solutions.webp",
       "stable_path": "assets/img/uae-tech-solutions.webp",
-      "width": 842,
-      "height": 900,
+      "width": 800,
+      "height": 803,
       "animated": true,
-      "frames": 6
+      "frames": 61,
+      "bytes": 2464558
+    },
+    {
+      "filename": "contact-us.webp",
+      "stable_path": "assets/img/contact-us.webp",
+      "width": 960,
+      "height": 540,
+      "animated": true,
+      "frames": 46,
+      "bytes": 800314
+    },
+    {
+      "filename": "pricing-growth-rays.webp",
+      "stable_path": "assets/img/pricing-growth-rays.webp",
+      "width": 1080,
+      "height": 564,
+      "animated": true,
+      "frames": 61,
+      "bytes": 1086994
+    },
+    {
+      "filename": "solutions-delivery-model.webp",
+      "stable_path": "assets/img/solutions-delivery-model.webp",
+      "width": 1400,
+      "height": 557,
+      "animated": true,
+      "frames": 61,
+      "bytes": 2006326
+    },
+    {
+      "filename": "customer-controlled-perimeter-diagram.webp",
+      "stable_path": "assets/img/customer-controlled-perimeter-diagram.webp",
+      "width": 805,
+      "height": 600,
+      "animated": true,
+      "frames": 62,
+      "bytes": 850130
     }
   ]
 }
