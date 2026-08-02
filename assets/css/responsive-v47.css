@@ -2538,3 +2538,38 @@ body.page-contact .process.single-column .step p {
     text-align: left;
   }
 }
+
+
+/* ===== Build 48: exact company-entity signals ===== */
+.official-identity,
+.entity-disambiguation-note{
+  max-width:760px;
+  margin:.8rem 0 1.05rem;
+  color:#9fc4e8;
+  font-size:.82rem;
+  line-height:1.55;
+  letter-spacing:.01em;
+}
+.official-identity::before{
+  content:"Official UAE company";
+  display:inline-flex;
+  margin-right:.55rem;
+  padding:.2rem .5rem;
+  border:1px solid rgba(43,192,255,.32);
+  border-radius:999px;
+  color:#38c8ff;
+  background:rgba(3,33,66,.72);
+  font-size:.67rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.entity-disambiguation-note{
+  padding:.7rem .9rem;
+  border-left:2px solid rgba(43,192,255,.55);
+  background:rgba(4,27,56,.42);
+}
+@media(max-width:620px){
+  .official-identity,.entity-disambiguation-note{font-size:.76rem;}
+  .official-identity::before{display:table;margin:0 0 .45rem;}
+}
