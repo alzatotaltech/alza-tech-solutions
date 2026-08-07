@@ -29,7 +29,7 @@ export function Content_contact() {
           <h1>Tell us what you need to build, connect, secure, migrate or support.</h1>
           
 
-          <p className={"lead"}>Share the site, users, current environment and target outcome. ALZA will respond with a practical next step for infrastructure, cloud, support or Microsoft 365 migration.</p>
+          <p className={"lead"}>Share the site, users, current environment and target outcome. ALZA will respond with a practical next step for infrastructure, cloud, cybersecurity, website design and development, support, or Microsoft 365 migration.</p>
           
 
         </div>
@@ -126,7 +126,7 @@ export function Content_contact() {
               <br/>
               <strong>WhatsApp</strong>
               <br/>
-              <a className={"text-link"} href={"https://wa.me/971557550081?text=Hello%20ALZA%2C%20I%27d%20like%20to%20discuss%20IT%20infrastructure%2C%20home%20or%20office%20setup%2C%20cloud%2C%20cybersecurity%2C%20managed%20support%20or%20Microsoft%20365%20migration."} rel={"noopener noreferrer"} target={"_blank"}>+971 55 755 0081</a>
+              <a className={"text-link"} href={"https://wa.me/971557550081?text=Hello%20ALZA%2C%20I%27d%20like%20to%20discuss%20IT%20infrastructure%2C%20home%20or%20office%20setup%2C%20cloud%2C%20cybersecurity%2C%20managed%20support%2C%20website%20design%20and%20development%20or%20Microsoft%20365%20migration."} rel={"noopener noreferrer"} target={"_blank"}>+971 55 755 0081</a>
               <br/>
               <strong>Email</strong>
               <br/>
@@ -207,9 +207,25 @@ export function Content_contact() {
               
 
               <div className={"field field-full"}>
+                <label htmlFor={"contact-lead-service"}>Service or project type</label>
+                <select id={"contact-lead-service"} name={"service"}>
+                  <option value={""}>Select one</option>
+                  <option>Home or office IT setup</option>
+                  <option>Network or IT infrastructure</option>
+                  <option>Cloud or Microsoft 365</option>
+                  <option>Cybersecurity</option>
+                  <option>Managed IT support</option>
+                  <option>Website design or development</option>
+                  <option>Microsoft 365 migration</option>
+                  <option>AI or workflow automation</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div className={"field field-full"}>
                 
 
-                <label htmlFor={"contact-lead-stage"}>Current migration stage</label>
+                <label htmlFor={"contact-lead-stage"}>Project stage</label>
                 <select id={"contact-lead-stage"} name={"stage"}>
                   
 
@@ -225,7 +241,7 @@ export function Content_contact() {
                   <option>Ready to execute</option>
                   
 
-                  <option>Migration already in progress</option>
+                  <option>Implementation already in progress</option>
                   
 
                   <option>Need delivery support</option>
@@ -240,7 +256,7 @@ export function Content_contact() {
               <div className={"field field-full"}>
                 
 
-                <label htmlFor={"contact-lead-message"}>Tell us about your IT, infrastructure, support or migration requirement *</label>
+                <label htmlFor={"contact-lead-message"}>Tell us about your IT, website, infrastructure, support or migration requirement *</label>
                 <textarea id={"contact-lead-message"} name={"message"} required></textarea>
                 
 

@@ -5,6 +5,7 @@ const expected=[
   "/products/",
   "/solutions/",
   "/services/",
+  "/services/website-design-development/",
   "/pricing/",
   "/resources/",
   "/about/",

@@ -29,7 +29,7 @@ export function Content_projects() {
         <h1>Different technology projects. One need for clear scope and accountable delivery.</h1>
         
 
-        <p className={"lead"}>ALZA supports new setups, infrastructure upgrades, cloud transformations, security improvements, managed support transitions and Microsoft 365 migrations.</p>
+        <p className={"lead"}>ALZA supports new setups, infrastructure upgrades, cloud transformations, website design and development, security improvements, managed support transitions and Microsoft 365 migrations.</p>
         
 
       </div>
@@ -120,6 +120,12 @@ export function Content_projects() {
           </article>
           
 
+          <article className={"use-case web-development-use-case"} data-reveal={""}>
+            <small>Website &amp; web application</small>
+            <h3>Turn a business requirement into a responsive, maintainable digital experience.</h3>
+            <p className={"muted"}>Plan UX, content structure, responsive interfaces, performance, SEO-ready foundations, analytics, deployment and ongoing web support.</p>
+            <Link className={"text-link arrow"} href={"/services/website-design-development/"}>Explore website services</Link>
+          </article>
           <article className={"use-case"} data-reveal={""}>
             
 

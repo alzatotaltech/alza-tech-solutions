@@ -3,6 +3,7 @@ export const routeBodyClass: Record<string,string> = {
   "/products": "enterprise-theme page-products",
   "/solutions": "enterprise-theme page-solutions",
   "/services": "enterprise-theme page-services",
+  "/services/website-design-development": "enterprise-theme page-web-development",
   "/pricing": "enterprise-theme page-pricing",
   "/resources": "enterprise-theme page-resources",
   "/about": "enterprise-theme page-about",

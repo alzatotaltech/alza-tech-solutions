@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "ALZA Total Tech Solutions FZ-LLC",
     short_name: "ALZA",
-    description: "UAE IT infrastructure, cloud, cybersecurity, managed IT services and Microsoft 365 migration software.",
+    description: "UAE IT infrastructure, cloud, cybersecurity, managed IT services, website design and development, and Microsoft 365 migration software.",
     start_url: "/",
     display: "standalone",
     background_color: "#020a18",

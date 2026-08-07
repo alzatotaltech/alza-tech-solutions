@@ -9,7 +9,7 @@ export function Content_solutions() {
         <div className={"solutions-hero-copy"}>
           <span className={"kicker"}>Complete IT solutions</span>
           <h1>Complete IT solutions for homes, offices and growing organizations.</h1>
-          <p className={"lead"}>From new-site and home-office setup to networks, servers, cloud, cybersecurity, managed support and Microsoft 365 migration, ALZA brings the complete technology environment into one delivery model.</p>
+          <p className={"lead"}>From new-site and home-office setup to networks, servers, cloud, cybersecurity, website design and development, managed support and Microsoft 365 migration, ALZA brings the complete technology environment into one delivery model.</p>
         </div>
         <figure className={"solutions-hero-media responsive-media-pair"}>
           <img alt={"ALZA delivery model showing Microsoft 365 migration, cloud services, cybersecurity, AI automation, and managed IT in a connected enterprise workflow."} className={"media-webp-desktop"} decoding={"async"} fetchPriority={"high"} height={557} src={"/assets/img/solutions-delivery-model.webp?v=42"} width={1400}/>
@@ -43,6 +43,11 @@ export function Content_solutions() {
             <h3>Managed IT &amp; Support</h3>
             <p>Remote and onsite support, monitoring, maintenance, user administration and technology lifecycle assistance.</p>
           </article>
+          <article className={"card"} id={"website-development"}>
+            <h3>Website Design &amp; Development</h3>
+            <p>Responsive company websites, landing pages and web applications designed around usability, performance, SEO-ready structure, analytics and maintainable deployment.</p>
+            <Link className={"text-link arrow"} href={"/services/website-design-development/"}>Explore website services</Link>
+          </article>
           <article className={"card"} id={"m365-migration"}>
             <h3>ALZA M365 Migration Suite</h3>
             <p>Proprietary customer-hosted software and delivery support for Microsoft 365 tenant-to-tenant migration.</p>
@@ -53,8 +58,8 @@ export function Content_solutions() {
     <section className={"section section-dark"}>
       <div className={"container"}>
         <div className={"cta-band"}>
-          <h2>Connect infrastructure, cloud, security, support and migration under one plan.</h2>
-          <p>Discuss a new setup, upgrade, managed support requirement or Microsoft 365 migration with the ALZA team.</p>
+          <h2>Connect infrastructure, cloud, security, websites, support and migration under one plan.</h2>
+          <p>Discuss a new setup, upgrade, website or web application, managed support requirement, or Microsoft 365 migration with the ALZA team.</p>
           <Link className={"btn btn-secondary"} href={"/contact/"}>Talk to an IT consultant</Link>
         </div>
       </div>

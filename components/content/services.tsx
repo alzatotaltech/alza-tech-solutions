@@ -26,10 +26,10 @@ export function Content_services() {
         <span className={"kicker"}>IT consulting and delivery</span>
         
 
-        <h1>IT consulting, infrastructure delivery and managed support.</h1>
+        <h1>IT consulting, infrastructure, website development and managed support.</h1>
         
 
-        <p className={"lead"}>ALZA plans, installs, secures and supports technology environments for homes, offices and organizations—from networks and devices to cloud platforms and Microsoft 365 migration.</p>
+        <p className={"lead"}>ALZA plans, builds, secures and supports technology environments for homes, offices and organizations—from networks and devices to cloud platforms, website design and development, and Microsoft 365 migration.</p>
         
 
       </div>
@@ -121,6 +121,17 @@ export function Content_services() {
           <article className={"card"} data-reveal={""}>
             <div aria-hidden={"true"} className={"card-icon"}>
               <svg aria-hidden={"true"} focusable={"false"} viewBox={"0 0 24 24"}>
+                <rect x={"3"} y={"4"} width={"18"} height={"14"} rx={"2"}></rect>
+                <path d={"M3 8h18M8 21h8M12 18v3"}></path>
+              </svg>
+            </div>
+            <h3>Website Design &amp; Development</h3>
+            <p className={"muted"}>Design and build responsive business websites, landing pages and web applications with modern UX, performance, SEO-ready foundations, analytics and deployment support.</p>
+            <Link className={"text-link arrow"} href={"/services/website-design-development/"}>Explore website services</Link>
+          </article>
+          <article className={"card"} data-reveal={""}>
+            <div aria-hidden={"true"} className={"card-icon"}>
+              <svg aria-hidden={"true"} focusable={"false"} viewBox={"0 0 24 24"}>
                 <path d={"M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"}></path>
                 <circle cx={"12"} cy={"12"} r={"4"}></circle>
                 <path d={"m10.5 12 1 1 2.2-2.2"}></path>
@@ -175,7 +186,7 @@ export function Content_services() {
             <h3>IT consulting and solution design</h3>
             
 
-            <p className={"muted"}>A focused review of the site, current environment, requirements, risks and implementation priorities.</p>
+            <p className={"muted"}>A focused review of the site, current environment, digital requirements, risks and implementation priorities—including infrastructure, cloud and website projects.</p>
             
 
           </article>

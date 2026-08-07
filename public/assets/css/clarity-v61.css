@@ -953,3 +953,90 @@ html[data-theme="dark-saas"] .company-hero-media .media-webp-desktop {
   62% { opacity:.34; }
   76%,100% { transform: translate3d(700%,0,0) rotate(12deg); opacity:0; }
 }
+
+
+/* Build 69 — live ALZA mark, stable CTA component, web-development service grids. */
+.site-header .brand-logo,
+.site-footer .brand-logo {
+  transform-origin: 50% 52%;
+  will-change: transform, filter;
+  animation: alza-mark-live-v69 3.6s ease-in-out infinite;
+}
+.site-header .brand:hover .brand-logo,
+.site-footer .brand:hover .brand-logo {
+  filter: brightness(1.18) saturate(1.18) drop-shadow(0 0 7px rgba(48,218,255,.82)) drop-shadow(0 0 22px rgba(31,126,255,.72));
+}
+@keyframes alza-mark-live-v69 {
+  0%,100% { transform: translateZ(0) scale(1); filter: brightness(1.02) saturate(1.06) drop-shadow(0 0 5px rgba(45,204,255,.38)) drop-shadow(0 0 13px rgba(29,112,255,.30)); }
+  48% { transform: translateZ(0) scale(1.035); filter: brightness(1.17) saturate(1.18) drop-shadow(0 0 9px rgba(60,224,255,.76)) drop-shadow(0 0 25px rgba(37,128,255,.60)); }
+  68% { transform: translateZ(0) scale(1.018); filter: brightness(1.10) saturate(1.12) drop-shadow(0 0 7px rgba(75,216,255,.58)) drop-shadow(0 0 18px rgba(93,81,255,.40)); }
+}
+
+/* CTA bands are content components, not tilt/glass cards. Keep their content
+   stable in every theme and viewport and remove legacy pseudo-layer collisions. */
+.cta-band {
+  isolation: isolate !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.cta-band::after {
+  content: none !important;
+  display: none !important;
+}
+.cta-band::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  right: -110px !important;
+  top: -150px !important;
+  width: 360px !important;
+  height: 360px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle,rgba(58,190,255,.13),rgba(82,92,255,.055) 38%,transparent 70%) !important;
+}
+html[data-theme="dark-saas"] .cta-band::before {
+  background: radial-gradient(circle,rgba(78,205,255,.095),rgba(118,91,255,.045) 38%,transparent 70%) !important;
+}
+.cta-band > * {
+  position: relative !important;
+  z-index: 1 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.cta-band h2 { max-width: 820px !important; overflow-wrap: normal; word-break: normal; }
+.cta-band p { max-width: 760px !important; }
+.cta-band .actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+.cta-band .actions .btn {
+  width: auto !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  text-align: center;
+}
+.desktop-glass-sheen-v68 { display:none !important; }
+
+/* Intentional 2x2 capability grid after adding web development. */
+@media (min-width: 901px) {
+  .page-about .about-delivery-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .page-solutions #website-development { grid-column: span 2; }
+  .page-projects .web-development-use-case { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  .cta-band { padding: 34px 22px !important; }
+  .cta-band .actions { display:grid !important; grid-template-columns:minmax(0,1fr) !important; width:100% !important; }
+  .cta-band .actions .btn { width:100% !important; justify-content:center !important; }
+}
+@media (max-width: 479px) {
+  .cta-band { padding: 28px 18px !important; border-radius: 20px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .brand-logo,.site-footer .brand-logo { animation:none !important; filter:brightness(1.08) saturate(1.10) drop-shadow(0 0 7px rgba(48,218,255,.48)) drop-shadow(0 0 18px rgba(31,126,255,.38)); }
+}

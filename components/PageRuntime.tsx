@@ -88,13 +88,11 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       });
 
       // Interactive 21st-style spotlight + subtle 3D tilt on pointer devices.
-      const surfaces=Array.from(el.querySelectorAll<HTMLElement>('.card, .b57-premium-card, .resource-card, .use-case, .plan-card, .price-card, .cta-band, .proof-strip, .glass-panel, .form-card, .boundary-diagram, .architecture-diagram-figure, .cutover-stage, .control-plane, .flow-node'));
+      const surfaces=Array.from(el.querySelectorAll<HTMLElement>('.card, .b57-premium-card, .resource-card, .use-case, .plan-card, .price-card, .proof-strip, .glass-panel, .form-card, .boundary-diagram, .architecture-diagram-figure, .cutover-stage, .control-plane, .flow-node'));
       const finePointer=desktop;
       if(finePointer){
         surfaces.forEach(surface=>{
           surface.classList.add('motion-surface-v54');
-          let sheen=surface.querySelector<HTMLElement>(':scope > .desktop-glass-sheen-v68');
-          if(!sheen){ sheen=document.createElement('span'); sheen.className='desktop-glass-sheen-v68'; sheen.setAttribute('aria-hidden','true'); surface.appendChild(sheen); }
           const move=(ev:PointerEvent)=>{
             if(ev.pointerType==='touch') return;
             const r=surface.getBoundingClientRect();

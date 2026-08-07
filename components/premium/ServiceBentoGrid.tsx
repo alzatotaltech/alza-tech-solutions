@@ -6,6 +6,7 @@ import {
   CloudCog,
   HardDrive,
   HousePlug,
+  MonitorSmartphone,
   Network,
   ShieldCheck,
   Workflow,
@@ -82,6 +83,15 @@ const services: readonly ServiceItem[] = [
     accent: "from-cyan-300/20 via-violet-500/10 to-transparent",
     flagship: true,
   },
+  {
+    title: "Website Design & Development",
+    description: "Responsive business websites, landing pages and web applications with clear UX, performance, SEO-ready structure, deployment and ongoing support.",
+    href: "/services/website-design-development/",
+    cta: "Explore website services",
+    icon: MonitorSmartphone,
+    span: "lg:col-span-6",
+    accent: "from-cyan-400/14 via-violet-500/8 to-transparent",
+  },
 ];
 
 /**
@@ -104,7 +114,7 @@ export function ServiceBentoGrid() {
             </h2>
           </div>
           <p className="m-0 max-w-[580px] text-[15px] leading-7 text-alza-muted lg:justify-self-end">
-            ALZA combines practical IT consulting and implementation with a proprietary Microsoft 365 migration platform—one accountable partner from site setup to cloud operations.
+            ALZA combines practical IT consulting, implementation, website delivery and proprietary Microsoft 365 migration software—one accountable partner from site setup to digital delivery and cloud operations.
           </p>
         </div>
 
@@ -122,7 +132,7 @@ export function ServiceBentoGrid() {
               >
                 <Card className={cn(
                   "b57-premium-card group relative h-full min-h-[260px] overflow-hidden border-white/[.08] transition duration-300 hover:-translate-y-1 hover:border-cyan-300/25 hover:shadow-[0_24px_90px_rgba(0,118,255,.15)]",
-                  service.flagship && "md:min-h-[280px]"
+                  (service.flagship || service.title === "Website Design & Development") && "md:min-h-[220px]"
                 )}>
                   <div aria-hidden="true" className={cn("absolute inset-0 bg-gradient-to-br opacity-80 transition-opacity duration-300 group-hover:opacity-100", service.accent)} />
                   <div aria-hidden="true" className="absolute -right-14 -top-16 size-44 rounded-full bg-cyan-300/8 blur-3xl transition-transform duration-500 group-hover:scale-125" />

@@ -32,7 +32,7 @@ export function Content_index() {
           </h1>
           
 
-          <p className={"lead"}>ALZA Total Tech Solutions FZ-LLC provides home and office IT setup, networks, servers, cloud, cybersecurity, managed support, and its flagship proprietary software, the ALZA M365 Migration Suite.</p>
+          <p className={"lead"}>ALZA Total Tech Solutions FZ-LLC provides home and office IT setup, networks, servers, cloud, cybersecurity, managed support, website design and development, and its flagship proprietary software, the ALZA M365 Migration Suite.</p>
           
 
           <div className={"actions"}>
@@ -1004,7 +1004,7 @@ export function Content_index() {
           <h2>Plan your IT environment or Microsoft 365 migration with one accountable partner.</h2>
           
 
-          <p>Tell us whether you need a new setup, infrastructure upgrade, cloud project, security improvement, ongoing support or migration software evaluation.</p>
+          <p>Tell us whether you need a new setup, infrastructure upgrade, cloud project, security improvement, website or web application, ongoing support, or migration software evaluation.</p>
           
 
           <div className={"actions"}>
