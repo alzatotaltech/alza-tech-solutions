@@ -1,0 +1,76 @@
+/* Build 76 — Header/footer Dark SaaS brand rendering hardening.
+   Header/footer brand copy is intentionally static. The homepage legal-name
+   pill keeps its separate moving glass treatment from Build 75. */
+
+.site-header .brand-copy-static-v76,
+.site-footer .brand-copy-static-v76,
+.site-header .brand-copy-static-v76 > strong,
+.site-header .brand-copy-static-v76 > span,
+.site-header .brand-copy-static-v76 > small,
+.site-footer .brand-copy-static-v76 > strong,
+.site-footer .brand-copy-static-v76 > span,
+.site-footer .brand-copy-static-v76 > small {
+  animation: none !important;
+  transition: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  background-position: initial !important;
+  background-size: auto !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-fill-color: currentColor !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  box-shadow: none !important;
+  will-change: auto !important;
+}
+
+/* Stable brand hierarchy in both themes. */
+.site-header .brand-copy-static-v76 > strong,
+.site-footer .brand-copy-static-v76 > strong {
+  color: #f8fbff !important;
+}
+.site-header .brand-copy-static-v76 > span,
+.site-footer .brand-copy-static-v76 > span {
+  color: #d6e0ec !important;
+}
+.site-header .brand-copy-static-v76 > small,
+.site-footer .brand-copy-static-v76 > small {
+  color: #86a2c2 !important;
+}
+
+html[data-theme="dark-saas"] .site-header .brand-copy-static-v76 > strong,
+html[data-theme="dark-saas"] .site-footer .brand-copy-static-v76 > strong {
+  color: #f7f9fc !important;
+}
+html[data-theme="dark-saas"] .site-header .brand-copy-static-v76 > span,
+html[data-theme="dark-saas"] .site-footer .brand-copy-static-v76 > span {
+  color: #cbd3df !important;
+}
+html[data-theme="dark-saas"] .site-header .brand-copy-static-v76 > small,
+html[data-theme="dark-saas"] .site-footer .brand-copy-static-v76 > small {
+  color: #8298b3 !important;
+}
+
+/* Defensive reset: old Build 74 live-brand selectors must never create paint
+   layers in header/footer, even if stale markup survives during hydration. */
+.site-header .brand-copy-live,
+.site-footer .brand-copy-live,
+.site-header .brand-copy-live > strong,
+.site-header .brand-copy-live > span,
+.site-footer .brand-copy-live > strong,
+.site-footer .brand-copy-live > span {
+  animation: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: inherit !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
