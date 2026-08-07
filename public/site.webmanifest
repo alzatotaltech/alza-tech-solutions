@@ -1,0 +1,24 @@
+{
+  "name": "ALZA Total Tech Solutions",
+  "short_name": "ALZA",
+  "description": "UAE-based IT consulting and technology company delivering home and office IT setup, complete IT infrastructure, networks, cloud, cybersecurity, managed support and the proprietary ALZA M365 Migration Suite.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#020916",
+  "theme_color": "#061225",
+  "lang": "en-AE",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
