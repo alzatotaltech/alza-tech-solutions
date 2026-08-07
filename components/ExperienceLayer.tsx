@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -15,7 +15,16 @@ import {
  * Decorative only and pointer-events:none, so it never blocks site controls.
  */
 export function ExperienceLayer() {
-  const reduce = useReducedMotion();
+  const prefersReduced = useReducedMotion();
+  const [desktop, setDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 901px)");
+    const sync = () => setDesktop(mq.matches);
+    sync();
+    mq.addEventListener?.("change", sync);
+    return () => mq.removeEventListener?.("change", sync);
+  }, []);
+  const reduce = Boolean(prefersReduced && !desktop);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 28, mass: 0.22 });
   const orbOneY = useTransform(scrollYProgress, [0, 1], [0, 180]);

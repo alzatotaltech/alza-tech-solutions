@@ -114,93 +114,27 @@
   .motion-surface-v54,.btn{transform:none!important;transition:none!important}
 }
 
-
-/* Build 66 — desktop ambient depth parity */
-@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
-  .experience-grid-v54 { opacity: .105; }
-  .experience-orb-one-v54 { opacity: .34; }
-  .experience-orb-two-v54 { opacity: .27; }
-
-  /* Slow glass-light drift: deliberately subtle, but continuously visible on
-     desktop rather than only during the initial scroll reveal. */
-  .b57-premium-card::before,
-  .proof-strip::after,
-  .glass-panel::before {
-    animation: v66-glass-drift 7.5s ease-in-out infinite alternate;
-  }
-  @keyframes v66-glass-drift {
-    0%   { opacity: .42; filter: brightness(.92); }
-    50%  { opacity: .90; filter: brightness(1.12); }
-    100% { opacity: .58; filter: brightness(1.00); }
-  }
-}
-
-/* Build 67 — desktop ambient parity. These layers are intentionally absent on
-   mobile because mobile already receives continuous H.264/WebP movement. */
-.experience-beam-v67,
-.experience-pointer-glow-v67 { display:none; }
-
+/* Build 68 — visible desktop Motion without changing desktop layout/backgrounds. */
 @media (min-width:901px) {
-  .experience-ambient-v54 {
-    opacity: 1;
-  }
   .experience-grid-v54 {
-    opacity: .13;
-    background-size: 62px 62px;
+    opacity: .09;
   }
-  .experience-orb-one-v54 {
-    width: 520px;
-    height: 520px;
-    filter: blur(40px);
+  .experience-ambient-v54 {
+    display: block !important;
   }
-  .experience-orb-two-v54 {
-    width: 440px;
-    height: 440px;
-    filter: blur(42px);
+  .experience-orb-one-v54 { opacity:.31; }
+  .experience-orb-two-v54 { opacity:.24; }
+  .motion-surface-v54::after {
+    background: radial-gradient(520px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(76,215,255,.22),rgba(42,122,255,.075) 30%,transparent 61%)!important;
   }
-  .experience-beam-v67 {
-    display:block;
-    position:absolute;
-    width:720px;
-    height:180px;
-    border-radius:999px;
-    filter:blur(34px);
-    pointer-events:none;
-    mix-blend-mode:screen;
-    will-change:transform,opacity;
+  .motion-surface-v54:hover {
+    border-color: rgba(88,210,255,.52)!important;
+    box-shadow: 0 25px 70px rgba(0,8,28,.36),0 0 0 1px rgba(62,184,255,.11) inset,0 0 46px rgba(26,142,255,.11)!important;
   }
-  .experience-beam-one-v67 {
-    right:-180px;
-    top:32vh;
-    background:linear-gradient(90deg,transparent,rgba(42,173,255,.16),rgba(92,96,255,.11),transparent);
-  }
-  .experience-beam-two-v67 {
-    left:-220px;
-    top:72vh;
-    background:linear-gradient(90deg,transparent,rgba(72,214,255,.10),rgba(35,108,255,.12),transparent);
-  }
-  .experience-pointer-glow-v67 {
-    display:block;
-    position:fixed;
-    left:0;
-    top:0;
-    width:540px;
-    height:540px;
-    border-radius:50%;
-    pointer-events:none;
-    opacity:.28;
-    filter:blur(24px);
-    background:radial-gradient(circle,rgba(63,205,255,.20) 0%,rgba(29,121,255,.09) 34%,rgba(116,91,255,.045) 52%,transparent 72%);
-    mix-blend-mode:screen;
-    will-change:transform;
-  }
-  html[data-theme="dark-saas"] .experience-pointer-glow-v67 {
-    opacity:.22;
-    background:radial-gradient(circle,rgba(86,210,255,.15) 0%,rgba(83,83,255,.065) 36%,transparent 70%);
-  }
-}
-
-@media (max-width:900px), (prefers-reduced-motion:reduce) {
-  .experience-beam-v67,
-  .experience-pointer-glow-v67 { display:none !important; }
+  /* Keep key UI animation visible on desktop even when Windows/Chrome reports
+     reduced motion; mobile/tablet still honors the preference. */
+  .alza-scroll-progress-v54 { display:block!important; }
+  .hero-copy .eyebrow::after,.page-hero .kicker::after { animation:v54-label-sweep 6.5s ease-in-out infinite!important; }
+  .btn:not(.btn-ghost):not(.btn-secondary)::before { animation:v54-border-spin 7s linear infinite!important; }
+  .btn:not(.btn-ghost):not(.btn-secondary)::after { animation:v54-button-sheen 4.8s ease-in-out infinite!important; }
 }

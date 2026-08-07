@@ -14,7 +14,10 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
     const el=root.current; if(!el) return;
     const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const saveData=(navigator as any).connection?.saveData===true;
-    const lowMotion=reduced||saveData;
+    const desktop=window.matchMedia('(min-width: 901px)').matches;
+    // ALZA explicitly keeps its premium desktop motion active. Reduced-motion is
+    // still honored on mobile/tablet, while Save-Data suppresses motion everywhere.
+    const lowMotion=saveData||(!desktop&&reduced);
     document.documentElement.classList.toggle('low-motion',lowMotion);
     document.documentElement.classList.add('react-motion-ready');
 
@@ -65,7 +68,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       const sections=Array.from(el.querySelectorAll<HTMLElement>('.section'));
       sections.forEach(section=>{
         const heading=section.querySelector<HTMLElement>('.heading-row, .section-heading, .section-title');
-        const cards=Array.from(section.querySelectorAll<HTMLElement>('.card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage, .price-card, .architecture-diagram-figure, .control-plane, .flow-node'));
+        const cards=Array.from(section.querySelectorAll<HTMLElement>('.card, .b57-premium-card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage, .price-card, .architecture-diagram-figure, .control-plane, .flow-node'));
         if(heading){ heading.style.opacity='0'; heading.style.transform='translateY(32px)'; }
         cards.forEach(card=>{card.style.opacity='0';card.style.transform='translateY(38px) scale(.975)'});
         const stop=inView(section,()=>{
@@ -76,7 +79,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       });
 
       // Standalone reveal elements outside card grids.
-      const reveals=Array.from(el.querySelectorAll<HTMLElement>('[data-reveal]')).filter(n=>!n.closest('.card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage, .price-card, .architecture-diagram-figure, .control-plane, .flow-node'));
+      const reveals=Array.from(el.querySelectorAll<HTMLElement>('[data-reveal]')).filter(n=>!n.closest('.card, .b57-premium-card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage, .price-card, .architecture-diagram-figure, .control-plane, .flow-node'));
       reveals.forEach(node=>{
         const stop=inView(node,()=>{
           const a=animate(node,{opacity:[0,1],y:[28,0]},{duration:.58,ease}); animations.push(a as any);
@@ -86,11 +89,14 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
 
       // Interactive 21st-style spotlight + subtle 3D tilt on pointer devices.
       const surfaces=Array.from(el.querySelectorAll<HTMLElement>('.card, .b57-premium-card, .resource-card, .use-case, .plan-card, .price-card, .cta-band, .proof-strip, .glass-panel, .form-card, .boundary-diagram, .architecture-diagram-figure, .cutover-stage, .control-plane, .flow-node'));
-      const finePointer=window.matchMedia('(any-hover:hover) and (any-pointer:fine)').matches;
+      const finePointer=desktop;
       if(finePointer){
         surfaces.forEach(surface=>{
           surface.classList.add('motion-surface-v54');
+          let sheen=surface.querySelector<HTMLElement>(':scope > .desktop-glass-sheen-v68');
+          if(!sheen){ sheen=document.createElement('span'); sheen.className='desktop-glass-sheen-v68'; sheen.setAttribute('aria-hidden','true'); surface.appendChild(sheen); }
           const move=(ev:PointerEvent)=>{
+            if(ev.pointerType==='touch') return;
             const r=surface.getBoundingClientRect();
             const px=(ev.clientX-r.left)/r.width;
             const py=(ev.clientY-r.top)/r.height;
@@ -117,6 +123,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       if(finePointer){
         el.querySelectorAll<HTMLElement>('.btn:not(.btn-ghost):not(.btn-secondary)').forEach(btn=>{
           const move=(ev:PointerEvent)=>{
+            if(ev.pointerType==='touch') return;
             const r=btn.getBoundingClientRect(); const x=(ev.clientX-r.left-r.width/2)*.08; const y=(ev.clientY-r.top-r.height/2)*.11;
             btn.style.setProperty('--mag-x',`${x.toFixed(1)}px`); btn.style.setProperty('--mag-y',`${y.toFixed(1)}px`);
           };

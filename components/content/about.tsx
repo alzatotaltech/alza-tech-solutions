@@ -13,12 +13,13 @@ export function Content_about() {
         disablePictureInPicture
         loop
         muted
+        hidden
         playsInline
-        poster={"/assets/img/uae-tech-solutions-mobile-poster.webp?v=67"}
+        poster={"/assets/img/uae-tech-solutions-mobile-poster.webp?v=68"}
         preload={"metadata"}
         tabIndex={-1}
       >
-        <source src={"/assets/video/uae-tech-solutions-mobile.mp4?v=67"} type={"video/mp4"}/>
+        <source src={"/assets/video/uae-tech-solutions-mobile.mp4?v=68"} type={"video/mp4"}/>
       </video>
       
 

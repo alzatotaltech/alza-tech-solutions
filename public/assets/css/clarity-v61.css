@@ -830,297 +830,126 @@ html[data-theme="dark-saas"] .company-hero-media .media-webp-desktop {
   }
 }
 
-
-/* --------------------------------------------------------------------------
-   Build 66: desktop Chrome glass + Motion parity
-   Keep mobile/tablet behaviour unchanged. On laptops/desktops, make the
-   premium surfaces genuinely translucent so the ambient Motion layer is
-   visible through them, and provide a glass fallback even when backdrop-filter
-   rendering is weak/disabled by the browser/GPU.
-   -------------------------------------------------------------------------- */
-@media (min-width: 901px) {
-  /* Give desktop content a transparent compositing context over the ambient
-     experience layer instead of painting opaque section slabs over it. */
-  html[data-theme="alza-blue"] body.enterprise-theme,
-  html[data-theme="dark-saas"] body.enterprise-theme {
-    background-attachment: fixed !important;
-  }
-
-  html[data-theme="alza-blue"] .section-dark,
-  html[data-theme="alza-blue"] .section-soft {
-    background: linear-gradient(180deg, rgba(4,18,40,.54), rgba(3,14,31,.38)) !important;
-  }
-  html[data-theme="dark-saas"] .section-dark,
-  html[data-theme="dark-saas"] .section-soft,
-  html[data-theme="dark-saas"] .b57-service-section {
-    background: linear-gradient(180deg, rgba(3,4,7,.78), rgba(5,7,11,.68)) !important;
-  }
-
-  /* Core glass system: translucent fill + independent highlight + stronger
-     blur/saturation. The fill still looks dimensional if backdrop-filter is
-     unavailable, because the gradient/border/shadow remain. */
-  html[data-theme="alza-blue"] .card,
-  html[data-theme="alza-blue"] .b57-premium-card,
-  html[data-theme="alza-blue"] .resource-card,
-  html[data-theme="alza-blue"] .use-case,
-  html[data-theme="alza-blue"] .glass-panel,
-  html[data-theme="alza-blue"] .form-card,
-  html[data-theme="alza-blue"] .download-status,
-  html[data-theme="alza-blue"] .boundary-diagram,
-  html[data-theme="alza-blue"] .cutover-stage,
-  html[data-theme="alza-blue"] .license-footnote,
-  html[data-theme="alza-blue"] .plan-card,
-  html[data-theme="alza-blue"] .price-card,
-  html[data-theme="alza-blue"] .architecture-diagram-figure {
-    background: linear-gradient(155deg, rgba(9,34,66,.58), rgba(3,16,35,.44)) !important;
-    border-color: rgba(93,190,255,.24) !important;
-    -webkit-backdrop-filter: blur(18px) saturate(138%) !important;
-    backdrop-filter: blur(18px) saturate(138%) !important;
-    box-shadow: 0 22px 70px rgba(0,7,24,.28), inset 0 1px rgba(255,255,255,.055), inset 0 -1px rgba(68,174,255,.035) !important;
-  }
-
-  html[data-theme="dark-saas"] .card,
-  html[data-theme="dark-saas"] .b57-premium-card,
-  html[data-theme="dark-saas"] .resource-card,
-  html[data-theme="dark-saas"] .use-case,
-  html[data-theme="dark-saas"] .glass-panel,
-  html[data-theme="dark-saas"] .form-card,
-  html[data-theme="dark-saas"] .download-status,
-  html[data-theme="dark-saas"] .boundary-diagram,
-  html[data-theme="dark-saas"] .cutover-stage,
-  html[data-theme="dark-saas"] .license-footnote,
-  html[data-theme="dark-saas"] .plan-card,
-  html[data-theme="dark-saas"] .price-card,
-  html[data-theme="dark-saas"] .architecture-diagram-figure,
-  html[data-theme="dark-saas"] .control-plane,
-  html[data-theme="dark-saas"] .flow-node {
-    background: linear-gradient(155deg, rgba(12,15,22,.68), rgba(5,7,11,.56)) !important;
-    border-color: rgba(166,181,207,.17) !important;
-    -webkit-backdrop-filter: blur(19px) saturate(128%) !important;
-    backdrop-filter: blur(19px) saturate(128%) !important;
-    box-shadow: 0 24px 74px rgba(0,0,0,.40), inset 0 1px rgba(255,255,255,.048), inset 0 -1px rgba(92,201,255,.025) !important;
-  }
-
-  /* Proof rail and CTA were particularly opaque on desktop. */
-  html[data-theme="alza-blue"] .proof-strip {
-    background: linear-gradient(155deg, rgba(8,32,64,.60), rgba(3,17,37,.46)) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-    backdrop-filter: blur(20px) saturate(140%) !important;
-  }
-  html[data-theme="dark-saas"] .proof-strip {
-    background: linear-gradient(155deg, rgba(10,13,19,.69), rgba(4,6,10,.58)) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(128%) !important;
-    backdrop-filter: blur(20px) saturate(128%) !important;
-  }
-  html[data-theme="alza-blue"] .cta-band {
-    background: radial-gradient(560px 240px at 82% 0%, rgba(38,148,255,.16), transparent 64%), rgba(5,25,52,.62) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-    backdrop-filter: blur(20px) saturate(140%) !important;
-  }
-  html[data-theme="dark-saas"] .cta-band {
-    background: radial-gradient(520px 220px at 84% 0%, rgba(112,88,255,.11), transparent 64%), rgba(8,10,15,.68) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(126%) !important;
-    backdrop-filter: blur(20px) saturate(126%) !important;
-  }
-
-  /* New React bento cards need the same top-edge glass highlight as legacy
-     cards. This is visible even before pointer interaction starts. */
-  .b57-premium-card::before {
-    content: "";
-    position: absolute;
-    z-index: 3;
-    pointer-events: none;
-    left: 8%;
-    right: 8%;
-    top: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(112,225,255,.46), rgba(115,132,255,.24), transparent);
-    opacity: .82;
-  }
-
-  /* Ensure the interactive spotlight has a pseudo-element on the React cards
-     too. Older .card styles already supplied one, but b57 cards did not. */
-  .b57-premium-card.motion-surface-v54::after,
-  .architecture-diagram-figure.motion-surface-v54::after,
-  .control-plane.motion-surface-v54::after,
-  .flow-node.motion-surface-v54::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    border-radius: inherit;
-  }
-}
-
 /* ========================================================================== 
-   Build 67 — About mobile UAE media + Solutions desktop cleanup + desktop
-   glass parity. Final cascade intentionally overrides earlier Build 63–66
-   experiments without changing the approved mobile glass composition.
+   Build 68 — restore approved desktop composition + one About media source.
+   No desktop section/grid/layout geometry is changed here.
    ========================================================================== */
 
-/* Solutions: in Dark SaaS desktop, use only the foreground delivery-model
-   artwork. Do not render the generic UAE background behind it. */
+/* Solutions Dark SaaS: foreground delivery-model panel only; never duplicate
+   it with the generic UAE pseudo-background. */
 @media (min-width: 901px) {
   html[data-theme="dark-saas"] body.page-solutions .page-hero.cloud-page-hero::before {
     display: none !important;
-    opacity: 0 !important;
     background-image: none !important;
-    filter: none !important;
-    -webkit-filter: none !important;
-  }
-  html[data-theme="dark-saas"] body.page-solutions .solutions-hero-media {
-    opacity: 1 !important;
-    position: relative;
-    z-index: 3;
+    opacity: 0 !important;
   }
 }
 
-/* About: the App Router migration lost the mobile UAE video element. Build 67
-   restores the dedicated H.264 + WebP-poster hero visual and keeps it below the
-   copy so it never competes with readability. */
-@media (max-width: 900px) {
-  body.page-about .page-hero.cloud-page-hero {
-    padding-bottom: clamp(220px, 58vw, 380px) !important;
-  }
+/* About has exactly one hero media source per viewport.
+   Desktop = animated WebP pseudo-background. Mobile = H.264 + WebP poster. */
+@media (min-width: 901px) {
   body.page-about .about-hero-mobile-video {
-    display: block !important;
-    inset: auto -9% 0 10% !important;
-    width: 102% !important;
-    height: clamp(205px, 55vw, 360px) !important;
-    object-fit: contain !important;
-    object-position: right bottom !important;
-    opacity: .66 !important;
-    filter: saturate(.94) brightness(.83) contrast(1.08) !important;
-    -webkit-filter: saturate(.94) brightness(.83) contrast(1.08) !important;
-    background: transparent !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
-  html[data-theme="dark-saas"] body.page-about .about-hero-mobile-video {
-    opacity: .72 !important;
-    filter: saturate(.82) brightness(.79) contrast(1.12) !important;
-    -webkit-filter: saturate(.82) brightness(.79) contrast(1.12) !important;
+  body.page-about .page-hero.cloud-page-hero::before {
+    display: block !important;
+    background-image: url('/assets/img/uae-tech-solutions.webp?v=68') !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+    background-size: contain !important;
+  }
+  html[data-theme="dark-saas"] body.page-about .page-hero.cloud-page-hero::before {
+    opacity: .67 !important;
+    filter: saturate(.72) brightness(.69) contrast(1.10) !important;
+    -webkit-filter: saturate(.72) brightness(.69) contrast(1.10) !important;
+    mix-blend-mode: screen !important;
+  }
+}
+
+@media (max-width: 900px) {
+  body.page-about .page-hero.cloud-page-hero::before {
+    display: none !important;
+  }
+  body.page-about .about-hero-mobile-video:not([hidden]) {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    opacity: .55 !important;
+    background: #020a18 !important;
+    filter: saturate(.96) brightness(.82) contrast(1.08) !important;
+    -webkit-filter: saturate(.96) brightness(.82) contrast(1.08) !important;
+  }
+  html[data-theme="dark-saas"] body.page-about .about-hero-mobile-video:not([hidden]) {
+    opacity: .60 !important;
+    background: #030407 !important;
+    filter: saturate(.82) brightness(.76) contrast(1.11) !important;
+    -webkit-filter: saturate(.82) brightness(.76) contrast(1.11) !important;
+  }
+  body.page-about .page-hero.cloud-page-hero::after {
+    background:
+      linear-gradient(180deg, rgba(3,16,38,.78) 0%, rgba(3,16,38,.62) 48%, rgba(3,16,38,.48) 100%),
+      linear-gradient(90deg, rgba(3,16,38,.76) 0%, rgba(3,16,38,.36) 70%, rgba(3,16,38,.16) 100%) !important;
   }
   html[data-theme="dark-saas"] body.page-about .page-hero.cloud-page-hero::after {
     background:
-      linear-gradient(180deg,
-        rgba(3,4,7,.91) 0%,
-        rgba(3,4,7,.82) 38%,
-        rgba(3,4,7,.55) 63%,
-        rgba(3,4,7,.26) 82%,
-        rgba(3,4,7,.10) 100%) !important;
+      linear-gradient(180deg, rgba(3,4,7,.78) 0%, rgba(3,4,7,.61) 48%, rgba(3,4,7,.48) 100%),
+      linear-gradient(90deg, rgba(3,4,7,.78) 0%, rgba(3,4,7,.38) 70%, rgba(3,4,7,.15) 100%) !important;
   }
 }
 
-/* Desktop visual parity: allow the persistent Motion layer to remain visible
-   through sections instead of covering it with solid slabs. The surfaces are
-   still dark enough for text contrast and retain the same design language as
-   mobile. */
+/* Desktop motion without a desktop layout rewrite. Existing dimensions, grids,
+   section backgrounds and spacing remain exactly as before Build 66/67. */
 @media (min-width: 901px) {
-  html[data-theme="alza-blue"] body.enterprise-theme #main .section:not(.section-dark):not(.section-soft),
-  html[data-theme="alza-blue"] body.enterprise-theme .b57-faq-section {
-    background:
-      radial-gradient(760px 360px at 82% 18%, rgba(25,133,255,.075), transparent 68%),
-      linear-gradient(180deg, rgba(2,12,29,.72), rgba(3,15,34,.60)) !important;
-  }
-  html[data-theme="dark-saas"] body.enterprise-theme #main .section:not(.section-dark):not(.section-soft),
-  html[data-theme="dark-saas"] body.enterprise-theme .b57-faq-section {
-    background:
-      radial-gradient(760px 360px at 82% 18%, rgba(99,82,255,.045), transparent 68%),
-      linear-gradient(180deg, rgba(3,4,7,.80), rgba(5,7,11,.68)) !important;
-  }
-
-  /* Header itself becomes a desktop glass layer as on mobile. */
-  html[data-theme="alza-blue"] .site-header {
-    background: rgba(2,13,31,.76) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(145%) !important;
-    backdrop-filter: blur(20px) saturate(145%) !important;
-    box-shadow: 0 10px 34px rgba(0,8,25,.18), inset 0 -1px rgba(76,190,255,.08) !important;
-  }
-  html[data-theme="dark-saas"] .site-header {
-    background: rgba(3,4,7,.82) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(125%) !important;
-    backdrop-filter: blur(20px) saturate(125%) !important;
-    box-shadow: 0 10px 34px rgba(0,0,0,.28), inset 0 -1px rgba(151,164,188,.08) !important;
-  }
-
-  /* Keep glass visually alive even before hover. No transforms are animated
-     here, so Motion's tilt/reveal transforms remain authoritative. */
-  .card,
-  .b57-premium-card,
-  .resource-card,
-  .use-case,
-  .glass-panel,
-  .form-card,
-  .download-status,
-  .boundary-diagram,
-  .cutover-stage,
-  .license-footnote,
-  .plan-card,
-  .price-card,
-  .architecture-diagram-figure,
-  .control-plane,
-  .flow-node,
-  .proof-strip,
-  .cta-band {
-    background-size: 175% 175% !important;
-    animation: v67-glass-gradient 10s ease-in-out infinite alternate;
-    will-change: background-position;
-  }
-
-  /* Foreground animated/media panels should visibly float on desktop just as
-     mobile gets continuous motion from its H.264 media. */
-  .solutions-hero-media,
-  .contact-hero-media,
-  .company-hero-media {
-    animation: v67-media-float 7.2s cubic-bezier(.45,.05,.55,.95) infinite;
-    will-change: transform;
-  }
-
-  /* More obvious glass edge and hover depth on desktop. */
   .motion-surface-v54 {
-    outline: 1px solid rgba(119,206,255,.025);
-    outline-offset: -1px;
+    overflow: hidden;
   }
-  .motion-surface-v54:hover {
-    box-shadow:
-      0 30px 88px rgba(0,7,24,.38),
-      0 0 0 1px rgba(72,199,255,.11) inset,
-      0 0 52px rgba(31,154,255,.10) !important;
+  .desktop-glass-sheen-v68 {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    top: -35%;
+    bottom: -35%;
+    left: -34%;
+    width: 22%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(123,226,255,.13), rgba(118,137,255,.08), transparent);
+    filter: blur(8px);
+    transform: translate3d(-220%,0,0) rotate(12deg);
+    animation: v68-desktop-glass-sweep 7.4s cubic-bezier(.42,0,.2,1) infinite;
   }
-}
+  html[data-theme="dark-saas"] .desktop-glass-sheen-v68 {
+    background: linear-gradient(90deg, transparent, rgba(125,222,255,.10), rgba(135,118,255,.055), transparent);
+  }
 
-@keyframes v67-glass-gradient {
-  0%   { background-position: 0% 45%; }
-  50%  { background-position: 78% 55%; }
-  100% { background-position: 100% 42%; }
-}
-
-@keyframes v67-media-float {
-  0%,100% { transform: translate3d(0,0,0); }
-  50%     { transform: translate3d(0,-8px,0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card,
-  .b57-premium-card,
-  .resource-card,
-  .use-case,
-  .glass-panel,
-  .form-card,
-  .download-status,
-  .boundary-diagram,
-  .cutover-stage,
-  .license-footnote,
-  .plan-card,
-  .price-card,
-  .architecture-diagram-figure,
-  .control-plane,
-  .flow-node,
-  .proof-strip,
-  .cta-band,
+  /* Guarantee the original animated WebP/panel effects continue on desktop,
+     including Windows systems that expose prefers-reduced-motion. */
+  .page-hero.cloud-page-hero::before {
+    animation: alzaHeroDrift35 11s ease-in-out infinite alternate !important;
+  }
   .solutions-hero-media,
   .contact-hero-media,
-  .company-hero-media {
-    animation: none !important;
+  .architecture-diagram-figure {
+    animation: alzaPanelFloat35 7.5s ease-in-out infinite alternate,
+               alzaPanelGlow35 4.8s ease-in-out infinite alternate !important;
   }
+  .solutions-hero-media::after,
+  .contact-hero-media::after,
+  .architecture-diagram-figure::after {
+    display: block !important;
+    animation: alzaScan35 8.5s cubic-bezier(.42,0,.2,1) infinite !important;
+  }
+}
+
+@keyframes v68-desktop-glass-sweep {
+  0%,12% { transform: translate3d(-220%,0,0) rotate(12deg); opacity:0; }
+  24% { opacity:.88; }
+  62% { opacity:.34; }
+  76%,100% { transform: translate3d(700%,0,0) rotate(12deg); opacity:0; }
 }
