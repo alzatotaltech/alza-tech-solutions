@@ -94,6 +94,30 @@ export function ExperienceLayer() {
         className="experience-pointer-glow-v67"
         style={{ x: smoothX, y: smoothY }}
       />
+
+      {/* Build 72: desktop-at-rest depth. Hidden completely below 901px. */}
+      <div aria-hidden="true" className="desktop-rich-field-v72">
+        <motion.span
+          className="desktop-aurora-v72 desktop-aurora-one-v72"
+          animate={{ x: [0, 90, 18, 0], y: [0, -34, 42, 0], scale: [1, 1.12, .96, 1], opacity: [.22, .38, .25, .22] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.span
+          className="desktop-aurora-v72 desktop-aurora-two-v72"
+          animate={{ x: [0, -78, 36, 0], y: [0, 48, -18, 0], scale: [1, .94, 1.1, 1], opacity: [.16, .31, .20, .16] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}
+        />
+        <motion.span
+          className="desktop-ribbon-v72 desktop-ribbon-one-v72"
+          animate={{ x: ["-8%", "9%", "-2%", "-8%"], rotate: [-12, -7, -15, -12], opacity: [.12, .24, .15, .12] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.span
+          className="desktop-ribbon-v72 desktop-ribbon-two-v72"
+          animate={{ x: ["8%", "-10%", "3%", "8%"], rotate: [11, 7, 14, 11], opacity: [.10, .20, .13, .10] }}
+          transition={{ duration: 24, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+      </div>
     </div>}
   </>;
 }

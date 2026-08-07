@@ -19,6 +19,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
     // still honored on mobile/tablet, while Save-Data suppresses motion everywhere.
     const lowMotion=saveData||(!desktop&&reduced);
     document.documentElement.classList.toggle('low-motion',lowMotion);
+    document.documentElement.classList.toggle('desktop-rich-motion-v72', desktop && !saveData);
     document.documentElement.classList.add('react-motion-ready');
 
     const cleanups: Array<()=>void> = [];
@@ -175,6 +176,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       animations.forEach(a=>a.cancel?.());
       cleanups.forEach(fn=>fn());
       document.documentElement.classList.remove('react-motion-ready');
+      document.documentElement.classList.remove('desktop-rich-motion-v72');
     };
   },[root,onLead]);
 }

@@ -1,0 +1,368 @@
+/* Build 72 — Desktop Rich SaaS Parity
+   Objective: give desktop the same always-on premium depth as mobile without
+   changing any desktop grid, width, spacing, order, breakpoint, or mobile rule.
+   This file is intentionally loaded last. */
+
+@media (min-width: 901px) {
+  html.desktop-rich-motion-v72 {
+    --v72-cyan: 73, 221, 255;
+    --v72-blue: 40, 137, 255;
+    --v72-violet: 126, 105, 255;
+    --v72-idle-border: rgba(80, 205, 255, .24);
+    --v72-idle-cyan: rgba(55, 200, 255, .10);
+    --v72-idle-violet: rgba(125, 100, 255, .065);
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v72 {
+    --v72-idle-border: rgba(104, 220, 255, .18);
+    --v72-idle-cyan: rgba(73, 215, 255, .065);
+    --v72-idle-violet: rgba(145, 115, 255, .045);
+  }
+
+  /* ---------------------------------------------------------------------
+     1. Persistent desktop ambient field — visible even with a stationary mouse.
+     --------------------------------------------------------------------- */
+  html.desktop-rich-motion-v72 .desktop-rich-field-v72 {
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  html.desktop-rich-motion-v72 .desktop-aurora-v72,
+  html.desktop-rich-motion-v72 .desktop-ribbon-v72 {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    will-change: transform, opacity;
+    mix-blend-mode: screen;
+  }
+
+  html.desktop-rich-motion-v72 .desktop-aurora-v72 {
+    border-radius: 999px;
+    filter: blur(72px);
+  }
+
+  html.desktop-rich-motion-v72 .desktop-aurora-one-v72 {
+    width: 46vw;
+    height: 46vw;
+    min-width: 620px;
+    min-height: 620px;
+    right: -16vw;
+    top: 2vh;
+    background: radial-gradient(circle,
+      rgba(var(--v72-cyan), .23) 0%,
+      rgba(var(--v72-blue), .12) 34%,
+      rgba(var(--v72-violet), .055) 54%,
+      transparent 72%);
+  }
+
+  html.desktop-rich-motion-v72 .desktop-aurora-two-v72 {
+    width: 40vw;
+    height: 40vw;
+    min-width: 560px;
+    min-height: 560px;
+    left: -16vw;
+    top: 54vh;
+    background: radial-gradient(circle,
+      rgba(var(--v72-violet), .14) 0%,
+      rgba(var(--v72-cyan), .075) 42%,
+      transparent 72%);
+  }
+
+  html.desktop-rich-motion-v72 .desktop-ribbon-v72 {
+    width: 72vw;
+    height: 150px;
+    left: 14vw;
+    filter: blur(42px);
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(var(--v72-cyan), .08) 22%,
+      rgba(var(--v72-blue), .15) 50%,
+      rgba(var(--v72-violet), .08) 76%,
+      transparent);
+  }
+  html.desktop-rich-motion-v72 .desktop-ribbon-one-v72 { top: 24vh; }
+  html.desktop-rich-motion-v72 .desktop-ribbon-two-v72 { top: 72vh; }
+
+  /* ---------------------------------------------------------------------
+     2. Restore the richer legacy media animations that Windows reduced-motion
+        was disabling with !important. No layouts are changed here.
+     --------------------------------------------------------------------- */
+  html.desktop-rich-motion-v72 .solutions-hero-media,
+  html.desktop-rich-motion-v72 .contact-hero-media,
+  html.desktop-rich-motion-v72 .architecture-diagram-figure {
+    animation:
+      alzaPanelFloat35 7.5s ease-in-out infinite alternate,
+      alzaPanelGlow35 4.8s ease-in-out infinite alternate !important;
+    transform-origin: 50% 50% !important;
+    will-change: transform, box-shadow !important;
+  }
+
+  html.desktop-rich-motion-v72 .solutions-hero-media::after,
+  html.desktop-rich-motion-v72 .contact-hero-media::after,
+  html.desktop-rich-motion-v72 .architecture-diagram-figure::after {
+    display: block !important;
+    animation: alzaScan35 8.5s cubic-bezier(.42, 0, .2, 1) infinite !important;
+  }
+
+  html.desktop-rich-motion-v72 .page-hero.cloud-page-hero::before {
+    animation: alzaHeroDrift35 11s ease-in-out infinite alternate !important;
+  }
+
+  /* Keep page-specific rules authoritative: if a page deliberately hides the
+     generic ::before artwork, this rule never changes display/visibility. */
+
+  /* Home animated WebP gets a gentle breathing depth on top of the animation
+     contained inside the WebP itself. */
+  html.desktop-rich-motion-v72 .page-index .home-hero-animation-desktop {
+    transform-origin: 78% 48% !important;
+    animation: v72-home-art-breathe 9.5s ease-in-out infinite alternate !important;
+    filter:
+      brightness(1.08)
+      saturate(1.18)
+      contrast(1.025)
+      drop-shadow(0 0 16px rgba(var(--v72-cyan), .12))
+      drop-shadow(0 0 42px rgba(var(--v72-blue), .10)) !important;
+    will-change: transform, filter !important;
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v72 .page-index .home-hero-animation-desktop {
+    filter:
+      brightness(1.10)
+      saturate(1.12)
+      contrast(1.04)
+      drop-shadow(0 0 18px rgba(var(--v72-cyan), .10))
+      drop-shadow(0 0 44px rgba(var(--v72-blue), .075)) !important;
+  }
+
+  @keyframes v72-home-art-breathe {
+    0%   { transform: translate3d(0, 0, 0) scale(1.006); }
+    45%  { transform: translate3d(-7px, -3px, 0) scale(1.017); }
+    100% { transform: translate3d(4px, -7px, 0) scale(1.026); }
+  }
+
+  /* ---------------------------------------------------------------------
+     3. Local section illumination. The original section backgrounds remain
+        intact; this is a non-layout layer inside each container.
+     --------------------------------------------------------------------- */
+  html.desktop-rich-motion-v72 .section > .container,
+  html.desktop-rich-motion-v72 .b57-service-section > .container,
+  html.desktop-rich-motion-v72 .b57-faq-section > .container {
+    position: relative;
+    isolation: isolate;
+  }
+
+  html.desktop-rich-motion-v72 .section > .container::before,
+  html.desktop-rich-motion-v72 .b57-service-section > .container::before,
+  html.desktop-rich-motion-v72 .b57-faq-section > .container::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -72px -7vw;
+    pointer-events: none;
+    opacity: .72;
+    filter: blur(4px);
+    background:
+      radial-gradient(ellipse 42% 46% at 12% 42%, var(--v72-idle-cyan), transparent 72%),
+      radial-gradient(ellipse 38% 44% at 88% 56%, var(--v72-idle-violet), transparent 72%);
+    transform: translate3d(0,0,0);
+    animation: v72-section-light-drift 14s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  html.desktop-rich-motion-v72 .section:nth-of-type(even) > .container::before {
+    animation-direction: alternate-reverse;
+    animation-delay: -5s;
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v72 .section > .container::before,
+  html[data-theme="dark-saas"].desktop-rich-motion-v72 .b57-service-section > .container::before,
+  html[data-theme="dark-saas"].desktop-rich-motion-v72 .b57-faq-section > .container::before {
+    opacity: .50;
+  }
+
+  @keyframes v72-section-light-drift {
+    0%   { transform: translate3d(-1.8%, 0, 0) scale(.99); opacity: .55; }
+    50%  { transform: translate3d(2.6%, -1.2%, 0) scale(1.025); opacity: .84; }
+    100% { transform: translate3d(-.4%, 1.6%, 0) scale(1.01); opacity: .66; }
+  }
+
+  /* ---------------------------------------------------------------------
+     4. Cards look premium at rest. Hover/pointer remains an extra layer,
+        rather than being the only time the effect becomes visible.
+     --------------------------------------------------------------------- */
+  html.desktop-rich-motion-v72 .motion-surface-v54 {
+    animation: v72-surface-idle-depth 6.8s ease-in-out infinite !important;
+    will-change: transform, box-shadow, border-color;
+  }
+
+  html.desktop-rich-motion-v72 .motion-surface-v54:nth-child(3n+2) {
+    animation-delay: -2.2s !important;
+  }
+  html.desktop-rich-motion-v72 .motion-surface-v54:nth-child(3n) {
+    animation-delay: -4.1s !important;
+  }
+
+  html.desktop-rich-motion-v72 .motion-surface-v54::after {
+    background:
+      radial-gradient(520px circle at var(--spot-x,50%) var(--spot-y,50%),
+        rgba(var(--v72-cyan), .19),
+        rgba(var(--v72-blue), .055) 31%,
+        transparent 61%),
+      linear-gradient(116deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255,255,255,.018) 45%,
+        rgba(var(--v72-cyan), .075) 50%,
+        rgba(var(--v72-violet), .035) 54%,
+        transparent 60%,
+        transparent 100%) !important;
+    background-size: 100% 100%, 280% 100% !important;
+    background-position: 0 0, 175% 0 !important;
+    animation: v72-surface-idle-sheen 8.5s linear infinite !important;
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v72 .motion-surface-v54::after {
+    background:
+      radial-gradient(520px circle at var(--spot-x,50%) var(--spot-y,50%),
+        rgba(var(--v72-cyan), .13),
+        rgba(var(--v72-blue), .035) 31%,
+        transparent 61%),
+      linear-gradient(116deg,
+        transparent 0%, transparent 42%,
+        rgba(255,255,255,.014) 46%,
+        rgba(var(--v72-cyan), .052) 50%,
+        rgba(var(--v72-violet), .025) 54%,
+        transparent 60%, transparent 100%) !important;
+  }
+
+  @keyframes v72-surface-idle-sheen {
+    0%   { background-position: 0 0, 175% 0; }
+    42%  { background-position: 0 0, 62% 0; }
+    70%  { background-position: 0 0, -70% 0; }
+    100% { background-position: 0 0, -70% 0; }
+  }
+
+  @keyframes v72-surface-idle-depth {
+    0%,100% {
+      border-color: rgba(91, 179, 244, .17);
+      box-shadow:
+        0 16px 44px rgba(0,7,24,.20),
+        0 0 0 1px rgba(95,205,255,.025) inset,
+        0 0 0 rgba(var(--v72-cyan), 0);
+    }
+    50% {
+      border-color: var(--v72-idle-border);
+      box-shadow:
+        0 22px 56px rgba(0,7,24,.27),
+        0 0 0 1px rgba(95,205,255,.065) inset,
+        0 0 32px rgba(var(--v72-cyan), .055);
+    }
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v72 .motion-surface-v54 {
+    animation-name: v72-surface-idle-depth-dark !important;
+  }
+
+  @keyframes v72-surface-idle-depth-dark {
+    0%,100% {
+      border-color: rgba(135,156,180,.115);
+      box-shadow:
+        0 16px 44px rgba(0,0,0,.28),
+        0 0 0 1px rgba(255,255,255,.018) inset,
+        0 0 0 rgba(var(--v72-cyan), 0);
+    }
+    50% {
+      border-color: rgba(93,217,255,.18);
+      box-shadow:
+        0 22px 58px rgba(0,0,0,.34),
+        0 0 0 1px rgba(94,220,255,.045) inset,
+        0 0 30px rgba(var(--v72-cyan), .035);
+    }
+  }
+
+  html.desktop-rich-motion-v72 .motion-surface-v54:hover {
+    animation-play-state: paused !important;
+  }
+
+  /* Proof strip stays visibly glassy even before the cursor reaches it. */
+  html.desktop-rich-motion-v72 .proof-strip {
+    animation: v72-proof-breathe 7.6s ease-in-out infinite !important;
+    will-change: box-shadow, border-color;
+  }
+
+  @keyframes v72-proof-breathe {
+    0%,100% {
+      box-shadow: 0 18px 50px rgba(0,8,26,.20), inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    50% {
+      box-shadow: 0 22px 62px rgba(0,8,26,.28), 0 0 34px rgba(var(--v72-cyan), .055), inset 0 1px 0 rgba(255,255,255,.07);
+    }
+  }
+
+  /* Icons and small technical accents get a restrained living glow. */
+  html.desktop-rich-motion-v72 .card-icon,
+  html.desktop-rich-motion-v72 .flow-node .node-icon,
+  html.desktop-rich-motion-v72 .cutover-stage .stage-number {
+    animation: v72-icon-energy 5.2s ease-in-out infinite !important;
+  }
+
+  html.desktop-rich-motion-v72 .b57-premium-card svg {
+    animation: v72-svg-energy 5.5s ease-in-out infinite;
+  }
+
+  @keyframes v72-icon-energy {
+    0%,100% { box-shadow: 0 0 0 rgba(var(--v72-cyan),0); filter: brightness(1); }
+    50% { box-shadow: 0 0 24px rgba(var(--v72-cyan),.11); filter: brightness(1.10); }
+  }
+  @keyframes v72-svg-energy {
+    0%,100% { filter: drop-shadow(0 0 0 rgba(var(--v72-cyan),0)); }
+    50% { filter: drop-shadow(0 0 8px rgba(var(--v72-cyan),.42)); }
+  }
+
+  /* Kicker/eyebrow accent is alive even in a static desktop screenshot. */
+  html.desktop-rich-motion-v72 .kicker,
+  html.desktop-rich-motion-v72 .eyebrow {
+    animation: v72-label-energy 6.2s ease-in-out infinite;
+  }
+  @keyframes v72-label-energy {
+    0%,100% { text-shadow: 0 0 0 rgba(var(--v72-cyan),0); }
+    50% { text-shadow: 0 0 14px rgba(var(--v72-cyan),.26); }
+  }
+
+  /* Header gets a faint living edge, no size/position change. */
+  html.desktop-rich-motion-v72 .site-header {
+    animation: v72-header-edge 8s ease-in-out infinite;
+  }
+  @keyframes v72-header-edge {
+    0%,100% { box-shadow: 0 1px 0 rgba(89,185,255,.08), 0 16px 44px rgba(0,0,0,.10); }
+    50% { box-shadow: 0 1px 0 rgba(89,215,255,.18), 0 18px 52px rgba(0,0,0,.15), 0 8px 34px rgba(var(--v72-blue),.045); }
+  }
+
+  /* Existing button/label animations are explicitly restored on desktop when
+     legacy reduced-motion rules would otherwise suppress them. */
+  html.desktop-rich-motion-v72 .hero-copy .eyebrow::after,
+  html.desktop-rich-motion-v72 .page-hero .kicker::after {
+    animation: v54-label-sweep 6.5s ease-in-out infinite !important;
+  }
+  html.desktop-rich-motion-v72 .btn:not(.btn-ghost):not(.btn-secondary)::before {
+    animation: v54-border-spin 7s linear infinite !important;
+  }
+  html.desktop-rich-motion-v72 .btn:not(.btn-ghost):not(.btn-secondary)::after {
+    animation: v54-button-sheen 4.8s ease-in-out infinite !important;
+  }
+
+  /* Never alter the CTA composition: no tilt and no card-style idle animation. */
+  html.desktop-rich-motion-v72 .cta-band,
+  html.desktop-rich-motion-v72 .cta-band * {
+    transform-style: flat;
+  }
+}
+
+/* Mobile/tablet are intentionally untouched by Build 72. */
+@media (max-width: 900px) {
+  .desktop-rich-field-v72 { display: none !important; }
+}
