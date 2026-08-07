@@ -1118,3 +1118,134 @@ html[data-theme="dark-saas"] .cta-band::before {
       drop-shadow(0 0 20px rgba(37,128,255,.52)) !important;
   }
 }
+
+/* Build 71 — desktop-safe live ALZA logo.
+   The animation runs on a dedicated wrapper so legacy .brand-logo rules and
+   desktop prefers-reduced-motion cannot cancel the requested branded effect. */
+.brand-logo-live {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  line-height: 0;
+  isolation: isolate;
+}
+.brand-logo-live .brand-logo {
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  .site-header .brand-logo-live,
+  .site-footer .brand-logo-live {
+    transform-origin: 50% 54%;
+    will-change: transform;
+    animation: alza-logo-desktop-float-v71 2.65s cubic-bezier(.42,0,.2,1) infinite !important;
+  }
+
+  .site-header .brand-logo-live::before,
+  .site-footer .brand-logo-live::before {
+    content: "";
+    position: absolute;
+    inset: 7% 3% 5%;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 38% 45%, rgba(54,230,255,.58) 0%, rgba(35,170,255,.25) 34%, rgba(71,83,255,.13) 56%, transparent 73%);
+    filter: blur(9px);
+    opacity: .38;
+    transform: scale(.88);
+    animation: alza-logo-desktop-aura-v71 2.65s ease-in-out infinite !important;
+  }
+
+  .site-header .brand-logo-live::after,
+  .site-footer .brand-logo-live::after {
+    content: "";
+    position: absolute;
+    inset: 15% 13%;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 44%;
+    background: linear-gradient(112deg, transparent 25%, rgba(151,245,255,.62) 46%, rgba(255,255,255,.80) 50%, rgba(100,189,255,.34) 55%, transparent 72%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform: translateX(-80%) skewX(-14deg);
+    animation: alza-logo-desktop-scan-v71 3.9s cubic-bezier(.4,0,.2,1) infinite !important;
+  }
+
+  .site-header .brand-logo-live .brand-logo,
+  .site-footer .brand-logo-live .brand-logo,
+  html[data-theme="dark-saas"] .site-header .brand-logo-live .brand-logo,
+  html[data-theme="dark-saas"] .site-footer .brand-logo-live .brand-logo {
+    animation: alza-logo-desktop-energy-v71 2.65s ease-in-out infinite !important;
+    transform: translateZ(0);
+    filter: brightness(1.07) saturate(1.12) drop-shadow(0 0 6px rgba(43,216,255,.48)) drop-shadow(0 0 15px rgba(35,122,255,.34)) !important;
+    will-change: filter;
+  }
+
+  .site-header .brand:hover .brand-logo-live,
+  .site-footer .brand:hover .brand-logo-live {
+    animation-duration: 1.55s !important;
+  }
+  .site-header .brand:hover .brand-logo-live::before,
+  .site-footer .brand:hover .brand-logo-live::before,
+  .site-header .brand:hover .brand-logo-live .brand-logo,
+  .site-footer .brand:hover .brand-logo-live .brand-logo {
+    animation-duration: 1.55s !important;
+  }
+}
+
+@keyframes alza-logo-desktop-float-v71 {
+  0%,100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+  22% { transform: translate3d(0,-1px,0) scale(1.016) rotate(-.28deg); }
+  48% { transform: translate3d(0,-2px,0) scale(1.055) rotate(.35deg); }
+  72% { transform: translate3d(0,-1px,0) scale(1.024) rotate(-.12deg); }
+}
+
+@keyframes alza-logo-desktop-energy-v71 {
+  0%,100% {
+    filter: brightness(1.06) saturate(1.10) drop-shadow(0 0 5px rgba(46,216,255,.44)) drop-shadow(0 0 13px rgba(35,122,255,.31));
+  }
+  48% {
+    filter: brightness(1.34) saturate(1.32) drop-shadow(0 0 12px rgba(91,241,255,.98)) drop-shadow(0 0 28px rgba(43,146,255,.82)) drop-shadow(0 0 42px rgba(95,82,255,.42));
+  }
+  70% {
+    filter: brightness(1.17) saturate(1.20) drop-shadow(0 0 8px rgba(58,226,255,.72)) drop-shadow(0 0 20px rgba(57,124,255,.52));
+  }
+}
+
+@keyframes alza-logo-desktop-aura-v71 {
+  0%,100% { opacity:.28; transform:scale(.82); }
+  48% { opacity:.88; transform:scale(1.18); }
+  72% { opacity:.48; transform:scale(.98); }
+}
+
+@keyframes alza-logo-desktop-scan-v71 {
+  0%,56% { opacity:0; transform:translateX(-95%) skewX(-14deg); }
+  64% { opacity:.18; }
+  74% { opacity:.70; }
+  86% { opacity:0; transform:translateX(95%) skewX(-14deg); }
+  100% { opacity:0; transform:translateX(95%) skewX(-14deg); }
+}
+
+/* Explicitly keep the requested desktop brand animation alive even where
+   Windows/Chrome reports prefers-reduced-motion. Other site animations retain
+   their existing accessibility behavior. */
+@media (min-width:1200px) and (prefers-reduced-motion: reduce) {
+  .site-header .brand-logo-live,
+  .site-footer .brand-logo-live {
+    animation: alza-logo-desktop-float-v71 3.2s ease-in-out infinite !important;
+  }
+  .site-header .brand-logo-live::before,
+  .site-footer .brand-logo-live::before {
+    animation: alza-logo-desktop-aura-v71 3.2s ease-in-out infinite !important;
+  }
+  .site-header .brand-logo-live::after,
+  .site-footer .brand-logo-live::after {
+    animation: alza-logo-desktop-scan-v71 4.4s ease-in-out infinite !important;
+  }
+  .site-header .brand-logo-live .brand-logo,
+  .site-footer .brand-logo-live .brand-logo {
+    animation: alza-logo-desktop-energy-v71 3.2s ease-in-out infinite !important;
+  }
+}

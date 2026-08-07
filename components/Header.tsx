@@ -46,7 +46,7 @@ export function Header() {
     </div>
     <div className="container nav-wrap">
       <Link aria-label="ALZA Total Tech Solutions home" className="brand" href="/">
-        <img alt="ALZA logo" className="brand-logo" height="56" src="/assets/img/alza-brand-mark-static.webp" width="64"/>
+        <span className="brand-logo-live" aria-hidden="true"><img alt="" className="brand-logo" height="56" src="/assets/img/alza-brand-mark-static.webp" width="64"/></span>
         <span className="brand-copy"><strong>ALZA</strong><span>Total Tech Solutions</span><small>IT Infrastructure • Cloud • Cybersecurity • Software</small></span>
       </Link>
       <button aria-controls="site-nav" aria-expanded={open} aria-label={open ? "Close navigation" : "Open navigation"} className="nav-toggle" type="button" onClick={() => setOpen(v=>!v)}><span/></button>
