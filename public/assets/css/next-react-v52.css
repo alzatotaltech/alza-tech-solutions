@@ -1,9 +1,0 @@
-/* Build 52: React / Next.js compatibility layer */
-.contact-bar-inner svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;vertical-align:-2px;margin-right:5px}
-.nav-lead-button{font:inherit;cursor:pointer}
-.react-modal{display:grid!important;position:fixed;inset:0;z-index:1000;background:rgba(1,8,20,.78);backdrop-filter:blur(12px);place-items:center;padding:20px}
-.react-modal .modal-card{position:relative;width:min(720px,100%);max-height:min(88vh,820px);overflow:auto}
-.react-modal .modal-close{position:absolute;right:18px;top:14px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(100,190,255,.25);background:rgba(3,22,49,.85);color:#fff;font-size:1.55rem;cursor:pointer}
-/* Legacy page bodies now live inside React's shared main. Keep all page-specific descendants intact. */
-#__next{min-height:100vh;display:flex;flex-direction:column}#__next>main{flex:1}
-@media(max-width:1199px){.nav-lead-button{width:100%;text-align:center}}
