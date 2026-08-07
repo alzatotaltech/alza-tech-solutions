@@ -1,0 +1,231 @@
+/* Build 74 — Brand glass relocation + footer logo parity + always-live buttons.
+   This layer is intentionally small and compositing-friendly. It loads after
+   Build 73, so it restores visible button motion without bringing back the
+   large repaint-heavy desktop effects removed for smooth scrolling. */
+
+/* --------------------------------------------------------------------------
+   1) ALZA mark: keep the glow/float/energy motion, but remove the moving
+      glass scan from the A itself. The scan is now carried by the company name.
+   -------------------------------------------------------------------------- */
+.brand-logo-live::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* Keep the A live in header and footer. The footer now uses the same wrapper
+   as the header, so desktop receives the same aura/float treatment and mobile
+   keeps the existing Build 70 logo pulse. */
+.site-header .brand-logo-live,
+.site-footer .brand-logo-live {
+  flex: 0 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   2) Moving glass belongs to the legal company name, not the A.
+      Only the two company-name lines shimmer; the capability descriptor stays
+      stable for readability. This is a tiny text-only paint area. */
+.brand-copy-live > strong,
+.brand-copy-live > span {
+  background-repeat: no-repeat !important;
+  background-size: 260% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: alza-company-glass-v74 5.6s cubic-bezier(.42,0,.2,1) infinite !important;
+}
+
+.brand-copy-live > strong {
+  background-image: linear-gradient(
+    105deg,
+    #f6fbff 0%,
+    #f6fbff 34%,
+    #8deeff 44%,
+    #ffffff 49%,
+    #72d9ff 54%,
+    #a99cff 59%,
+    #f6fbff 70%,
+    #f6fbff 100%
+  ) !important;
+}
+
+.brand-copy-live > span {
+  background-image: linear-gradient(
+    105deg,
+    #dbeaff 0%,
+    #dbeaff 34%,
+    #7fe5ff 44%,
+    #ffffff 49%,
+    #77d0ff 54%,
+    #9d93ff 59%,
+    #dbeaff 70%,
+    #dbeaff 100%
+  ) !important;
+  animation-delay: .12s !important;
+}
+
+html[data-theme="dark-saas"] .brand-copy-live > strong {
+  background-image: linear-gradient(
+    105deg,
+    #f7f9fc 0%,
+    #f7f9fc 34%,
+    #8cecff 44%,
+    #ffffff 49%,
+    #7bcfff 54%,
+    #b0a5ff 59%,
+    #f7f9fc 70%,
+    #f7f9fc 100%
+  ) !important;
+}
+
+html[data-theme="dark-saas"] .brand-copy-live > span {
+  background-image: linear-gradient(
+    105deg,
+    #cbd3df 0%,
+    #cbd3df 34%,
+    #74ddf7 44%,
+    #f7fbff 49%,
+    #75c8f7 54%,
+    #a398f7 59%,
+    #cbd3df 70%,
+    #cbd3df 100%
+  ) !important;
+}
+
+@keyframes alza-company-glass-v74 {
+  0%, 58% { background-position: 118% 50%; }
+  78% { background-position: -118% 50%; }
+  100% { background-position: -118% 50%; }
+}
+
+/* The exact legal-name badge on the home hero also keeps its glass pass live,
+   even though Build 73 pauses generic eyebrow/kicker animation for performance. */
+.page-index .hero-copy .eyebrow::after {
+  animation: alza-company-badge-glass-v74 5.8s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+}
+
+@keyframes alza-company-badge-glass-v74 {
+  0%, 61% { left: -45%; opacity: 0; }
+  68% { opacity: .28; }
+  78% { opacity: .92; }
+  90% { left: 122%; opacity: .48; }
+  100% { left: 122%; opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   3) All site CTA buttons keep visible animation at rest, on hover, during
+      scrolling, and in both themes. The sheen uses transform/opacity instead
+      of animating left, so it is much cheaper than Build 72's repaint-heavy
+      effects. */
+.btn {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+/* Primary animated border remains continuously live. */
+.btn:not(.btn-ghost):not(.btn-secondary)::before {
+  animation: v74-button-border 8.4s linear infinite !important;
+  animation-play-state: running !important;
+  will-change: transform;
+}
+
+@keyframes v74-button-border {
+  to { transform: rotate(360deg); }
+}
+
+/* A lightweight glass sweep is continuously visible on every .btn, including
+   primary, ghost and secondary buttons. */
+.btn::after,
+.btn:not(.btn-ghost):not(.btn-secondary)::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -90% !important;
+  bottom: -90% !important;
+  left: -34% !important;
+  width: 24% !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.30), transparent) !important;
+  transform: translate3d(0,0,0) skewX(-18deg) !important;
+  animation: v74-button-glass 4.9s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform, opacity;
+}
+
+.btn-ghost::after,
+.btn-secondary::after {
+  background: linear-gradient(90deg, transparent, rgba(121,225,255,.23), rgba(255,255,255,.24), transparent) !important;
+}
+
+html[data-theme="dark-saas"] .btn-ghost::after,
+html[data-theme="dark-saas"] .btn-secondary::after {
+  background: linear-gradient(90deg, transparent, rgba(112,218,255,.18), rgba(255,255,255,.22), transparent) !important;
+}
+
+@keyframes v74-button-glass {
+  0%, 56% {
+    transform: translate3d(0,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+  63% { opacity: .20; }
+  72% { opacity: .82; }
+  86% {
+    transform: translate3d(620%,0,0) skewX(-18deg);
+    opacity: .48;
+  }
+  100% {
+    transform: translate3d(620%,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Build 73 intentionally freezes magnetic movement during active scroll. Keep
+   that safety, but never pause the button's own small composited animations. */
+html.is-scrolling-v73 .btn::before,
+html.is-scrolling-v73 .btn::after,
+html.desktop-rich-motion-v73 .btn::before,
+html.desktop-rich-motion-v73 .btn::after,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::before,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::after {
+  animation-play-state: running !important;
+}
+
+/* Match the higher-specificity Build 73 primary-button rules so the optimized
+   v74 animation remains authoritative in idle, hover and focus states. */
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::before,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+  animation: v74-button-border 8.4s linear infinite !important;
+  animation-play-state: running !important;
+}
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::after,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):hover::after,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::after {
+  animation: v74-button-glass 4.9s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+}
+
+/* The user explicitly requested always-live branded/button animation. Override
+   older reduced-motion rules only for these small brand/button surfaces; large
+   ambient/media effects continue to follow the performance safeguards. */
+@media (prefers-reduced-motion: reduce) {
+  .brand-copy-live > strong,
+  .brand-copy-live > span {
+    animation: alza-company-glass-v74 6.4s ease-in-out infinite !important;
+  }
+  .page-index .hero-copy .eyebrow::after {
+    animation: alza-company-badge-glass-v74 6.4s ease-in-out infinite !important;
+  }
+  .btn:not(.btn-ghost):not(.btn-secondary)::before {
+    animation: v74-button-border 9.2s linear infinite !important;
+  }
+  .btn::after,
+  .btn:not(.btn-ghost):not(.btn-secondary)::after {
+    animation: v74-button-glass 5.6s ease-in-out infinite !important;
+  }
+}
