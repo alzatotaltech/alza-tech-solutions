@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /*.md$
-Disallow: /*.txt$
-
-Sitemap: https://alzatotaltech.com/sitemap.xml
