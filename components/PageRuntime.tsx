@@ -85,7 +85,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       });
 
       // Interactive 21st-style spotlight + subtle 3D tilt on pointer devices.
-      const surfaces=Array.from(el.querySelectorAll<HTMLElement>('.card, .plan-card, .cta-band, .proof-strip, .glass-panel'));
+      const surfaces=Array.from(el.querySelectorAll<HTMLElement>('.card, .b57-premium-card, .resource-card, .use-case, .plan-card, .price-card, .cta-band, .proof-strip, .glass-panel, .form-card, .boundary-diagram, .architecture-diagram-figure, .cutover-stage, .control-plane, .flow-node'));
       const finePointer=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
       if(finePointer){
         surfaces.forEach(surface=>{

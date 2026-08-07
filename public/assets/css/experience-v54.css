@@ -48,6 +48,7 @@
   transition:transform 220ms cubic-bezier(.22,1,.36,1),border-color 220ms ease,box-shadow 220ms ease;
 }
 .motion-surface-v54::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;z-index:2;
   opacity:1!important;
   background:radial-gradient(480px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(69,208,255,.15),rgba(35,120,255,.055) 30%,transparent 58%)!important;
   transition:opacity .22s ease!important;
@@ -111,4 +112,25 @@
   .alza-scroll-progress-v54,.experience-ambient-v54{display:none!important}
   .hero-copy h1 span,.page-hero h1 strong,.hero-copy .eyebrow::after,.page-hero .kicker::after,.btn::before,.btn::after{animation:none!important}
   .motion-surface-v54,.btn{transform:none!important;transition:none!important}
+}
+
+
+/* Build 66 — desktop ambient depth parity */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .experience-grid-v54 { opacity: .105; }
+  .experience-orb-one-v54 { opacity: .34; }
+  .experience-orb-two-v54 { opacity: .27; }
+
+  /* Slow glass-light drift: deliberately subtle, but continuously visible on
+     desktop rather than only during the initial scroll reveal. */
+  .b57-premium-card::before,
+  .proof-strip::after,
+  .glass-panel::before {
+    animation: v66-glass-drift 7.5s ease-in-out infinite alternate;
+  }
+  @keyframes v66-glass-drift {
+    0%   { opacity: .42; filter: brightness(.92); }
+    50%  { opacity: .90; filter: brightness(1.12); }
+    100% { opacity: .58; filter: brightness(1.00); }
+  }
 }

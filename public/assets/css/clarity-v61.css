@@ -829,3 +829,126 @@ html[data-theme="dark-saas"] .company-hero-media .media-webp-desktop {
     opacity: .74 !important;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   Build 66: desktop Chrome glass + Motion parity
+   Keep mobile/tablet behaviour unchanged. On laptops/desktops, make the
+   premium surfaces genuinely translucent so the ambient Motion layer is
+   visible through them, and provide a glass fallback even when backdrop-filter
+   rendering is weak/disabled by the browser/GPU.
+   -------------------------------------------------------------------------- */
+@media (min-width: 901px) {
+  /* Give desktop content a transparent compositing context over the ambient
+     experience layer instead of painting opaque section slabs over it. */
+  html[data-theme="alza-blue"] body.enterprise-theme,
+  html[data-theme="dark-saas"] body.enterprise-theme {
+    background-attachment: fixed !important;
+  }
+
+  html[data-theme="alza-blue"] .section-dark,
+  html[data-theme="alza-blue"] .section-soft {
+    background: linear-gradient(180deg, rgba(4,18,40,.54), rgba(3,14,31,.38)) !important;
+  }
+  html[data-theme="dark-saas"] .section-dark,
+  html[data-theme="dark-saas"] .section-soft,
+  html[data-theme="dark-saas"] .b57-service-section {
+    background: linear-gradient(180deg, rgba(3,4,7,.78), rgba(5,7,11,.68)) !important;
+  }
+
+  /* Core glass system: translucent fill + independent highlight + stronger
+     blur/saturation. The fill still looks dimensional if backdrop-filter is
+     unavailable, because the gradient/border/shadow remain. */
+  html[data-theme="alza-blue"] .card,
+  html[data-theme="alza-blue"] .b57-premium-card,
+  html[data-theme="alza-blue"] .resource-card,
+  html[data-theme="alza-blue"] .use-case,
+  html[data-theme="alza-blue"] .glass-panel,
+  html[data-theme="alza-blue"] .form-card,
+  html[data-theme="alza-blue"] .download-status,
+  html[data-theme="alza-blue"] .boundary-diagram,
+  html[data-theme="alza-blue"] .cutover-stage,
+  html[data-theme="alza-blue"] .license-footnote,
+  html[data-theme="alza-blue"] .plan-card,
+  html[data-theme="alza-blue"] .price-card,
+  html[data-theme="alza-blue"] .architecture-diagram-figure {
+    background: linear-gradient(155deg, rgba(9,34,66,.58), rgba(3,16,35,.44)) !important;
+    border-color: rgba(93,190,255,.24) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(138%) !important;
+    backdrop-filter: blur(18px) saturate(138%) !important;
+    box-shadow: 0 22px 70px rgba(0,7,24,.28), inset 0 1px rgba(255,255,255,.055), inset 0 -1px rgba(68,174,255,.035) !important;
+  }
+
+  html[data-theme="dark-saas"] .card,
+  html[data-theme="dark-saas"] .b57-premium-card,
+  html[data-theme="dark-saas"] .resource-card,
+  html[data-theme="dark-saas"] .use-case,
+  html[data-theme="dark-saas"] .glass-panel,
+  html[data-theme="dark-saas"] .form-card,
+  html[data-theme="dark-saas"] .download-status,
+  html[data-theme="dark-saas"] .boundary-diagram,
+  html[data-theme="dark-saas"] .cutover-stage,
+  html[data-theme="dark-saas"] .license-footnote,
+  html[data-theme="dark-saas"] .plan-card,
+  html[data-theme="dark-saas"] .price-card,
+  html[data-theme="dark-saas"] .architecture-diagram-figure,
+  html[data-theme="dark-saas"] .control-plane,
+  html[data-theme="dark-saas"] .flow-node {
+    background: linear-gradient(155deg, rgba(12,15,22,.68), rgba(5,7,11,.56)) !important;
+    border-color: rgba(166,181,207,.17) !important;
+    -webkit-backdrop-filter: blur(19px) saturate(128%) !important;
+    backdrop-filter: blur(19px) saturate(128%) !important;
+    box-shadow: 0 24px 74px rgba(0,0,0,.40), inset 0 1px rgba(255,255,255,.048), inset 0 -1px rgba(92,201,255,.025) !important;
+  }
+
+  /* Proof rail and CTA were particularly opaque on desktop. */
+  html[data-theme="alza-blue"] .proof-strip {
+    background: linear-gradient(155deg, rgba(8,32,64,.60), rgba(3,17,37,.46)) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+  }
+  html[data-theme="dark-saas"] .proof-strip {
+    background: linear-gradient(155deg, rgba(10,13,19,.69), rgba(4,6,10,.58)) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(128%) !important;
+    backdrop-filter: blur(20px) saturate(128%) !important;
+  }
+  html[data-theme="alza-blue"] .cta-band {
+    background: radial-gradient(560px 240px at 82% 0%, rgba(38,148,255,.16), transparent 64%), rgba(5,25,52,.62) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+  }
+  html[data-theme="dark-saas"] .cta-band {
+    background: radial-gradient(520px 220px at 84% 0%, rgba(112,88,255,.11), transparent 64%), rgba(8,10,15,.68) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(126%) !important;
+    backdrop-filter: blur(20px) saturate(126%) !important;
+  }
+
+  /* New React bento cards need the same top-edge glass highlight as legacy
+     cards. This is visible even before pointer interaction starts. */
+  .b57-premium-card::before {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    left: 8%;
+    right: 8%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(112,225,255,.46), rgba(115,132,255,.24), transparent);
+    opacity: .82;
+  }
+
+  /* Ensure the interactive spotlight has a pseudo-element on the React cards
+     too. Older .card styles already supplied one, but b57 cards did not. */
+  .b57-premium-card.motion-surface-v54::after,
+  .architecture-diagram-figure.motion-surface-v54::after,
+  .control-plane.motion-surface-v54::after,
+  .flow-node.motion-surface-v54::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
