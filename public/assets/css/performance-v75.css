@@ -1,0 +1,170 @@
+/* Build 75 — Desktop GPU relief / mobile-parity performance architecture.
+   Loaded after Build 74. Mobile performance/visual composition is preserved. */
+
+/* --------------------------------------------------------------------------
+   Brand motion placement — all viewports.
+   Header/footer legal name is static. The moving glass belongs only to the
+   homepage ALZA Total Tech Solutions FZ-LLC identity pill.
+   -------------------------------------------------------------------------- */
+.site-header .brand-copy-live > strong,
+.site-header .brand-copy-live > span,
+.site-footer .brand-copy-live > strong,
+.site-footer .brand-copy-live > span {
+  animation:none !important;
+  background:none !important;
+  -webkit-background-clip:border-box !important;
+  background-clip:border-box !important;
+  -webkit-text-fill-color:currentColor !important;
+  color:inherit !important;
+  will-change:auto !important;
+}
+.site-header .brand-copy-live > strong,
+.site-footer .brand-copy-live > strong { color:#fff !important; }
+.site-header .brand-copy-live > span,
+.site-footer .brand-copy-live > span { color:#dbeaff !important; }
+html[data-theme="dark-saas"] .site-header .brand-copy-live > span,
+html[data-theme="dark-saas"] .site-footer .brand-copy-live > span { color:#cbd3df !important; }
+
+/* Transform-only glass pass on the exact homepage legal-name pill. */
+.page-index .hero-copy .eyebrow::after {
+  content:"" !important;
+  position:absolute !important;
+  top:-55% !important;
+  bottom:-55% !important;
+  left:-34% !important;
+  width:28% !important;
+  opacity:0;
+  pointer-events:none !important;
+  background:linear-gradient(90deg,transparent,rgba(100,226,255,.16),rgba(255,255,255,.56),rgba(122,153,255,.18),transparent) !important;
+  transform:translate3d(0,0,0) skewX(-18deg) !important;
+  animation:v75-company-pill-glass 5.8s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state:running !important;
+  will-change:transform,opacity;
+}
+@keyframes v75-company-pill-glass {
+  0%,58% { transform:translate3d(0,0,0) skewX(-18deg); opacity:0; }
+  65% { opacity:.18; }
+  74% { opacity:.92; }
+  88% { transform:translate3d(620%,0,0) skewX(-18deg); opacity:.38; }
+  100% { transform:translate3d(620%,0,0) skewX(-18deg); opacity:0; }
+}
+
+@media (min-width: 901px) {
+  /* Keep the A alive but stop animating CSS filters every frame. The wrapper
+     float/aura remains, while the image itself uses one static illuminated
+     filter. This removes a repeated paint operation from the sticky header. */
+  .site-header .brand-logo-live .brand-logo,
+  .site-footer .brand-logo-live .brand-logo,
+  html[data-theme="dark-saas"] .site-header .brand-logo-live .brand-logo,
+  html[data-theme="dark-saas"] .site-footer .brand-logo-live .brand-logo {
+    animation:none !important;
+    will-change:auto !important;
+    filter:brightness(1.13) saturate(1.16) drop-shadow(0 0 7px rgba(55,222,255,.62)) drop-shadow(0 0 17px rgba(38,128,255,.42)) !important;
+  }
+
+  /* ----------------------------------------------------------------------
+     Buttons: always visibly animated WHEN THEY ARE NEAR THE VIEWPORT.
+     One transform/opacity sheen replaces the continuously rotating conic
+     border. Off-screen buttons do zero animation work.
+     ---------------------------------------------------------------------- */
+  .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+    animation:none !important;
+    animation-play-state:paused !important;
+    will-change:auto !important;
+    transform:none !important;
+    opacity:.58 !important;
+  }
+
+  .btn::after,
+  .btn:not(.btn-ghost):not(.btn-secondary)::after,
+  html.desktop-rich-motion-v73 .btn::after,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::after {
+    animation:none !important;
+    animation-play-state:paused !important;
+    opacity:0 !important;
+    will-change:auto !important;
+    transform:translate3d(0,0,0) skewX(-18deg) !important;
+  }
+
+  .btn.v75-button-live::after,
+  .btn.v75-button-live:not(.btn-ghost):not(.btn-secondary)::after,
+  html.desktop-rich-motion-v73 .btn.v75-button-live::after,
+  html.desktop-rich-motion-v73 .btn.v75-button-live:not(.btn-ghost):not(.btn-secondary)::after,
+  html.desktop-rich-motion-v73 .btn.v75-button-live:not(.btn-ghost):not(.btn-secondary):hover::after,
+  html.desktop-rich-motion-v73 .btn.v75-button-live:not(.btn-ghost):not(.btn-secondary):focus-visible::after {
+    animation:v75-button-sheen 5.6s cubic-bezier(.42,0,.2,1) infinite !important;
+    animation-play-state:running !important;
+    will-change:transform,opacity !important;
+  }
+  @keyframes v75-button-sheen {
+    0%,60% { transform:translate3d(0,0,0) skewX(-18deg); opacity:0; }
+    67% { opacity:.18; }
+    76% { opacity:.74; }
+    88% { transform:translate3d(620%,0,0) skewX(-18deg); opacity:.34; }
+    100% { transform:translate3d(620%,0,0) skewX(-18deg); opacity:0; }
+  }
+
+  /* ----------------------------------------------------------------------
+     Remove desktop backdrop blur from surfaces that move over page content.
+     Existing gradients and borders preserve the glass appearance without
+     re-blurring the page every scroll frame.
+     ---------------------------------------------------------------------- */
+  .site-header,
+  .proof-strip,
+  .btn-ghost,
+  .card,
+  .resource-card,
+  .use-case,
+  .glass-panel,
+  .form-card,
+  .download-status,
+  .boundary-diagram,
+  .cutover-stage,
+  .license-footnote,
+  .plan-card,
+  .hub,
+  .orbit-card,
+  .card-dark {
+    -webkit-backdrop-filter:none !important;
+    backdrop-filter:none !important;
+  }
+
+  /* Remove large static blur/repaint surfaces inherited from older premium
+     layers. The Build 73 fixed ambient field already supplies depth. */
+  .section:nth-of-type(3n)::after { display:none !important; }
+  body.enterprise-theme::before { display:none !important; }
+
+  /* Large animated text background-position causes continuous repaints.
+     Retain the premium gradient but make it static on desktop. */
+  .hero-copy h1 span,
+  .page-hero h1 strong {
+    animation:none !important;
+    background-position:50% 50% !important;
+  }
+
+  /* Desktop homepage now uses hardware-decoded H.264 like the mobile strategy. */
+  .page-index .home-hero-animation-desktop { display:none !important; }
+  .page-index .home-hero-video-desktop {
+    display:block !important;
+    opacity:1 !important;
+    object-fit:cover !important;
+    object-position:right center !important;
+    transform:translateZ(0);
+    will-change:auto !important;
+  }
+
+  /* When a CSS-background WebP page hero is far outside the viewport, remove
+     it entirely so Chrome is not decoding/painting unseen animated frames. */
+  .page-hero.cloud-page-hero:not(.v75-hero-media-active)::before {
+    background-image:none !important;
+    animation:none !important;
+    opacity:0 !important;
+  }
+
+  /* During active scroll, keep only the compositor-friendly visible button
+     sheen. Tilt/spotlight/magnetic movement remain frozen by Build 73. */
+  html.is-scrolling-v73 .motion-surface-v54::after { opacity:0 !important; }
+}

@@ -7,7 +7,9 @@ export function Content_index() {
   return (
     <>
     <section className={"hero hero-branded"}>
-      <img alt={""} aria-hidden={"true"} className={"home-hero-animation home-hero-animation-desktop"} decoding={"async"} fetchPriority={"high"} height={600} src={"/assets/img/hero-cloud-migration-v21.webp?v=41"} width={1144}/>
+      <video aria-hidden={"true"} className={"home-hero-video home-hero-video-desktop"} loop muted playsInline poster={"/assets/img/hero-cloud-migration-poster.webp?v=41"} preload={"metadata"} tabIndex={-1}>
+        <source src={"/assets/video/hero-cloud-migration-v21.mp4?v=75"} type={"video/mp4"}/>
+      </video>
       <video aria-hidden={"true"} autoPlay className={"home-hero-video home-hero-video-mobile"} loop muted playsInline poster={"/assets/img/hero-cloud-migration-mobile-poster.webp?v=41"} preload={"auto"} tabIndex={-1}>
         <source src={"/assets/video/hero-cloud-migration-v21-mobile.mp4?v=41"} type={"video/mp4"}/>
       </video>

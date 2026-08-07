@@ -25,6 +25,62 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
     const cleanups: Array<()=>void> = [];
     const animations: Array<{cancel?:()=>void}> = [];
 
+    // Build 75 performance gates: only visible desktop controls/media stay live.
+    // Mobile keeps its existing smooth H.264-first experience unchanged.
+    if(desktop) {
+      const visibleButtons=Array.from(el.querySelectorAll<HTMLElement>('.btn'));
+      if('IntersectionObserver' in window) {
+        const buttonObserver=new IntersectionObserver(entries=>{
+          entries.forEach(entry=>{
+            (entry.target as HTMLElement).classList.toggle('v75-button-live',entry.isIntersecting);
+          });
+        },{rootMargin:'140px 0px',threshold:0});
+        visibleButtons.forEach(btn=>buttonObserver.observe(btn));
+        cleanups.push(()=>buttonObserver.disconnect());
+      } else {
+        visibleButtons.forEach(btn=>btn.classList.add('v75-button-live'));
+        cleanups.push(()=>visibleButtons.forEach(btn=>btn.classList.remove('v75-button-live')));
+      }
+
+      // Desktop homepage now uses the hardware-decoded H.264 asset. Pause it
+      // once the hero is well outside the viewport so long-page scrolling does
+      // not keep decoding unseen animation frames.
+      el.querySelectorAll<HTMLVideoElement>('.home-hero-video-desktop').forEach(video=>{
+        video.muted=true; video.playsInline=true;
+        const setActive=(active:boolean)=>{
+          video.classList.toggle('v75-media-active',active);
+          if(active && !document.hidden) video.play().catch(()=>{}); else video.pause();
+        };
+        const onDesktopMediaVisibility=()=>{
+          if(document.hidden) video.pause();
+          else if(video.classList.contains('v75-media-active')) video.play().catch(()=>{});
+        };
+        document.addEventListener('visibilitychange',onDesktopMediaVisibility);
+        cleanups.push(()=>document.removeEventListener('visibilitychange',onDesktopMediaVisibility));
+        if('IntersectionObserver' in window) {
+          const mediaObserver=new IntersectionObserver(entries=>{
+            entries.forEach(entry=>setActive(entry.isIntersecting));
+          },{rootMargin:'320px 0px',threshold:0});
+          mediaObserver.observe(video);
+          cleanups.push(()=>mediaObserver.disconnect());
+        } else setActive(true);
+      });
+
+      // CSS-background animated WebP heroes cannot be paused directly. Remove
+      // the background when the top hero is far off-screen, then restore it
+      // before the user scrolls back into view.
+      el.querySelectorAll<HTMLElement>('.page-hero.cloud-page-hero').forEach(hero=>{
+        hero.classList.add('v75-hero-media-active');
+        if('IntersectionObserver' in window) {
+          const heroObserver=new IntersectionObserver(entries=>{
+            entries.forEach(entry=>entry.target.classList.toggle('v75-hero-media-active',entry.isIntersecting));
+          },{rootMargin:'360px 0px',threshold:0});
+          heroObserver.observe(hero);
+          cleanups.push(()=>heroObserver.disconnect());
+        }
+      });
+    }
+
     // Preserve campaign + pricing context in the client-rendered enquiry form.
     const params=new URLSearchParams(window.location.search);
     const selectedPlan=params.get("plan")||"";
