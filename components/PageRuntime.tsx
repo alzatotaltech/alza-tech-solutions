@@ -19,7 +19,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
     // still honored on mobile/tablet, while Save-Data suppresses motion everywhere.
     const lowMotion=saveData||(!desktop&&reduced);
     document.documentElement.classList.toggle('low-motion',lowMotion);
-    document.documentElement.classList.toggle('desktop-rich-motion-v72', desktop && !saveData);
+    document.documentElement.classList.toggle('desktop-rich-motion-v73', desktop && !saveData);
     document.documentElement.classList.add('react-motion-ready');
 
     const cleanups: Array<()=>void> = [];
@@ -91,18 +91,30 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       // Interactive 21st-style spotlight + subtle 3D tilt on pointer devices.
       const surfaces=Array.from(el.querySelectorAll<HTMLElement>('.card, .b57-premium-card, .resource-card, .use-case, .plan-card, .price-card, .proof-strip, .glass-panel, .form-card, .boundary-diagram, .architecture-diagram-figure, .cutover-stage, .control-plane, .flow-node'));
       const finePointer=desktop;
+      let scrolling=false;
+      let scrollTimer:number|undefined;
+      const onScrollPerf=()=>{
+        if(!desktop) return;
+        if(!scrolling){ scrolling=true; document.documentElement.classList.add('is-scrolling-v73'); }
+        if(scrollTimer) window.clearTimeout(scrollTimer);
+        scrollTimer=window.setTimeout(()=>{ scrolling=false; document.documentElement.classList.remove('is-scrolling-v73'); },120);
+      };
+      if(desktop){
+        window.addEventListener('scroll',onScrollPerf,{passive:true});
+        cleanups.push(()=>{window.removeEventListener('scroll',onScrollPerf); if(scrollTimer) window.clearTimeout(scrollTimer); document.documentElement.classList.remove('is-scrolling-v73');});
+      }
       if(finePointer){
         surfaces.forEach(surface=>{
           surface.classList.add('motion-surface-v54');
           const move=(ev:PointerEvent)=>{
-            if(ev.pointerType==='touch') return;
+            if(ev.pointerType==='touch'||scrolling) return;
             const r=surface.getBoundingClientRect();
             const px=(ev.clientX-r.left)/r.width;
             const py=(ev.clientY-r.top)/r.height;
             surface.style.setProperty('--spot-x',`${(px*100).toFixed(1)}%`);
             surface.style.setProperty('--spot-y',`${(py*100).toFixed(1)}%`);
-            const rx=(.5-py)*3.4;
-            const ry=(px-.5)*4.2;
+            const rx=(.5-py)*2.2;
+            const ry=(px-.5)*2.8;
             surface.style.setProperty('--tilt-x',`${rx.toFixed(2)}deg`);
             surface.style.setProperty('--tilt-y',`${ry.toFixed(2)}deg`);
           };
@@ -122,7 +134,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       if(finePointer){
         el.querySelectorAll<HTMLElement>('.btn:not(.btn-ghost):not(.btn-secondary)').forEach(btn=>{
           const move=(ev:PointerEvent)=>{
-            if(ev.pointerType==='touch') return;
+            if(ev.pointerType==='touch'||scrolling) return;
             const r=btn.getBoundingClientRect(); const x=(ev.clientX-r.left-r.width/2)*.08; const y=(ev.clientY-r.top-r.height/2)*.11;
             btn.style.setProperty('--mag-x',`${x.toFixed(1)}px`); btn.style.setProperty('--mag-y',`${y.toFixed(1)}px`);
           };
@@ -176,7 +188,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       animations.forEach(a=>a.cancel?.());
       cleanups.forEach(fn=>fn());
       document.documentElement.classList.remove('react-motion-ready');
-      document.documentElement.classList.remove('desktop-rich-motion-v72');
+      document.documentElement.classList.remove('desktop-rich-motion-v73');
     };
   },[root,onLead]);
 }

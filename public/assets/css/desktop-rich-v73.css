@@ -1,0 +1,166 @@
+/* Build 73 — Desktop Rich SaaS Performance Pass
+   Keeps the approved desktop layout and premium depth while removing the
+   repaint-heavy continuous effects introduced in Build 72. */
+
+@media (min-width: 901px) {
+  html.desktop-rich-motion-v73 {
+    --v73-cyan: 73, 221, 255;
+    --v73-blue: 40, 137, 255;
+    --v73-violet: 126, 105, 255;
+  }
+
+  /* One fixed, static gradient field replaces four giant moving blurred layers. */
+  html.desktop-rich-motion-v73 .desktop-rich-field-v73 {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .42;
+    background:
+      radial-gradient(52rem 36rem at 91% 16%, rgba(var(--v73-cyan), .075), transparent 68%),
+      radial-gradient(46rem 34rem at 8% 70%, rgba(var(--v73-violet), .045), transparent 70%),
+      linear-gradient(115deg, transparent 25%, rgba(var(--v73-blue), .018) 52%, transparent 76%);
+    contain: strict;
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v73 .desktop-rich-field-v73 {
+    opacity: .34;
+  }
+
+  /* Do not run the old blurred ambient orbs/beams on desktop. */
+  html.desktop-rich-motion-v73 .experience-ambient-v54,
+  html.desktop-rich-motion-v73 .experience-beam-v67,
+  html.desktop-rich-motion-v73 .experience-pointer-glow-v67,
+  html.desktop-rich-motion-v73 .desktop-rich-field-v72 {
+    display: none !important;
+  }
+
+  /* Grid is static and cheap. */
+  html.desktop-rich-motion-v73 .experience-grid-v54 {
+    opacity: .065;
+  }
+
+  /* Restore visible media movement using transform only. No animated filters,
+     box shadows or giant glow scans. */
+  html.desktop-rich-motion-v73 .page-index .home-hero-animation-desktop,
+  html.desktop-rich-motion-v73 .page-hero.cloud-page-hero::before,
+  html.desktop-rich-motion-v73 .solutions-hero-media,
+  html.desktop-rich-motion-v73 .contact-hero-media,
+  html.desktop-rich-motion-v73 .architecture-diagram-figure {
+    animation: v73-media-float 10s cubic-bezier(.45,.05,.55,.95) infinite alternate !important;
+    transform-origin: 50% 50% !important;
+  }
+
+  html.desktop-rich-motion-v73 .page-index .home-hero-animation-desktop {
+    filter: brightness(1.06) saturate(1.12) contrast(1.02) !important;
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v73 .page-index .home-hero-animation-desktop {
+    filter: brightness(1.08) saturate(1.08) contrast(1.03) !important;
+  }
+
+  @keyframes v73-media-float {
+    from { transform: translate3d(0, 0, 0) scale(1.002); }
+    to   { transform: translate3d(0, -6px, 0) scale(1.012); }
+  }
+
+  /* Disable repaint-heavy scans on large media panels. */
+  html.desktop-rich-motion-v73 .solutions-hero-media::after,
+  html.desktop-rich-motion-v73 .contact-hero-media::after,
+  html.desktop-rich-motion-v73 .architecture-diagram-figure::after {
+    animation: none !important;
+    opacity: .14 !important;
+  }
+
+  /* Premium card depth at rest is static. Interactive spotlight/tilt remains. */
+  html.desktop-rich-motion-v73 .motion-surface-v54 {
+    animation: none !important;
+    will-change: auto !important;
+    contain: paint;
+  }
+
+  html.desktop-rich-motion-v73 .motion-surface-v54::after {
+    animation: none !important;
+    background: radial-gradient(
+      420px circle at var(--spot-x,50%) var(--spot-y,50%),
+      rgba(var(--v73-cyan), .13),
+      rgba(var(--v73-blue), .035) 32%,
+      transparent 62%
+    ) !important;
+  }
+
+  html[data-theme="dark-saas"].desktop-rich-motion-v73 .motion-surface-v54::after {
+    background: radial-gradient(
+      420px circle at var(--spot-x,50%) var(--spot-y,50%),
+      rgba(var(--v73-cyan), .085),
+      rgba(var(--v73-blue), .025) 32%,
+      transparent 62%
+    ) !important;
+  }
+
+  /* During active scrolling, freeze interactive transforms and decorative
+     pseudo-layers so Chrome can prioritize compositing the scroll. */
+  html.is-scrolling-v73 .motion-surface-v54 {
+    transform: none !important;
+    transition: none !important;
+  }
+  html.is-scrolling-v73 .motion-surface-v54::after {
+    opacity: 0 !important;
+  }
+  html.is-scrolling-v73 .btn:not(.btn-ghost):not(.btn-secondary) {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Build 72 animated box-shadow/border/filter effects are deliberately gone. */
+  html.desktop-rich-motion-v73 .proof-strip,
+  html.desktop-rich-motion-v73 .card-icon,
+  html.desktop-rich-motion-v73 .flow-node .node-icon,
+  html.desktop-rich-motion-v73 .cutover-stage .stage-number,
+  html.desktop-rich-motion-v73 .b57-premium-card svg,
+  html.desktop-rich-motion-v73 .kicker,
+  html.desktop-rich-motion-v73 .eyebrow,
+  html.desktop-rich-motion-v73 .site-header {
+    animation: none !important;
+  }
+
+  /* Keep restrained static glow so the site remains visually rich. */
+  html.desktop-rich-motion-v73 .card-icon,
+  html.desktop-rich-motion-v73 .flow-node .node-icon,
+  html.desktop-rich-motion-v73 .cutover-stage .stage-number {
+    box-shadow: 0 0 18px rgba(var(--v73-cyan), .06);
+  }
+  html.desktop-rich-motion-v73 .b57-premium-card svg {
+    filter: drop-shadow(0 0 5px rgba(var(--v73-cyan), .20));
+  }
+
+  /* Continuous button conic rotation on every CTA is expensive. Keep sheen
+     only on hover/focus where the user can actually see it. */
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::after,
+  html.desktop-rich-motion-v73 .hero-copy .eyebrow::after,
+  html.desktop-rich-motion-v73 .page-hero .kicker::after {
+    animation-play-state: paused !important;
+  }
+
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+    animation: v54-border-spin 7s linear infinite !important;
+    animation-play-state: running !important;
+  }
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):hover::after,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::after {
+    animation: v54-button-sheen 4.8s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+
+  /* No layout changes. */
+  html.desktop-rich-motion-v73 .cta-band,
+  html.desktop-rich-motion-v73 .cta-band * {
+    transform-style: flat;
+  }
+}
+
+@media (max-width: 900px) {
+  .desktop-rich-field-v73 { display: none !important; }
+}

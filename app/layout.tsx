@@ -44,7 +44,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="stylesheet" href="/assets/css/experience-v54.css?v=69" />
         <link rel="stylesheet" href="/assets/css/theme-v55.css?v=61" />
         <link rel="stylesheet" href="/assets/css/clarity-v61.css?v=71" />
-        <link rel="stylesheet" href="/assets/css/desktop-rich-v72.css?v=72" />
+        <link rel="stylesheet" href="/assets/css/desktop-rich-v73.css?v=73" />
       </head>
       <body className="enterprise-theme">
         <script dangerouslySetInnerHTML={{ __html: bootstrap }} />
