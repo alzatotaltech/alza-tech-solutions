@@ -563,3 +563,27 @@ html[data-theme="alza-blue"] .brand-copy small { color: #8da8c5; }
     background: linear-gradient(180deg, #030407 0%, rgba(3,4,7,.96) 56%, rgba(3,4,7,.72) 100%) !important;
   }
 }
+
+/* Build 62: keep contact-bar icons beside their labels, never stacked above. */
+.contact-bar-inner > a,
+.contact-bar-inner > .contact-location {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.contact-bar-inner > a > svg,
+.contact-bar-inner > .contact-location > svg {
+  display: block !important;
+  flex: 0 0 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin: 0 !important;
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  vertical-align: middle !important;
+}
