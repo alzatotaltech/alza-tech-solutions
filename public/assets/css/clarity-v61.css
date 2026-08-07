@@ -652,3 +652,84 @@ html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero .b
       #030407 100%) !important;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   Build 64: finish Dark SaaS neutralisation for premium service cards and
+   customer-controlled architecture visuals. Blue/cyan remains accent-only.
+   -------------------------------------------------------------------------- */
+
+/* Homepage premium service/bento region: true near-black surfaces. */
+html[data-theme="dark-saas"] .b57-service-section {
+  background: #030407 !important;
+  background-image: none !important;
+  border-color: rgba(151,164,188,.10) !important;
+}
+html[data-theme="dark-saas"] .b57-premium-grid {
+  opacity: .13 !important;
+  filter: grayscale(1) saturate(0) !important;
+  -webkit-filter: grayscale(1) saturate(0) !important;
+}
+html[data-theme="dark-saas"] .b57-premium-card {
+  background: linear-gradient(155deg,#0b0e14 0%,#07090d 100%) !important;
+  border-color: rgba(151,164,188,.16) !important;
+  box-shadow: 0 18px 54px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.025) !important;
+}
+html[data-theme="dark-saas"] .b57-premium-card:hover {
+  border-color: rgba(108,212,255,.24) !important;
+  box-shadow: 0 24px 72px rgba(0,0,0,.42), 0 0 26px rgba(64,187,255,.055) !important;
+}
+/* Neutralise the large Tailwind accent wash inside each card. */
+html[data-theme="dark-saas"] .b57-premium-card > div[aria-hidden="true"]:first-child {
+  background: radial-gradient(80% 70% at 8% 0%,rgba(91,205,255,.055),transparent 58%),
+              linear-gradient(155deg,rgba(255,255,255,.018),transparent 62%) !important;
+  opacity: 1 !important;
+}
+html[data-theme="dark-saas"] .b57-premium-card > div[aria-hidden="true"]:nth-child(2) {
+  background: rgba(102,213,255,.055) !important;
+  opacity: .48 !important;
+}
+html[data-theme="dark-saas"] .b57-premium-card h3 { color:#f5f7fa !important; }
+html[data-theme="dark-saas"] .b57-premium-card p { color:#b8c1cf !important; }
+
+/* Architecture figure shell and caption: remove legacy navy panels. */
+html[data-theme="dark-saas"] .architecture-diagram-figure {
+  background: #07090d !important;
+  border-color: rgba(151,164,188,.16) !important;
+  box-shadow: 0 22px 64px rgba(0,0,0,.42), inset 0 1px rgba(255,255,255,.025) !important;
+}
+html[data-theme="dark-saas"] .architecture-diagram-figure figcaption {
+  color: #aeb8c6 !important;
+  background: #080b10 !important;
+  border-top-color: rgba(151,164,188,.12) !important;
+}
+/* The source artwork itself is blue. Keep it readable while taking the large
+   blue field out of Dark SaaS. Applies to both desktop WebP and mobile H.264. */
+html[data-theme="dark-saas"] .architecture-diagram-image,
+html[data-theme="dark-saas"] .architecture-diagram-figure .media-h264-mobile {
+  background: #05070a !important;
+  border-color: rgba(151,164,188,.12) !important;
+  filter: grayscale(.72) saturate(.30) brightness(.68) contrast(1.10) !important;
+  -webkit-filter: grayscale(.72) saturate(.30) brightness(.68) contrast(1.10) !important;
+}
+/* Convert the legacy bright-blue scanner into a restrained neutral/cyan sheen. */
+html[data-theme="dark-saas"] .architecture-diagram-figure::after {
+  background: linear-gradient(90deg,transparent,rgba(203,234,247,.055),rgba(102,213,255,.045),transparent) !important;
+  filter: blur(11px) grayscale(.55) !important;
+  opacity: .62 !important;
+}
+
+/* Also neutralise the older CSS-drawn architecture blocks if used elsewhere. */
+html[data-theme="dark-saas"] .boundary-diagram,
+html[data-theme="dark-saas"] .control-plane,
+html[data-theme="dark-saas"] .flow-node {
+  background: linear-gradient(155deg,#0c1017,#080a0f) !important;
+  border-color: rgba(151,164,188,.16) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.022) !important;
+}
+html[data-theme="dark-saas"] .flow-node b,
+html[data-theme="dark-saas"] .control-plane b { color:#f2f5f8 !important; }
+html[data-theme="dark-saas"] .flow-node span,
+html[data-theme="dark-saas"] .control-plane span,
+html[data-theme="dark-saas"] .control-plane small { color:#aeb8c6 !important; }
+html[data-theme="dark-saas"] .perimeter-label { color:#67d8ff !important; }
