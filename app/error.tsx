@@ -1,0 +1,2 @@
+"use client";
+export default function Error({reset}:{error:Error & {digest?:string};reset:()=>void}){return <main className="enterprise-theme next-error"><section className="section"><div className="container"><span className="kicker">Something went wrong</span><h1>We could not load this page.</h1><p className="lead">Please try again. If the problem continues, contact ALZA support.</p><button className="btn" type="button" onClick={()=>reset()}>Try again</button></div></section></main>;}

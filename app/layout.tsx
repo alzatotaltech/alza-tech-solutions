@@ -1,0 +1,48 @@
+import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import { MotionConfigProvider } from "@/components/MotionConfigProvider";
+import { RouteBodyClass } from "@/components/RouteBodyClass";
+import { routeBodyClass } from "@/lib/routes";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://alzatotaltech.com"),
+  applicationName: "ALZA Total Tech Solutions",
+  creator: "ALZA Total Tech Solutions FZ-LLC",
+  publisher: "ALZA Total Tech Solutions FZ-LLC",
+  icons: { icon: [{ url: "/favicon.ico" }, { url: "/favicon.svg", type: "image/svg+xml" }] },
+  manifest: "/manifest.webmanifest",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#020a18",
+  colorScheme: "dark",
+};
+
+const bootstrap = `(function(){try{var t=localStorage.getItem("alza-theme-v55");document.documentElement.dataset.theme=t==="dark-saas"?"dark-saas":"alza-blue";}catch(e){document.documentElement.dataset.theme="alza-blue";}try{var p=location.pathname.replace(/\/+$/,"")||"/";var m=${JSON.stringify(routeBodyClass)};document.body.className=m[p]||"enterprise-theme";}catch(e){}})();`;
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en" data-theme="alza-blue" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("alza-theme-v55");document.documentElement.dataset.theme=t==="dark-saas"?"dark-saas":"alza-blue";}catch(e){document.documentElement.dataset.theme="alza-blue";}})();` }} />
+        <link rel="stylesheet" href="/assets/css/master.css?v=57" />
+        <link rel="stylesheet" href="/assets/css/responsive-v49.css?v=57" />
+        <link rel="stylesheet" href="/assets/css/motion-v50.css?v=57" />
+        <link rel="stylesheet" href="/assets/css/premium-v51.css?v=57" />
+        <link rel="stylesheet" href="/assets/css/next-react-v52.css?v=57" />
+        <link rel="stylesheet" href="/assets/css/experience-v54.css?v=57" />
+        <link rel="stylesheet" href="/assets/css/theme-v55.css?v=57" />
+      </head>
+      <body className="enterprise-theme">
+        <script dangerouslySetInnerHTML={{ __html: bootstrap }} />
+        <MotionConfigProvider>
+          <RouteBodyClass />
+          {children}
+        </MotionConfigProvider>
+      </body>
+    </html>
+  );
+}
