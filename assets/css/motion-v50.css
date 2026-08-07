@@ -1,0 +1,52 @@
+/* Build 50 — Motion + 21st-inspired interaction layer */
+:root{
+  --motion-fast:180ms;
+  --motion-base:240ms;
+  --motion-slow:380ms;
+  --motion-ease:cubic-bezier(.22,1,.36,1);
+  --surface-border:rgba(73,169,255,.24);
+  --surface-glow:rgba(32,181,255,.13);
+}
+
+.alza-scroll-progress{
+  position:fixed;z-index:9999;top:0;left:0;width:100%;height:2px;
+  transform:scaleX(0);transform-origin:left center;pointer-events:none;
+  background:linear-gradient(90deg,#21c7f5,#1885ff 58%,#7d71ff);
+  box-shadow:0 0 16px rgba(33,199,245,.55);
+}
+
+.motion-surface{will-change:transform;transform:translateZ(0)}
+.card,.plan-card,.cta-band{
+  position:relative;isolation:isolate;
+  transition:border-color var(--motion-base) var(--motion-ease),box-shadow var(--motion-base) var(--motion-ease),background-color var(--motion-base) var(--motion-ease);
+}
+.card::after,.plan-card::after,.cta-band::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:radial-gradient(420px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(44,196,255,.105),transparent 46%);
+  opacity:0;transition:opacity var(--motion-base) ease;
+}
+@media (hover:hover) and (pointer:fine){
+  .card:hover,.plan-card:hover,.cta-band:hover{border-color:rgba(70,181,255,.38);box-shadow:0 20px 55px rgba(0,8,24,.28),0 0 0 1px rgba(43,177,255,.045) inset}
+  .card:hover::after,.plan-card:hover::after,.cta-band:hover::after{opacity:1}
+  .btn,.app-tab{transition:box-shadow var(--motion-fast) ease,border-color var(--motion-fast) ease,background-color var(--motion-fast) ease}
+}
+
+/* 21st-inspired restraint: clear hierarchy, subtle glow, no decorative overload */
+.kicker,.eyebrow{letter-spacing:.13em}
+.btn:focus-visible,.app-tab:focus-visible,.nav-toggle:focus-visible,a:focus-visible{
+  outline:2px solid #46d4ff;outline-offset:3px;
+}
+
+/* Keep the brand experience visually persistent across device widths. */
+@media (max-width:900px){
+  .motion-surface{will-change:auto!important}
+  .card::after,.plan-card::after,.cta-band::after{display:none}
+  .alza-scroll-progress{height:2px}
+  .btn,.app-tab{min-height:44px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  .motion-surface{transform:none!important;transition:none!important}
+  .alza-scroll-progress{transition:none!important}
+}
