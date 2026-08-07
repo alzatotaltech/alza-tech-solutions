@@ -1040,3 +1040,81 @@ html[data-theme="dark-saas"] .cta-band::before {
 @media (prefers-reduced-motion: reduce) {
   .site-header .brand-logo,.site-footer .brand-logo { animation:none !important; filter:brightness(1.08) saturate(1.10) drop-shadow(0 0 7px rgba(48,218,255,.48)) drop-shadow(0 0 18px rgba(31,126,255,.38)); }
 }
+
+
+/* Build 70 — visibly live ALZA A mark.  This is intentionally applied after
+   the Build 69 pulse so it wins without changing logo dimensions/layout. */
+.site-header .brand-logo,
+.site-footer .brand-logo {
+  transform-origin: 50% 52% !important;
+  will-change: transform, filter !important;
+  animation: alza-mark-live-v70 2.85s cubic-bezier(.42,0,.2,1) infinite !important;
+  backface-visibility: hidden;
+}
+
+@keyframes alza-mark-live-v70 {
+  0%,100% {
+    transform: translate3d(0,0,0) scale(1) rotate(0deg);
+    filter:
+      brightness(1.04) saturate(1.08)
+      drop-shadow(0 0 4px rgba(37,211,255,.42))
+      drop-shadow(0 0 11px rgba(36,126,255,.28));
+  }
+  18% {
+    transform: translate3d(0,-1px,0) scale(1.018) rotate(-.35deg);
+    filter:
+      brightness(1.14) saturate(1.16)
+      drop-shadow(0 0 7px rgba(54,226,255,.72))
+      drop-shadow(0 0 18px rgba(37,136,255,.48));
+  }
+  42% {
+    transform: translate3d(0,-2px,0) scale(1.065) rotate(.45deg);
+    filter:
+      brightness(1.30) saturate(1.30)
+      drop-shadow(0 0 11px rgba(78,236,255,.98))
+      drop-shadow(0 0 28px rgba(38,139,255,.78))
+      drop-shadow(0 0 42px rgba(89,74,255,.38));
+  }
+  58% {
+    transform: translate3d(0,-1px,0) scale(1.038) rotate(-.2deg);
+    filter:
+      brightness(1.19) saturate(1.20)
+      drop-shadow(0 0 9px rgba(59,222,255,.80))
+      drop-shadow(0 0 22px rgba(69,112,255,.58));
+  }
+  76% {
+    transform: translate3d(0,0,0) scale(1.012) rotate(.15deg);
+    filter:
+      brightness(1.10) saturate(1.13)
+      drop-shadow(0 0 6px rgba(48,213,255,.60))
+      drop-shadow(0 0 15px rgba(42,128,255,.38));
+  }
+}
+
+.site-header .brand:hover .brand-logo,
+.site-footer .brand:hover .brand-logo {
+  animation-duration: 1.65s !important;
+  filter:
+    brightness(1.34) saturate(1.30)
+    drop-shadow(0 0 12px rgba(78,236,255,1))
+    drop-shadow(0 0 30px rgba(37,139,255,.82)) !important;
+}
+
+@media (max-width: 900px) {
+  .site-header .brand-logo,
+  .site-footer .brand-logo {
+    animation-duration: 3.1s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header .brand-logo,
+  .site-footer .brand-logo {
+    animation: none !important;
+    transform: none !important;
+    filter:
+      brightness(1.16) saturate(1.18)
+      drop-shadow(0 0 8px rgba(60,224,255,.72))
+      drop-shadow(0 0 20px rgba(37,128,255,.52)) !important;
+  }
+}
