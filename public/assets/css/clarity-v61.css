@@ -587,3 +587,68 @@ html[data-theme="alza-blue"] .brand-copy small { color: #8da8c5; }
   transform: none !important;
   vertical-align: middle !important;
 }
+
+/* --------------------------------------------------------------------------
+   Build 63: true near-black Dark SaaS treatment for every inner-page hero.
+   Legacy master.css uses blue background shorthands and blue-toned artwork on
+   .cloud-page-hero. Override both the shorthand and pseudo layers here.
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero {
+  background: #030407 !important;
+  background-color: #030407 !important;
+  background-image: none !important;
+  border-bottom-color: rgba(151, 164, 188, .10) !important;
+  box-shadow: none !important;
+}
+
+/* Keep the page-specific artwork, but remove the large navy/blue cast. */
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero::before {
+  opacity: .34 !important;
+  filter: grayscale(.92) saturate(.16) brightness(.50) contrast(1.18) !important;
+  -webkit-filter: grayscale(.92) saturate(.16) brightness(.50) contrast(1.18) !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Strong neutral-black overlay replaces every legacy blue hero overlay. */
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero::after {
+  background:
+    linear-gradient(90deg,
+      #030407 0%,
+      rgba(3,4,7,.995) 32%,
+      rgba(3,4,7,.92) 50%,
+      rgba(3,4,7,.76) 68%,
+      rgba(3,4,7,.54) 84%,
+      rgba(3,4,7,.42) 100%),
+    linear-gradient(0deg,
+      #030407 0%,
+      rgba(3,4,7,.82) 22%,
+      rgba(3,4,7,.28) 58%,
+      transparent 100%) !important;
+}
+
+/* Maintain readable high-contrast hero copy on the neutral Dark SaaS surface. */
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero h1,
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero h2,
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero strong {
+  color: #f8fafc !important;
+}
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero .lead,
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero p,
+html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero .breadcrumbs {
+  color: #c2cad6 !important;
+}
+
+/* Mobile artwork should remain subdued too; avoid the old full-width blue wash. */
+@media (max-width: 720px) {
+  html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero::before {
+    opacity: .25 !important;
+    filter: grayscale(.96) saturate(.10) brightness(.46) contrast(1.16) !important;
+    -webkit-filter: grayscale(.96) saturate(.10) brightness(.46) contrast(1.16) !important;
+  }
+  html[data-theme="dark-saas"] body.enterprise-theme .page-hero.cloud-page-hero::after {
+    background: linear-gradient(180deg,
+      rgba(3,4,7,.92) 0%,
+      rgba(3,4,7,.84) 44%,
+      #030407 100%) !important;
+  }
+}
