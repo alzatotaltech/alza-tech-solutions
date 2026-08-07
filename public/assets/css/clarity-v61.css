@@ -952,3 +952,175 @@ html[data-theme="dark-saas"] .company-hero-media .media-webp-desktop {
     border-radius: inherit;
   }
 }
+
+/* ========================================================================== 
+   Build 67 — About mobile UAE media + Solutions desktop cleanup + desktop
+   glass parity. Final cascade intentionally overrides earlier Build 63–66
+   experiments without changing the approved mobile glass composition.
+   ========================================================================== */
+
+/* Solutions: in Dark SaaS desktop, use only the foreground delivery-model
+   artwork. Do not render the generic UAE background behind it. */
+@media (min-width: 901px) {
+  html[data-theme="dark-saas"] body.page-solutions .page-hero.cloud-page-hero::before {
+    display: none !important;
+    opacity: 0 !important;
+    background-image: none !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+  }
+  html[data-theme="dark-saas"] body.page-solutions .solutions-hero-media {
+    opacity: 1 !important;
+    position: relative;
+    z-index: 3;
+  }
+}
+
+/* About: the App Router migration lost the mobile UAE video element. Build 67
+   restores the dedicated H.264 + WebP-poster hero visual and keeps it below the
+   copy so it never competes with readability. */
+@media (max-width: 900px) {
+  body.page-about .page-hero.cloud-page-hero {
+    padding-bottom: clamp(220px, 58vw, 380px) !important;
+  }
+  body.page-about .about-hero-mobile-video {
+    display: block !important;
+    inset: auto -9% 0 10% !important;
+    width: 102% !important;
+    height: clamp(205px, 55vw, 360px) !important;
+    object-fit: contain !important;
+    object-position: right bottom !important;
+    opacity: .66 !important;
+    filter: saturate(.94) brightness(.83) contrast(1.08) !important;
+    -webkit-filter: saturate(.94) brightness(.83) contrast(1.08) !important;
+    background: transparent !important;
+  }
+  html[data-theme="dark-saas"] body.page-about .about-hero-mobile-video {
+    opacity: .72 !important;
+    filter: saturate(.82) brightness(.79) contrast(1.12) !important;
+    -webkit-filter: saturate(.82) brightness(.79) contrast(1.12) !important;
+  }
+  html[data-theme="dark-saas"] body.page-about .page-hero.cloud-page-hero::after {
+    background:
+      linear-gradient(180deg,
+        rgba(3,4,7,.91) 0%,
+        rgba(3,4,7,.82) 38%,
+        rgba(3,4,7,.55) 63%,
+        rgba(3,4,7,.26) 82%,
+        rgba(3,4,7,.10) 100%) !important;
+  }
+}
+
+/* Desktop visual parity: allow the persistent Motion layer to remain visible
+   through sections instead of covering it with solid slabs. The surfaces are
+   still dark enough for text contrast and retain the same design language as
+   mobile. */
+@media (min-width: 901px) {
+  html[data-theme="alza-blue"] body.enterprise-theme #main .section:not(.section-dark):not(.section-soft),
+  html[data-theme="alza-blue"] body.enterprise-theme .b57-faq-section {
+    background:
+      radial-gradient(760px 360px at 82% 18%, rgba(25,133,255,.075), transparent 68%),
+      linear-gradient(180deg, rgba(2,12,29,.72), rgba(3,15,34,.60)) !important;
+  }
+  html[data-theme="dark-saas"] body.enterprise-theme #main .section:not(.section-dark):not(.section-soft),
+  html[data-theme="dark-saas"] body.enterprise-theme .b57-faq-section {
+    background:
+      radial-gradient(760px 360px at 82% 18%, rgba(99,82,255,.045), transparent 68%),
+      linear-gradient(180deg, rgba(3,4,7,.80), rgba(5,7,11,.68)) !important;
+  }
+
+  /* Header itself becomes a desktop glass layer as on mobile. */
+  html[data-theme="alza-blue"] .site-header {
+    background: rgba(2,13,31,.76) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(145%) !important;
+    backdrop-filter: blur(20px) saturate(145%) !important;
+    box-shadow: 0 10px 34px rgba(0,8,25,.18), inset 0 -1px rgba(76,190,255,.08) !important;
+  }
+  html[data-theme="dark-saas"] .site-header {
+    background: rgba(3,4,7,.82) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(125%) !important;
+    backdrop-filter: blur(20px) saturate(125%) !important;
+    box-shadow: 0 10px 34px rgba(0,0,0,.28), inset 0 -1px rgba(151,164,188,.08) !important;
+  }
+
+  /* Keep glass visually alive even before hover. No transforms are animated
+     here, so Motion's tilt/reveal transforms remain authoritative. */
+  .card,
+  .b57-premium-card,
+  .resource-card,
+  .use-case,
+  .glass-panel,
+  .form-card,
+  .download-status,
+  .boundary-diagram,
+  .cutover-stage,
+  .license-footnote,
+  .plan-card,
+  .price-card,
+  .architecture-diagram-figure,
+  .control-plane,
+  .flow-node,
+  .proof-strip,
+  .cta-band {
+    background-size: 175% 175% !important;
+    animation: v67-glass-gradient 10s ease-in-out infinite alternate;
+    will-change: background-position;
+  }
+
+  /* Foreground animated/media panels should visibly float on desktop just as
+     mobile gets continuous motion from its H.264 media. */
+  .solutions-hero-media,
+  .contact-hero-media,
+  .company-hero-media {
+    animation: v67-media-float 7.2s cubic-bezier(.45,.05,.55,.95) infinite;
+    will-change: transform;
+  }
+
+  /* More obvious glass edge and hover depth on desktop. */
+  .motion-surface-v54 {
+    outline: 1px solid rgba(119,206,255,.025);
+    outline-offset: -1px;
+  }
+  .motion-surface-v54:hover {
+    box-shadow:
+      0 30px 88px rgba(0,7,24,.38),
+      0 0 0 1px rgba(72,199,255,.11) inset,
+      0 0 52px rgba(31,154,255,.10) !important;
+  }
+}
+
+@keyframes v67-glass-gradient {
+  0%   { background-position: 0% 45%; }
+  50%  { background-position: 78% 55%; }
+  100% { background-position: 100% 42%; }
+}
+
+@keyframes v67-media-float {
+  0%,100% { transform: translate3d(0,0,0); }
+  50%     { transform: translate3d(0,-8px,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .b57-premium-card,
+  .resource-card,
+  .use-case,
+  .glass-panel,
+  .form-card,
+  .download-status,
+  .boundary-diagram,
+  .cutover-stage,
+  .license-footnote,
+  .plan-card,
+  .price-card,
+  .architecture-diagram-figure,
+  .control-plane,
+  .flow-node,
+  .proof-strip,
+  .cta-band,
+  .solutions-hero-media,
+  .contact-hero-media,
+  .company-hero-media {
+    animation: none !important;
+  }
+}

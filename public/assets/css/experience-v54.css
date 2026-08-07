@@ -134,3 +134,73 @@
     100% { opacity: .58; filter: brightness(1.00); }
   }
 }
+
+/* Build 67 — desktop ambient parity. These layers are intentionally absent on
+   mobile because mobile already receives continuous H.264/WebP movement. */
+.experience-beam-v67,
+.experience-pointer-glow-v67 { display:none; }
+
+@media (min-width:901px) {
+  .experience-ambient-v54 {
+    opacity: 1;
+  }
+  .experience-grid-v54 {
+    opacity: .13;
+    background-size: 62px 62px;
+  }
+  .experience-orb-one-v54 {
+    width: 520px;
+    height: 520px;
+    filter: blur(40px);
+  }
+  .experience-orb-two-v54 {
+    width: 440px;
+    height: 440px;
+    filter: blur(42px);
+  }
+  .experience-beam-v67 {
+    display:block;
+    position:absolute;
+    width:720px;
+    height:180px;
+    border-radius:999px;
+    filter:blur(34px);
+    pointer-events:none;
+    mix-blend-mode:screen;
+    will-change:transform,opacity;
+  }
+  .experience-beam-one-v67 {
+    right:-180px;
+    top:32vh;
+    background:linear-gradient(90deg,transparent,rgba(42,173,255,.16),rgba(92,96,255,.11),transparent);
+  }
+  .experience-beam-two-v67 {
+    left:-220px;
+    top:72vh;
+    background:linear-gradient(90deg,transparent,rgba(72,214,255,.10),rgba(35,108,255,.12),transparent);
+  }
+  .experience-pointer-glow-v67 {
+    display:block;
+    position:fixed;
+    left:0;
+    top:0;
+    width:540px;
+    height:540px;
+    border-radius:50%;
+    pointer-events:none;
+    opacity:.28;
+    filter:blur(24px);
+    background:radial-gradient(circle,rgba(63,205,255,.20) 0%,rgba(29,121,255,.09) 34%,rgba(116,91,255,.045) 52%,transparent 72%);
+    mix-blend-mode:screen;
+    will-change:transform;
+  }
+  html[data-theme="dark-saas"] .experience-pointer-glow-v67 {
+    opacity:.22;
+    background:radial-gradient(circle,rgba(86,210,255,.15) 0%,rgba(83,83,255,.065) 36%,transparent 70%);
+  }
+}
+
+@media (max-width:900px), (prefers-reduced-motion:reduce) {
+  .experience-beam-v67,
+  .experience-pointer-glow-v67 { display:none !important; }
+}

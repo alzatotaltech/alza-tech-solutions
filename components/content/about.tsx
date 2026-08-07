@@ -5,6 +5,21 @@ export function Content_about() {
   return (
     <>
     <section className={"cloud-page-hero page-hero"}>
+      <video
+        aria-hidden={"true"}
+        autoPlay
+        className={"page-hero-mobile-video about-hero-mobile-video mobile-autoplay-media"}
+        controlsList={"nodownload noplaybackrate nofullscreen"}
+        disablePictureInPicture
+        loop
+        muted
+        playsInline
+        poster={"/assets/img/uae-tech-solutions-mobile-poster.webp?v=67"}
+        preload={"metadata"}
+        tabIndex={-1}
+      >
+        <source src={"/assets/video/uae-tech-solutions-mobile.mp4?v=67"} type={"video/mp4"}/>
+      </video>
       
 
       <div className={"container"}>

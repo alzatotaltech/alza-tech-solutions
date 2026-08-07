@@ -65,7 +65,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       const sections=Array.from(el.querySelectorAll<HTMLElement>('.section'));
       sections.forEach(section=>{
         const heading=section.querySelector<HTMLElement>('.heading-row, .section-heading, .section-title');
-        const cards=Array.from(section.querySelectorAll<HTMLElement>('.card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage'));
+        const cards=Array.from(section.querySelectorAll<HTMLElement>('.card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage, .price-card, .architecture-diagram-figure, .control-plane, .flow-node'));
         if(heading){ heading.style.opacity='0'; heading.style.transform='translateY(32px)'; }
         cards.forEach(card=>{card.style.opacity='0';card.style.transform='translateY(38px) scale(.975)'});
         const stop=inView(section,()=>{
@@ -76,7 +76,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
       });
 
       // Standalone reveal elements outside card grids.
-      const reveals=Array.from(el.querySelectorAll<HTMLElement>('[data-reveal]')).filter(n=>!n.closest('.card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage'));
+      const reveals=Array.from(el.querySelectorAll<HTMLElement>('[data-reveal]')).filter(n=>!n.closest('.card, .resource-card, .use-case, .glass-panel, .plan-card, .cutover-stage, .price-card, .architecture-diagram-figure, .control-plane, .flow-node'));
       reveals.forEach(node=>{
         const stop=inView(node,()=>{
           const a=animate(node,{opacity:[0,1],y:[28,0]},{duration:.58,ease}); animations.push(a as any);
@@ -86,7 +86,7 @@ export function usePageRuntime(root: RefObject<HTMLElement | null>, onLead:()=>v
 
       // Interactive 21st-style spotlight + subtle 3D tilt on pointer devices.
       const surfaces=Array.from(el.querySelectorAll<HTMLElement>('.card, .b57-premium-card, .resource-card, .use-case, .plan-card, .price-card, .cta-band, .proof-strip, .glass-panel, .form-card, .boundary-diagram, .architecture-diagram-figure, .cutover-stage, .control-plane, .flow-node'));
-      const finePointer=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+      const finePointer=window.matchMedia('(any-hover:hover) and (any-pointer:fine)').matches;
       if(finePointer){
         surfaces.forEach(surface=>{
           surface.classList.add('motion-surface-v54');
