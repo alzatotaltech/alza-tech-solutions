@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:where([data-theme="dark-saas"] *));
 
+/* Build 61: use the self-hosted Next.js Inter variable font everywhere. */
+html, body {
+  font-family: var(--font-alza), Inter, "Segoe UI Variable", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 :root {
   --alza-tw-bg: #020a18;
   --alza-tw-panel: rgba(8, 30, 58, 0.72);

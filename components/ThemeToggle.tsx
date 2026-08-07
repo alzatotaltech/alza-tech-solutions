@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -7,16 +8,19 @@ const STORAGE_KEY = "alza-theme-v55";
 
 function applyTheme(theme: ThemeName) {
   document.documentElement.dataset.theme = theme;
-  try { localStorage.setItem(STORAGE_KEY, theme); } catch {}
+  try {
+    localStorage.setItem(STORAGE_KEY, theme);
+  } catch {}
   const meta = document.querySelector('meta[name="theme-color"]');
-  meta?.setAttribute("content", theme === "dark-saas" ? "#05060a" : "#020a18");
+  meta?.setAttribute("content", theme === "dark-saas" ? "#030407" : "#020a18");
 }
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<ThemeName>("alza-blue");
 
   useEffect(() => {
-    const current = document.documentElement.dataset.theme === "dark-saas" ? "dark-saas" : "alza-blue";
+    const current: ThemeName =
+      document.documentElement.dataset.theme === "dark-saas" ? "dark-saas" : "alza-blue";
     setTheme(current);
     applyTheme(current);
   }, []);
@@ -31,22 +35,19 @@ export function ThemeToggle() {
   return (
     <motion.button
       type="button"
-      className={`theme-toggle-v55${dark ? " is-dark" : ""}`}
-      aria-label={dark ? "Switch to current ALZA Blue theme" : "Switch to Dark SaaS theme"}
+      className={`theme-toggle-v61${dark ? " is-dark" : ""}`}
+      aria-label={dark ? "Switch to ALZA Blue theme" : "Switch to Dark SaaS theme"}
       aria-pressed={dark}
-      title={dark ? "Switch to ALZA Blue" : "Switch to Dark SaaS"}
+      title={dark ? "Switch to ALZA Blue theme" : "Switch to Dark SaaS theme"}
       onClick={toggle}
-      whileTap={{ scale: 0.96 }}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.92 }}
     >
-      <span className="theme-toggle-icon-v55" aria-hidden="true">
-        {dark ? (
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
-        ) : (
-          <svg viewBox="0 0 24 24"><path d="M20.4 14.1A8.4 8.4 0 0 1 9.9 3.6 8.5 8.5 0 1 0 20.4 14.1Z"/></svg>
-        )}
-      </span>
-      <span className="theme-toggle-label-v55">{dark ? "ALZA Blue" : "Dark SaaS"}</span>
-      <span className="theme-toggle-switch-v55" aria-hidden="true"><span/></span>
+      <svg className="theme-toggle-icon-v61" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19.2 15.35A7.55 7.55 0 0 1 8.65 4.8a8.15 8.15 0 1 0 10.55 10.55Z" />
+        <path d="m18.35 3.15.48 1.2 1.2.48-1.2.48-.48 1.2-.48-1.2-1.2-.48 1.2-.48.48-1.2Z" />
+        <path d="m15.05 6.65.3.76.76.3-.76.3-.3.76-.3-.76-.76-.3.76-.3.3-.76Z" />
+      </svg>
     </motion.button>
   );
 }

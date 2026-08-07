@@ -1,6 +1,6 @@
 {
   "name": "alza-total-tech-solutions-nextjs",
-  "version": "59.0.0",
+  "version": "61.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

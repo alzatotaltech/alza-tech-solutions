@@ -1,8 +1,16 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import { MotionConfigProvider } from "@/components/MotionConfigProvider";
 import { RouteBodyClass } from "@/components/RouteBodyClass";
 import { routeBodyClass } from "@/lib/routes";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-alza",
+  preload: true,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://alzatotaltech.com"),
@@ -25,16 +33,17 @@ const bootstrap = `(function(){try{var t=localStorage.getItem("alza-theme-v55");
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="alza-blue" suppressHydrationWarning>
+    <html lang="en" data-theme="alza-blue" className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("alza-theme-v55");document.documentElement.dataset.theme=t==="dark-saas"?"dark-saas":"alza-blue";}catch(e){document.documentElement.dataset.theme="alza-blue";}})();` }} />
-        <link rel="stylesheet" href="/assets/css/master.css?v=57" />
-        <link rel="stylesheet" href="/assets/css/responsive-v49.css?v=57" />
-        <link rel="stylesheet" href="/assets/css/motion-v50.css?v=57" />
-        <link rel="stylesheet" href="/assets/css/premium-v51.css?v=57" />
-        <link rel="stylesheet" href="/assets/css/next-react-v52.css?v=57" />
-        <link rel="stylesheet" href="/assets/css/experience-v54.css?v=57" />
-        <link rel="stylesheet" href="/assets/css/theme-v55.css?v=57" />
+        <link rel="stylesheet" href="/assets/css/master.css?v=61" />
+        <link rel="stylesheet" href="/assets/css/responsive-v49.css?v=61" />
+        <link rel="stylesheet" href="/assets/css/motion-v50.css?v=61" />
+        <link rel="stylesheet" href="/assets/css/premium-v51.css?v=61" />
+        <link rel="stylesheet" href="/assets/css/next-react-v52.css?v=61" />
+        <link rel="stylesheet" href="/assets/css/experience-v54.css?v=61" />
+        <link rel="stylesheet" href="/assets/css/theme-v55.css?v=61" />
+        <link rel="stylesheet" href="/assets/css/clarity-v61.css?v=61" />
       </head>
       <body className="enterprise-theme">
         <script dangerouslySetInnerHTML={{ __html: bootstrap }} />
