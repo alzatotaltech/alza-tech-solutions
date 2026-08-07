@@ -15,7 +15,18 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-const services = [
+type ServiceItem = {
+  title: string;
+  description: string;
+  href: string;
+  cta: string;
+  icon: typeof HousePlug;
+  span: string;
+  accent: string;
+  flagship?: boolean;
+};
+
+const services: readonly ServiceItem[] = [
   {
     title: "Home & Office IT Setup",
     description: "End-to-end device, Wi-Fi, printing, collaboration and workplace technology setup for homes, offices and new sites.",
@@ -71,7 +82,7 @@ const services = [
     accent: "from-cyan-300/20 via-violet-500/10 to-transparent",
     flagship: true,
   },
-] as const;
+]
 
 /**
  * ALZA-specific bento implementation.
