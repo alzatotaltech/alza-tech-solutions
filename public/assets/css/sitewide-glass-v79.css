@@ -1,0 +1,217 @@
+/* Build 79 — site-wide hero-pill glass sweep + site-wide button sheen.
+   Apply after Build 78.
+
+   Scope:
+   - Homepage identity pill: .hero-copy .eyebrow
+   - Inner-page hero pills: .page-hero .kicker
+   - All shared site buttons: .btn (primary, secondary and ghost)
+   - Desktop and mobile
+
+   Performance:
+   - Motion is transform + opacity only.
+   - No animated blur, filter, box-shadow, backdrop-filter or background-position.
+   - Build 75's expensive desktop rotating conic button border remains disabled.
+*/
+
+/* --------------------------------------------------------------------------
+   1) HERO PILLS — all pages, desktop + mobile
+   Restore the proven pre-Build-77 sweep geometry/cadence everywhere a page
+   hero uses the shared ALZA pill treatment.
+   -------------------------------------------------------------------------- */
+html body .hero-copy .eyebrow,
+html body .page-hero .kicker {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: auto !important;
+}
+
+html body .hero-copy .eyebrow::after,
+html body .page-hero .kicker::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -55% !important;
+  bottom: -55% !important;
+  left: -34% !important;
+  width: 28% !important;
+  z-index: auto !important;
+  pointer-events: none !important;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100,226,255,.16),
+    rgba(255,255,255,.56),
+    rgba(122,153,255,.18),
+    transparent
+  ) !important;
+  transform: translate3d(0,0,0) skewX(-18deg) !important;
+  animation: alza-site-pill-glass-v79 5.8s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform, opacity !important;
+}
+
+html[data-theme="dark-saas"] body .hero-copy .eyebrow::after,
+html[data-theme="dark-saas"] body .page-hero .kicker::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100,226,255,.16),
+    rgba(255,255,255,.56),
+    rgba(122,153,255,.18),
+    transparent
+  ) !important;
+}
+
+@keyframes alza-site-pill-glass-v79 {
+  0%, 58% {
+    transform: translate3d(0,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+  65% { opacity: .18; }
+  74% { opacity: .92; }
+  88% {
+    transform: translate3d(620%,0,0) skewX(-18deg);
+    opacity: .38;
+  }
+  100% {
+    transform: translate3d(620%,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Keep the small hero-pill sweep alive while Build 73 freezes larger scroll
+   effects. Applies equally to homepage and inner-page hero pills. */
+html.is-scrolling-v73 body .hero-copy .eyebrow::after,
+html.is-scrolling-v73 body .page-hero .kicker::after,
+html.desktop-rich-motion-v73 body .hero-copy .eyebrow::after,
+html.desktop-rich-motion-v73 body .page-hero .kicker::after {
+  animation: alza-site-pill-glass-v79 5.8s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+}
+
+/* --------------------------------------------------------------------------
+   2) BUTTON SHEEN — all pages, every .btn, desktop + mobile
+   Reassert after Build 75/77 so page state, viewport and IntersectionObserver
+   state cannot silently pause the visible narrow sheen.
+   -------------------------------------------------------------------------- */
+html body .btn {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+html body .btn::after,
+html body .btn:not(.btn-ghost):not(.btn-secondary)::after,
+html.desktop-rich-motion-v73 body .btn::after,
+html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary)::after,
+html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):hover::after,
+html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::after,
+html body .btn.v75-button-live::after,
+html.desktop-rich-motion-v73 body .btn.v75-button-live::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -95% !important;
+  bottom: -95% !important;
+  left: -36% !important;
+  width: 23% !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.12) 24%,
+    rgba(255,255,255,.50) 50%,
+    rgba(123,220,255,.18) 70%,
+    transparent
+  ) !important;
+  transform: translate3d(0,0,0) skewX(-18deg) !important;
+  animation: alza-site-button-sheen-v79 4.65s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform, opacity !important;
+}
+
+html body .btn-ghost::after,
+html body .btn-secondary::after,
+html.desktop-rich-motion-v73 body .btn-ghost::after,
+html.desktop-rich-motion-v73 body .btn-secondary::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(83,218,255,.08) 20%,
+    rgba(255,255,255,.36) 50%,
+    rgba(111,167,255,.14) 72%,
+    transparent
+  ) !important;
+}
+
+html[data-theme="dark-saas"] body .btn::after,
+html[data-theme="dark-saas"] body .btn:not(.btn-ghost):not(.btn-secondary)::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(78,211,255,.10) 20%,
+    rgba(255,255,255,.44) 50%,
+    rgba(111,145,255,.16) 72%,
+    transparent
+  ) !important;
+}
+
+@keyframes alza-site-button-sheen-v79 {
+  0%, 50% {
+    transform: translate3d(0,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+  57% { opacity: .18; }
+  66% { opacity: .88; }
+  82% {
+    transform: translate3d(670%,0,0) skewX(-18deg);
+    opacity: .38;
+  }
+  91%, 100% {
+    transform: translate3d(670%,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+html.is-scrolling-v73 body .btn::after,
+html.is-scrolling-v73 body .btn.v75-button-live::after,
+html.desktop-rich-motion-v73 body .btn::after,
+html.desktop-rich-motion-v73 body .btn.v75-button-live::after {
+  animation: alza-site-button-sheen-v79 4.65s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+}
+
+/* Preserve Build 75's desktop GPU relief: the costly rotating conic border
+   stays disabled. Build 79 restores only the narrow glass sheen. */
+@media (min-width: 901px) {
+  html body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+    animation: none !important;
+    animation-play-state: paused !important;
+    will-change: auto !important;
+  }
+}
+
+/* The project baseline has intentionally kept these tiny branded sweeps alive
+   even when reduced-motion is reported. Slow them rather than re-enabling the
+   large ambient/tilt effects disabled elsewhere. */
+@media (prefers-reduced-motion: reduce) {
+  html body .hero-copy .eyebrow::after,
+  html body .page-hero .kicker::after,
+  html.is-scrolling-v73 body .hero-copy .eyebrow::after,
+  html.is-scrolling-v73 body .page-hero .kicker::after {
+    animation: alza-site-pill-glass-v79 6.4s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+
+  html body .btn::after,
+  html body .btn:not(.btn-ghost):not(.btn-secondary)::after,
+  html body .btn.v75-button-live::after,
+  html.is-scrolling-v73 body .btn::after {
+    animation: alza-site-button-sheen-v79 5.4s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+}
