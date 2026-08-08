@@ -1,0 +1,187 @@
+/* Build 77 — restore visible lightweight glass motion after Build 75/76.
+   Final override layer: transform + opacity only. No blur/filter/shadow animation. */
+
+/* --------------------------------------------------------------------------
+   1) Homepage legal-name pill — visible moving glass on desktop + mobile.
+   -------------------------------------------------------------------------- */
+.page-index .hero-copy .eyebrow {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+.page-index .hero-copy .eyebrow::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -70% !important;
+  bottom: -70% !important;
+  left: -42% !important;
+  width: 30% !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(80, 214, 255, .08) 18%,
+    rgba(124, 229, 255, .34) 38%,
+    rgba(255, 255, 255, .82) 50%,
+    rgba(126, 166, 255, .34) 63%,
+    transparent 100%
+  ) !important;
+  transform: translate3d(0,0,0) skewX(-18deg) !important;
+  animation: alza-pill-glass-v77 4.35s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform, opacity;
+}
+
+/* Keep pill contents above the sheen without changing layout. */
+.page-index .hero-copy .eyebrow > i,
+.page-index .hero-copy .eyebrow {
+  color: inherit;
+}
+.page-index .hero-copy .eyebrow > i {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes alza-pill-glass-v77 {
+  0%, 45% {
+    transform: translate3d(0,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+  52% { opacity: .24; }
+  62% { opacity: .96; }
+  79% {
+    transform: translate3d(700%,0,0) skewX(-18deg);
+    opacity: .48;
+  }
+  88%, 100% {
+    transform: translate3d(700%,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+html[data-theme="dark-saas"] .page-index .hero-copy .eyebrow::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(54, 207, 255, .08) 18%,
+    rgba(92, 226, 255, .30) 38%,
+    rgba(255, 255, 255, .78) 50%,
+    rgba(111, 139, 255, .30) 63%,
+    transparent 100%
+  ) !important;
+}
+
+/* --------------------------------------------------------------------------
+   2) Buttons — always-live glass sheen on every viewport.
+   Build 75's expensive rotating border remains OFF. Only a narrow compositor-
+   friendly transform/opacity sweep runs continuously.
+   -------------------------------------------------------------------------- */
+.btn {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+/* Explicitly keep the old conic border animation disabled on desktop. */
+@media (min-width: 901px) {
+  .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+  html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+    animation: none !important;
+    animation-play-state: paused !important;
+    will-change: auto !important;
+  }
+}
+
+.btn::after,
+.btn:not(.btn-ghost):not(.btn-secondary)::after,
+html.desktop-rich-motion-v73 .btn::after,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary)::after,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):hover::after,
+html.desktop-rich-motion-v73 .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -95% !important;
+  bottom: -95% !important;
+  left: -36% !important;
+  width: 23% !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.12) 24%,
+    rgba(255,255,255,.50) 50%,
+    rgba(123,220,255,.18) 70%,
+    transparent
+  ) !important;
+  transform: translate3d(0,0,0) skewX(-18deg) !important;
+  animation: alza-button-glass-v77 4.65s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform, opacity;
+}
+
+.btn-ghost::after,
+.btn-secondary::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(83,218,255,.08) 20%,
+    rgba(255,255,255,.36) 50%,
+    rgba(111,167,255,.14) 72%,
+    transparent
+  ) !important;
+}
+
+html[data-theme="dark-saas"] .btn::after,
+html[data-theme="dark-saas"] .btn:not(.btn-ghost):not(.btn-secondary)::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(78,211,255,.10) 20%,
+    rgba(255,255,255,.44) 50%,
+    rgba(111,145,255,.16) 72%,
+    transparent
+  ) !important;
+}
+
+@keyframes alza-button-glass-v77 {
+  0%, 50% {
+    transform: translate3d(0,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+  57% { opacity: .18; }
+  66% { opacity: .88; }
+  82% {
+    transform: translate3d(670%,0,0) skewX(-18deg);
+    opacity: .38;
+  }
+  91%, 100% {
+    transform: translate3d(670%,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Build 73 may mark the document as scrolling. Do not disable these tiny
+   transform/opacity sweeps; pointer tilt/magnetic motion still remains frozen. */
+html.is-scrolling-v73 .btn::after,
+html.is-scrolling-v73 .page-index .hero-copy .eyebrow::after {
+  animation-play-state: running !important;
+}
+
+/* User explicitly requested these branded micro-animations even when Windows
+   reports reduced motion. This override is intentionally limited to tiny paint areas. */
+@media (prefers-reduced-motion: reduce) {
+  .page-index .hero-copy .eyebrow::after {
+    animation: alza-pill-glass-v77 4.9s ease-in-out infinite !important;
+  }
+  .btn::after,
+  .btn:not(.btn-ghost):not(.btn-secondary)::after {
+    animation: alza-button-glass-v77 5.1s ease-in-out infinite !important;
+  }
+}
