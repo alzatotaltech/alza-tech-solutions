@@ -1,0 +1,156 @@
+/* Build 80 — desktop-visible company pill + button sheen hardening.
+   Apply after Build 79.
+
+   Root cause fixed:
+   Build 75 desktop GPU relief declares .btn::after { opacity:0 !important; }.
+   CSS animation opacity from later builds cannot override an !important author
+   declaration, so the transform animation may run while the sheen remains
+   visually transparent on desktop.
+
+   Build 80 avoids that conflict entirely:
+   - desktop sheen opacity is fixed with !important;
+   - the light strip rests fully outside the clipped control;
+   - only transform is animated across the surface;
+   - no blur/filter/shadow/background-position animation is introduced.
+   Mobile remains on the already-working Build 79 treatment.
+*/
+
+@media (min-width: 901px) {
+  /* ----------------------------------------------------------------------
+     1) Hero/company pills — every page hero on desktop.
+     Use a bright narrow strip at fixed opacity. It is invisible at rest only
+     because it sits completely outside overflow:hidden, not because opacity
+     is animated to zero. This makes the sweep deterministic across cascades.
+     ---------------------------------------------------------------------- */
+  html body .hero-copy .eyebrow,
+  html body .page-hero .kicker {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+  }
+
+  html body .hero-copy .eyebrow::after,
+  html body .page-hero .kicker::after,
+  html.desktop-rich-motion-v73 body .hero-copy .eyebrow::after,
+  html.desktop-rich-motion-v73 body .page-hero .kicker::after,
+  html.is-scrolling-v73 body .hero-copy .eyebrow::after,
+  html.is-scrolling-v73 body .page-hero .kicker::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    top: -70% !important;
+    bottom: -70% !important;
+    left: -42% !important;
+    width: 30% !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+    opacity: .94 !important;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(72,213,255,.06) 16%,
+      rgba(104,229,255,.38) 34%,
+      rgba(255,255,255,.92) 50%,
+      rgba(131,164,255,.40) 66%,
+      transparent 100%
+    ) !important;
+    transform: translate3d(0,0,0) skewX(-18deg) !important;
+    animation: alza-desktop-pill-sweep-v80 4.45s cubic-bezier(.42,0,.2,1) infinite !important;
+    animation-play-state: running !important;
+    will-change: transform !important;
+  }
+
+  @keyframes alza-desktop-pill-sweep-v80 {
+    0%, 48% {
+      transform: translate3d(0,0,0) skewX(-18deg);
+    }
+    78%, 100% {
+      transform: translate3d(640%,0,0) skewX(-18deg);
+    }
+  }
+
+  /* ----------------------------------------------------------------------
+     2) Shared site buttons — desktop.
+     Explicit opacity !important defeats the stale Build 75 opacity:0!important
+     rule. The strip is off-canvas during the idle portion, so there is no
+     permanent white overlay on the control.
+     ---------------------------------------------------------------------- */
+  html body .btn {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+  }
+
+  html body .btn::after,
+  html body .btn:not(.btn-ghost):not(.btn-secondary)::after,
+  html body .btn.v75-button-live::after,
+  html.desktop-rich-motion-v73 body .btn::after,
+  html.desktop-rich-motion-v73 body .btn.v75-button-live::after,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary)::after,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):hover::after,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::after,
+  html.is-scrolling-v73 body .btn::after,
+  html.is-scrolling-v73 body .btn.v75-button-live::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    top: -100% !important;
+    bottom: -100% !important;
+    left: -38% !important;
+    width: 25% !important;
+    z-index: 4 !important;
+    pointer-events: none !important;
+    opacity: .92 !important;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(103,221,255,.08) 18%,
+      rgba(255,255,255,.42) 38%,
+      rgba(255,255,255,.88) 50%,
+      rgba(115,194,255,.26) 68%,
+      transparent 100%
+    ) !important;
+    transform: translate3d(0,0,0) skewX(-18deg) !important;
+    animation: alza-desktop-button-sheen-v80 4.15s cubic-bezier(.42,0,.2,1) infinite !important;
+    animation-play-state: running !important;
+    will-change: transform !important;
+  }
+
+  html body .btn-ghost::after,
+  html body .btn-secondary::after,
+  html.desktop-rich-motion-v73 body .btn-ghost::after,
+  html.desktop-rich-motion-v73 body .btn-secondary::after {
+    opacity: .82 !important;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(82,218,255,.08) 18%,
+      rgba(255,255,255,.34) 40%,
+      rgba(255,255,255,.76) 50%,
+      rgba(100,168,255,.22) 70%,
+      transparent 100%
+    ) !important;
+  }
+
+  @keyframes alza-desktop-button-sheen-v80 {
+    0%, 47% {
+      transform: translate3d(0,0,0) skewX(-18deg);
+    }
+    77%, 100% {
+      transform: translate3d(680%,0,0) skewX(-18deg);
+    }
+  }
+
+  /* Keep Build 75's expensive rotating conic border OFF. */
+  html body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+    animation: none !important;
+    animation-play-state: paused !important;
+    will-change: auto !important;
+  }
+}
+
+/* Mobile is intentionally not modified by Build 80; Build 79 remains the
+   mobile authority because the user-visible motion is already working there. */
