@@ -1,0 +1,92 @@
+/* Build 78 — restore the exact pre-Build-77 homepage company-pill glass sweep.
+   Apply after Build 77. This file intentionally touches ONLY the homepage
+   ALZA TOTAL TECH SOLUTIONS FZ-LLC identity pill.
+
+   Why this exists:
+   Build 77 introduced a new isolation/z-index treatment and changed the
+   sweep geometry/timing. The pill was visibly sweeping before Build 77.
+   Build 78 restores the proven Build 75/76 motion architecture while leaving
+   Build 77 button motion and Build 75 GPU-relief protections untouched. */
+
+.page-index .hero-copy .eyebrow {
+  position: relative !important;
+  overflow: hidden !important;
+  /* Return to pre-v77 stacking behavior. */
+  isolation: auto !important;
+}
+
+.page-index .hero-copy .eyebrow::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -55% !important;
+  bottom: -55% !important;
+  left: -34% !important;
+  width: 28% !important;
+  z-index: auto !important;
+  opacity: 0;
+  pointer-events: none !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100,226,255,.16),
+    rgba(255,255,255,.56),
+    rgba(122,153,255,.18),
+    transparent
+  ) !important;
+  transform: translate3d(0,0,0) skewX(-18deg) !important;
+  animation: alza-company-pill-glass-v78 5.8s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform, opacity;
+}
+
+@keyframes alza-company-pill-glass-v78 {
+  0%, 58% {
+    transform: translate3d(0,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+  65% { opacity: .18; }
+  74% { opacity: .92; }
+  88% {
+    transform: translate3d(620%,0,0) skewX(-18deg);
+    opacity: .38;
+  }
+  100% {
+    transform: translate3d(620%,0,0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Build 76's Dark SaaS theme remains visually consistent. Keep the same
+   sweep luminance so the motion is clearly visible without adding filters,
+   blur, shadow or background-position animation. */
+html[data-theme="dark-saas"] .page-index .hero-copy .eyebrow::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100,226,255,.16),
+    rgba(255,255,255,.56),
+    rgba(122,153,255,.18),
+    transparent
+  ) !important;
+}
+
+/* Build 73/75 scrolling optimizations may freeze larger effects. This tiny
+   transform/opacity sweep must stay live because it is the approved company
+   identity motion. */
+html.is-scrolling-v73 .page-index .hero-copy .eyebrow::after,
+html.desktop-rich-motion-v73 .page-index .hero-copy .eyebrow::after {
+  animation: alza-company-pill-glass-v78 5.8s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+}
+
+/* Preserve the established always-live behavior for this small branded
+   surface while leaving all large ambient/media reduced-motion safeguards
+   untouched. */
+@media (prefers-reduced-motion: reduce) {
+  .page-index .hero-copy .eyebrow::after,
+  html.is-scrolling-v73 .page-index .hero-copy .eyebrow::after,
+  html.desktop-rich-motion-v73 .page-index .hero-copy .eyebrow::after {
+    animation: alza-company-pill-glass-v78 6.4s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+}
