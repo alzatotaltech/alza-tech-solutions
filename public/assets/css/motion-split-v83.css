@@ -1,0 +1,204 @@
+/* Build 83 — split motion model.
+   PILL = travelling glass sweep only.
+   BUTTON = rotating internal cyan/blue/violet colour motion only.
+   The two effects use separate real DOM layers so legacy pseudo-element rules
+   from Builds 54/74/75 cannot cross-contaminate them. */
+
+/* --------------------------------------------------------------------------
+   0) Retire Build 81/82 dedicated sheen layer everywhere.
+   -------------------------------------------------------------------------- */
+.alza-live-sheen-v81 {
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   1) PILLS ONLY — travelling glass sweep.
+   Applies to Home company pill (.hero-copy .eyebrow) and inner-page hero pills
+   (.page-hero .kicker), desktop + mobile.
+   -------------------------------------------------------------------------- */
+.alza-pill-glass-host-v83 {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+/* Retire every historical pseudo-element sweep on the pill hosts. */
+html body .alza-pill-glass-host-v83::after,
+html.desktop-rich-motion-v73 body .alza-pill-glass-host-v83::after,
+html.is-scrolling-v73 body .alza-pill-glass-host-v83::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+.alza-pill-glass-host-v83 > .alza-pill-glass-v83 {
+  display: block !important;
+  position: absolute !important;
+  top: -115% !important;
+  bottom: -115% !important;
+  left: -39% !important;
+  width: 28% !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  opacity: .96 !important;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59, 210, 255, .08) 10%,
+    rgba(88, 225, 255, .45) 29%,
+    rgba(255, 255, 255, .98) 49%,
+    rgba(181, 213, 255, .70) 59%,
+    rgba(105, 146, 255, .30) 74%,
+    transparent 100%
+  ) !important;
+  transform: translate3d(0, 0, 0) skewX(-18deg);
+  animation: alza-pill-glass-pass-v83 4.6s cubic-bezier(.42, 0, .2, 1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform !important;
+}
+
+@keyframes alza-pill-glass-pass-v83 {
+  0%, 54% {
+    transform: translate3d(0, 0, 0) skewX(-18deg);
+  }
+  83%, 100% {
+    transform: translate3d(575%, 0, 0) skewX(-18deg);
+  }
+}
+
+@media (min-width: 901px) {
+  .alza-pill-glass-host-v83 > .alza-pill-glass-v83 {
+    width: 30% !important;
+    left: -41% !important;
+    opacity: 1 !important;
+    animation-duration: 4.15s !important;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(67, 219, 255, .10) 10%,
+      rgba(103, 235, 255, .52) 30%,
+      rgba(255, 255, 255, 1) 49%,
+      rgba(192, 220, 255, .76) 59%,
+      rgba(113, 154, 255, .35) 74%,
+      transparent 100%
+    ) !important;
+  }
+}
+
+html.is-scrolling-v73 .alza-pill-glass-host-v83 > .alza-pill-glass-v83,
+html.desktop-rich-motion-v73 .alza-pill-glass-host-v83 > .alza-pill-glass-v83,
+html.low-motion .alza-pill-glass-host-v83 > .alza-pill-glass-v83 {
+  animation-name: alza-pill-glass-pass-v83 !important;
+  animation-play-state: running !important;
+}
+
+/* --------------------------------------------------------------------------
+   2) BUTTONS ONLY — rotating internal colour motion.
+   There is intentionally NO travelling white/glass strip on buttons.
+   A real conic-gradient layer rotates behind the button label. Only transform
+   is animated, so the colour field itself is not repainted frame-by-frame.
+   -------------------------------------------------------------------------- */
+.alza-button-color-host-v83 {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+/* Kill every historical button glass sweep. */
+html body .btn::after,
+html.desktop-rich-motion-v73 body .btn::after,
+html.is-scrolling-v73 body .btn::after,
+html body .btn:hover::after,
+html body .btn:focus-visible::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* Kill the historical rotating ::before implementation too. Build 83 owns the
+   rotating colour as a dedicated real layer, avoiding Build 75's desktop
+   animation:none!important rule on ::before. */
+html body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+html.is-scrolling-v73 body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+html body .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+html body .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+.alza-button-color-host-v83 > .alza-button-color-v83 {
+  display: block !important;
+  position: absolute !important;
+  inset: -145% !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  opacity: .46 !important;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(45, 224, 255, .92) 0deg,
+    rgba(22, 140, 255, .88) 72deg,
+    rgba(124, 114, 255, .90) 145deg,
+    rgba(35, 196, 255, .86) 220deg,
+    rgba(98, 95, 255, .82) 300deg,
+    rgba(45, 224, 255, .92) 360deg
+  ) !important;
+  transform: rotate(0deg) translateZ(0);
+  transform-origin: 50% 50% !important;
+  animation: alza-button-color-rotate-v83 7.2s linear infinite !important;
+  animation-play-state: running !important;
+  will-change: transform !important;
+}
+
+/* Primary buttons carry the strongest internal motion. */
+.btn:not(.btn-ghost):not(.btn-secondary).alza-button-color-host-v83 > .alza-button-color-v83 {
+  opacity: .58 !important;
+}
+
+/* Secondary/ghost buttons retain the same rotating colour language, but more
+   restrained so their hierarchy remains secondary. */
+.btn-secondary.alza-button-color-host-v83 > .alza-button-color-v83 {
+  opacity: .34 !important;
+}
+
+.btn-ghost.alza-button-color-host-v83 > .alza-button-color-v83 {
+  opacity: .26 !important;
+}
+
+@keyframes alza-button-color-rotate-v83 {
+  to { transform: rotate(360deg) translateZ(0); }
+}
+
+@media (min-width: 901px) {
+  .alza-button-color-host-v83 > .alza-button-color-v83 {
+    animation-duration: 6.8s !important;
+  }
+  .btn:not(.btn-ghost):not(.btn-secondary).alza-button-color-host-v83 > .alza-button-color-v83 {
+    opacity: .62 !important;
+  }
+}
+
+html.is-scrolling-v73 .alza-button-color-host-v83 > .alza-button-color-v83,
+html.desktop-rich-motion-v73 .alza-button-color-host-v83 > .alza-button-color-v83,
+html.low-motion .alza-button-color-host-v83 > .alza-button-color-v83 {
+  animation-name: alza-button-color-rotate-v83 !important;
+  animation-play-state: running !important;
+}
+
+/* Slightly calmer cadence for OS reduced-motion preference while preserving
+   the requested branded movement. */
+@media (prefers-reduced-motion: reduce) {
+  .alza-pill-glass-host-v83 > .alza-pill-glass-v83 {
+    animation-duration: 6.8s !important;
+  }
+  .alza-button-color-host-v83 > .alza-button-color-v83 {
+    animation-duration: 12s !important;
+  }
+}
