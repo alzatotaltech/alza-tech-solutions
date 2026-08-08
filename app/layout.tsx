@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { MotionConfigProvider } from "@/components/MotionConfigProvider";
+import { GlobalSheenRuntime } from "@/components/GlobalSheenRuntime";
 import { RouteBodyClass } from "@/components/RouteBodyClass";
 import { routeBodyClass } from "@/lib/routes";
 
@@ -48,14 +49,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="stylesheet" href="/assets/css/brand-buttons-v74.css?v=74" />
         <link rel="stylesheet" href="/assets/css/performance-v75.css?v=75" />
         <link rel="stylesheet" href="/assets/css/brand-static-v76.css?v=76" />
-        <link rel="stylesheet" href="/assets/css/live-glass-v77.css?v=77" />
-        <link rel="stylesheet" href="/assets/css/pill-glass-v78.css?v=78" />
-        <link rel="stylesheet" href="/assets/css/sitewide-glass-v79.css?v=79" />
-        <link rel="stylesheet" href="/assets/css/desktop-sheen-v80.css?v=80" />
+        <link rel="stylesheet" href="/assets/css/live-sheen-v81.css?v=81" />
       </head>
       <body className="enterprise-theme">
         <script dangerouslySetInnerHTML={{ __html: bootstrap }} />
         <MotionConfigProvider>
+          <GlobalSheenRuntime />
           <RouteBodyClass />
           {children}
         </MotionConfigProvider>

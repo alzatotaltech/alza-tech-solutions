@@ -1,0 +1,156 @@
+/* Build 81 — deterministic site-wide pill + button sheen.
+   This layer deliberately stops reusing ::after. The old experience/performance
+   layers all own that pseudo-element in different viewport/state branches.
+   Build 81 inserts a dedicated aria-hidden span at runtime and animates only
+   its transform, so legacy opacity/animation/content rules cannot suppress it. */
+
+/* --------------------------------------------------------------------------
+   1) Hosts
+   -------------------------------------------------------------------------- */
+.alza-sheen-host-v81 {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+/* Retire only the legacy sheen pseudo-element on decorated hosts. This avoids
+   double sweeps and, critically, removes all old Build 54/74/75/77-80 fights. */
+.alza-pill-sheen-host-v81::after,
+.alza-button-sheen-host-v81::after,
+html body .alza-pill-sheen-host-v81::after,
+html body .alza-button-sheen-host-v81::after,
+html.desktop-rich-motion-v73 body .alza-pill-sheen-host-v81::after,
+html.desktop-rich-motion-v73 body .alza-button-sheen-host-v81::after,
+html.is-scrolling-v73 body .alza-pill-sheen-host-v81::after,
+html.is-scrolling-v73 body .alza-button-sheen-host-v81::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   2) Dedicated live layer — transform only
+   The strip is fully outside the clipped host during the idle part. Therefore
+   it needs no animated opacity and cannot be hidden by Build 75 opacity rules.
+   -------------------------------------------------------------------------- */
+.alza-sheen-host-v81 > .alza-live-sheen-v81 {
+  display: block !important;
+  position: absolute !important;
+  top: -110% !important;
+  bottom: -110% !important;
+  left: -42% !important;
+  width: 27% !important;
+  z-index: 50 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  opacity: .96 !important;
+  transform: translate3d(0,0,0) skewX(-18deg) !important;
+  animation: alza-live-sheen-pass-v81 4.65s cubic-bezier(.42,0,.2,1) infinite !important;
+  animation-play-state: running !important;
+  will-change: transform !important;
+}
+
+.alza-pill-sheen-host-v81 > .alza-live-sheen-v81 {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(68,218,255,.10) 13%,
+    rgba(100,231,255,.48) 31%,
+    rgba(255,255,255,.98) 49%,
+    rgba(178,210,255,.68) 58%,
+    rgba(111,149,255,.32) 72%,
+    transparent 100%
+  ) !important;
+}
+
+.alza-button-sheen-host-v81 > .alza-live-sheen-v81 {
+  width: 25% !important;
+  left: -40% !important;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(80,217,255,.08) 14%,
+    rgba(255,255,255,.42) 32%,
+    rgba(255,255,255,.98) 50%,
+    rgba(120,206,255,.38) 68%,
+    transparent 100%
+  ) !important;
+}
+
+.btn-ghost.alza-button-sheen-host-v81 > .alza-live-sheen-v81,
+.btn-secondary.alza-button-sheen-host-v81 > .alza-live-sheen-v81 {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(73,220,255,.10) 14%,
+    rgba(130,231,255,.40) 32%,
+    rgba(255,255,255,.88) 50%,
+    rgba(113,170,255,.34) 70%,
+    transparent 100%
+  ) !important;
+}
+
+@keyframes alza-live-sheen-pass-v81 {
+  0%, 50% {
+    transform: translate3d(0,0,0) skewX(-18deg);
+  }
+  82%, 100% {
+    transform: translate3d(760%,0,0) skewX(-18deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3) Desktop: a little brighter/faster so the pass remains unmistakable on
+      large dark surfaces. Still transform-only; rotating conic border stays off.
+   -------------------------------------------------------------------------- */
+@media (min-width: 901px) {
+  .alza-sheen-host-v81 > .alza-live-sheen-v81 {
+    opacity: 1 !important;
+    animation-duration: 4.15s !important;
+  }
+
+  .alza-pill-sheen-host-v81 > .alza-live-sheen-v81 {
+    width: 29% !important;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(69,219,255,.12) 12%,
+      rgba(104,234,255,.54) 31%,
+      rgba(255,255,255,1) 49%,
+      rgba(190,218,255,.74) 58%,
+      rgba(116,153,255,.38) 73%,
+      transparent 100%
+    ) !important;
+  }
+
+  .alza-button-sheen-host-v81 > .alza-live-sheen-v81 {
+    width: 26% !important;
+  }
+
+  /* Preserve the Build 75 GPU policy: no continuously rotating conic border. */
+  html body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary)::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):hover::before,
+  html.desktop-rich-motion-v73 body .btn:not(.btn-ghost):not(.btn-secondary):focus-visible::before {
+    animation: none !important;
+    animation-play-state: paused !important;
+    will-change: auto !important;
+  }
+}
+
+/* Do not let older scroll/reduced-motion selectors pause this dedicated layer.
+   The effect is a small transform-only brand micro-animation. */
+html.is-scrolling-v73 .alza-sheen-host-v81 > .alza-live-sheen-v81,
+html.desktop-rich-motion-v73 .alza-sheen-host-v81 > .alza-live-sheen-v81,
+html.low-motion .alza-sheen-host-v81 > .alza-live-sheen-v81 {
+  animation-name: alza-live-sheen-pass-v81 !important;
+  animation-play-state: running !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alza-sheen-host-v81 > .alza-live-sheen-v81 {
+    animation: alza-live-sheen-pass-v81 5.2s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+}
